@@ -20,7 +20,7 @@ public class Creep implements Entity, Hitboxable {
 	@Override
 	public void update() {
 		// TODO Auto-generated method stub
-		
+		//
 	}
 
 }
