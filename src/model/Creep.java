@@ -23,4 +23,10 @@ public class Creep implements Entity, Hitboxable {
 		//
 	}
 
+	@Override
+	public void makeHitbox() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

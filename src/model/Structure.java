@@ -20,4 +20,10 @@ public class Structure implements Entity, Hitboxable {
 		
 	}
 
+	@Override
+	public void makeHitbox() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
