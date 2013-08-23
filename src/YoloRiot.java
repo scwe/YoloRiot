@@ -7,6 +7,8 @@ public class YoloRiot extends JFrame{
 
     private ScreenPanel screen;
 
+	ScreenPanel mainScreen;
+	
     public YoloRiot(){
     	setTitle("Yolo Riot");
     	setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
@@ -16,6 +18,7 @@ public class YoloRiot extends JFrame{
 
         setFocusable(true);
         setVisible(true);
+    	
         
         gameLoop();
     }
