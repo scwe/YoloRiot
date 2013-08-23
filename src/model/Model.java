@@ -1,24 +1,32 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Model {
 	
-	List<Mob> mobs;
-	List<Static> statics;
-	Player player;
+	List<Creep> creeps;
+	List<Structure> structures;
 	
 	public Model () {
-		
-		
+		creeps = new ArrayList<Creep> ();
+		structures = new ArrayList<Structure> ();
 	}
 	
 	public void draw () {
-				
+	
 	}
 	
 	// update the data 
 	public void tick () {
-		for ()		
+		for (Creep c : creeps) {
+			c.update ();		
+		}
+		
+		for (Structure s : structures) {
+			s.update ();
+		}
 	}
+	
+	
 }
