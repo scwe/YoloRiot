@@ -1,5 +1,11 @@
+
 cat .gitignore
 /bin
 *.class
 .classpath
 .project
+
+# Package Files #
+*.jar
+*.war
+*.ear
