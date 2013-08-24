@@ -11,6 +11,7 @@ import java.awt.Image;
 import java.awt.Point;
 import java.awt.RenderingHints;
 import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
 
@@ -54,9 +55,10 @@ public class ScreenPanel extends JPanel{
 		buffer.setRenderingHints(rh);
 		
 		if(ItemPanel.currentButton != null){
-			cursor = Toolkit.getDefaultToolkit().createCustomCursor(new ImageLoader().getImage(ItemPanel.currentButton).getScaledInstance(64, 64, Image.SCALE_FAST), new Point(0,0), ItemPanel.currentButton);
+			Image image = new ImageLoader().getImage(ItemPanel.currentButton).getScaledInstance(64, 64, Image.SCALE_FAST);
+			buffer.drawImage(image, 0, 0, 64, 64, null);
+			cursor = Toolkit.getDefaultToolkit().createCustomCursor(image, new Point(1,1), ItemPanel.currentButton);
 			super.setCursor(cursor);
-			System.out.println("Changed the cursor to "+ItemPanel.currentButton);
 		}
 
 		//TODO drawing of any background shit should go here
