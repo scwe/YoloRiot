@@ -10,6 +10,7 @@ public class YoloMouse extends MouseAdapter{
 	private MapPanel map;
 	
     public YoloMouse(Model model, MapPanel m){
+    	
     	this.model = model;
     	this.map = m;
     	
