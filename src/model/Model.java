@@ -9,11 +9,15 @@ import java.util.Set;
 import map.Map;
 import map.Tile;
 import projectiles.SimpleProjectile;
+
 import creeps.RandomCreep;
+
+import structures.SimpleCannon;
+import structures.SimpleWall;
+
 import creeps.SimpleCreep;
 
 public class Model {
-	
 	private static final int FIELD_WIDTH = Map.MAP_WIDTH*Tile.TILE_WIDTH;
 	private static final int FIELD_HEIGHT = Map.MAP_HEIGHT*Tile.TILE_HEIGHT;
 	
@@ -38,7 +42,7 @@ public class Model {
 		projectiles = new ArrayList<Projectile>();
 		yolostones = new Yolostone[Map.MAP_HEIGHT];
 		for (int i=0; i < Map.MAP_HEIGHT; i++) {
-			yolostones[i] = new Yolostone (i);
+			yolostones[i] = new Yolostone (i, this);
 		}
 	}
 	
@@ -81,8 +85,6 @@ public class Model {
 	}
 	
 	public void draw (Graphics g) {
-		
-		
 		for (Creep c : creeps) {
 			c.draw (g);	
 		}
@@ -163,10 +165,25 @@ public class Model {
 		}
 	}	
 	
+	public void addStructure (Location l, int buttonnum) {
+		if (buttonnum == 0) {
+			structures.add(new SimpleWall(l, this));
+		} else if (buttonnum == 1) {
+			structures.add(new SimpleCannon(l, this));
+		}
+	}
 
 	private boolean outOfBounds (Entity e) {
 		Location l = e.getLocation();
 		return !(l.x >= 0 && l.y >= 0 && l.x <= FIELD_WIDTH && l.y <= FIELD_HEIGHT);
+	}
+	
+	public void addStructure(Structure s){
+		structures.add(s);
+	}
+
+	public void addProjectile(Projectile p) {
+		projectiles.add(p);
 	}
 
 }

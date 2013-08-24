@@ -117,7 +117,6 @@ public class Map implements Drawable {
 	public enum TileType{
 		INNER_TILE,EDGE_TILE,CORNER_TILE;
 		
-		
 	}
 
 

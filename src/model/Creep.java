@@ -28,7 +28,6 @@ public abstract class Creep extends EntityImpl implements Entity, Hitboxable, Dr
 	public abstract void interact(Interaction i);
 	public abstract BufferedImage getSprite ();
 	
-	
 	public void draw (Graphics g) {
 		g.drawImage(getSprite(), location.x, location.y,  Tile.TILE_WIDTH, Tile.TILE_HEIGHT, null);
 	}

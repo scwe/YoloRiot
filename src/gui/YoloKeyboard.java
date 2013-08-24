@@ -27,6 +27,8 @@ public class YoloKeyboard extends KeyAdapter{
     		downPressed = true;
     	}else if(k.getKeyCode() == KeyEvent.VK_D){
     		rightPressed = true;
+    	}else if(k.getKeyCode() == KeyEvent.VK_ESCAPE){
+    		System.exit(0);
     	}
     }
 

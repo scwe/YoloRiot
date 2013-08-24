@@ -18,6 +18,10 @@ public class MapPanel extends JPanel{
 		
 	}
 	
+	public Map getMap(){
+		return map;
+	}
+	
 	public void paintComponent(Graphics g){
 		Graphics2D g2d = (Graphics2D) g;
 		Image offscreen = createImage(getWidth(), getHeight());
@@ -29,9 +33,6 @@ public class MapPanel extends JPanel{
 		model.draw(buffer);
 		
 		g2d.drawImage(offscreen, 0, 0, this);
-		
-		Point p = super.getLocationOnScreen();
-		Point a = super.getTopLevelAncestor().getLocationOnScreen();
 
 	}
 }

@@ -11,6 +11,7 @@ import java.awt.Image;
 import java.awt.Point;
 import java.awt.RenderingHints;
 import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
 
@@ -25,15 +26,12 @@ public class ScreenPanel extends JPanel{
 	private Map map;
 	private Model model;
 	
-	private String currentTurret;
-	
 	private Cursor cursor;
 	
 	
-    public ScreenPanel(Model model, Map map, String currentTurret){
+    public ScreenPanel(Model model, Map map){
         setFocusable(true);
         requestFocusInWindow();
-        this.currentTurret = currentTurret;
 
         this.model = model;
         this.map = map;
@@ -56,10 +54,10 @@ public class ScreenPanel extends JPanel{
 		buffer.fillRect(0, 0, getWidth(), getHeight());
 		buffer.setRenderingHints(rh);
 		
-		if(currentTurret != null){
-			cursor = Toolkit.getDefaultToolkit().createCustomCursor(new ImageLoader().getImage(currentTurret), new Point(0,0), currentTurret);
-			//super.setCursor(cursor);
-			System.out.println("Changed the cursor to "+currentTurret);
+		if(ItemPanel.currentButton != null){
+			Image image = new ImageLoader().getImage(ItemPanel.currentButton).getScaledInstance(64, 64, Image.SCALE_FAST);
+			cursor = Toolkit.getDefaultToolkit().createCustomCursor(image, new Point(0,0), ItemPanel.currentButton);
+			super.setCursor(cursor);
 		}
 
 		//TODO drawing of any background shit should go here
