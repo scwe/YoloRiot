@@ -1,6 +1,9 @@
 
 public class Tile {
 	
+	public static final int TILE_WIDTH = 32;
+	public static final int TILE_HEIGHT = 32;
+	
 	int xLoc;
 	int yLoc;
 	int width;

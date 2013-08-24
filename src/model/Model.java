@@ -5,16 +5,13 @@ import java.util.List;
 
 public class Model {
 	
-	List<Creep> creeps;
-	List<Structure> structures;
+	private List<Creep> creeps;
+	private List<Structure> structures;
+	
 	
 	public Model () {
 		creeps = new ArrayList<Creep> ();
 		structures = new ArrayList<Structure> ();
-	}
-	
-	public void draw () {
-	
 	}
 	
 	// update the data 

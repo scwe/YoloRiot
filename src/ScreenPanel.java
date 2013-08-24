@@ -1,6 +1,6 @@
 
 import java.awt.*;
-
+import model.*;
 import javax.swing.*;
 
 public class ScreenPanel extends JPanel{
@@ -8,6 +8,9 @@ public class ScreenPanel extends JPanel{
 	private YoloKeyboard key;
 	private YoloMouse mouse;
 	private Graphics2D buffer;
+	
+	private Map map;
+	private Model model;
 	
     public ScreenPanel(){
         setFocusable(true);
@@ -19,7 +22,12 @@ public class ScreenPanel extends JPanel{
         addMouseMotionListener(mouse);
         addKeyListener(key);
         
-        
+        initGame();
+    }
+    
+    public void initGame(){
+    	this.map = new Map();
+    	this.model = new Model();
     }
     
     @Override
@@ -37,7 +45,9 @@ public class ScreenPanel extends JPanel{
     
     public void draw(Graphics2D g){
     	g.drawRect(0, 0, YoloRiot.SCREEN_WIDTH, YoloRiot.SCREEN_HEIGHT);
-    	//do the drawing here
+    	if(map != null){
+    		map.draw(g);
+    	}
     }
     
     
