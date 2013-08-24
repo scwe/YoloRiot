@@ -1,10 +1,8 @@
 package gui;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-import javax.swing.JFrame;
-import javax.swing.Timer;
+import javax.swing.*;
+import java.awt.event.*;
 
 import map.Map;
 import model.Model;
@@ -21,6 +19,8 @@ public class YoloRiot extends JFrame implements ActionListener{
 
 	ScreenPanel mainScreen;
 	StartScreen startScreen;
+	
+	private SoundFactory sounds;   //use the sounds.playSound(filename) to play a sound
 	
 	private YoloMouse mouse;
 	private YoloKeyboard key;
@@ -43,16 +43,20 @@ public class YoloRiot extends JFrame implements ActionListener{
         screen = new ScreenPanel(model, map);
         screen.setVisible(false);
         add(screen);
+       
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         
        
 
         mouse = new YoloMouse(model);
         key = new YoloKeyboard(model.getPlayer());
+        sounds = new SoundFactory();
         
         addMouseListener(mouse);
         addMouseMotionListener(mouse);
         addKeyListener(key);
+        
+        
         
 
         setFocusable(true);

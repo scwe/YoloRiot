@@ -21,11 +21,9 @@ public class SpriteSheet {
 		this.spriteHeight = spriteHeight;
 		this.spriteWidth = spriteWidth;
 		try {
-			image = ImageIO.read(new File(filename));
-		} catch (IOException e) {
-			System.out.println(e.toString());
-			System.out.println("Shit son, something went wrong");
-			//e.printStackTrace(); 
+			image = new ImageLoader().getImage(filename);
+		} catch (Error e) {
+			System.out.println("That image doesn't exist, or atleast that is probably the problem");
 		}
 	}
 	
