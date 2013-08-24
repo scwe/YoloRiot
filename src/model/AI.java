@@ -1,5 +1,6 @@
 package model;
 
 public interface AI {
-	public Action getNext (Entity e);
+	public enum State {MOVE, ATTACK};
+	public void next (Entity e);
 }

@@ -5,10 +5,11 @@ import model.Action;
 import model.Entity;
 
 public class SimpleCreepAI implements AI {
-
+	State last;
+	
 	@Override
-	public Action getNext(Entity e) {
-		return new Action(Action.State.MOVE);
+	public void next(Entity e) {
+		last = State.MOVE;
+		e.getLocation().moveLeft(10);		
 	}
-
 }
