@@ -109,7 +109,6 @@ public class Model {
 
 		double creepNo = Math.abs(Math.sin(tick)*20);
 
-		System.out.println("creepno = "+creepNo);
 		int end = Map.MAP_WIDTH * Tile.TILE_WIDTH;
 		int laneHeight = Tile.TILE_HEIGHT;
 		int numLanes = Map.MAP_HEIGHT;
