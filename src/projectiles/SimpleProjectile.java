@@ -21,6 +21,7 @@ public class SimpleProjectile extends Projectile {
 	
 	public SimpleProjectile(Location location, Location direction, Model model) {
 		super (location, direction, model);
+		setHitbox(0,0);
 		tickspeed = 30;
 	}
 	
@@ -31,6 +32,8 @@ public class SimpleProjectile extends Projectile {
 		if (ticks == tickspeed) {
 			ticks = 0;
 			Set<Entity> es = model.intersects(hitbox);
+			
+			unitMove(10);
 			
 			for (Entity e : es) {
 				if (e instanceof Creep) {
@@ -43,11 +46,11 @@ public class SimpleProjectile extends Projectile {
 	}
 
 	@Override
-	public Image getSprite () {
-		Image im = new BufferedImage (8, 4, BufferedImage.TYPE_INT_ARGB);
+	public BufferedImage getSprite () {
+		BufferedImage im = new BufferedImage (32, 32, BufferedImage.TYPE_INT_ARGB);
 		Graphics g = im.getGraphics();
-		g.setColor(Color.GREEN);
-		g.fillRect(0, 0, 8, 4);
+		g.setColor(Color.BLUE);
+		g.fillRect(0, 0, 32, 32);
 		return im;
 	}
 
