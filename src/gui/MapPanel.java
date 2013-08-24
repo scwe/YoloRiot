@@ -14,6 +14,7 @@ public class MapPanel extends JPanel{
 		setPreferredSize(new Dimension(Tile.TILE_WIDTH*Map.MAP_WIDTH, Tile.TILE_HEIGHT* Map.MAP_HEIGHT));
 		this.map = m;
 		this.model = model;
+		setFocusable(true);
 	}
 	
 	public void paintComponent(Graphics g){

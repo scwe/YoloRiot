@@ -9,8 +9,6 @@ import javax.swing.*;
 
 public class ScreenPanel extends JPanel{
 
-	private YoloKeyboard key;
-	private YoloMouse mouse;
 	private Graphics2D buffer;
 	
 	private MapPanel mapPanel;
@@ -35,7 +33,7 @@ public class ScreenPanel extends JPanel{
 		Graphics2D g2d = (Graphics2D) g;
 		Image offscreen = createImage(getWidth(), getHeight());
 		buffer = (Graphics2D) offscreen.getGraphics();
-		buffer.setColor(Color.blue);
+		buffer.setColor(Color.white);
 		buffer.fillRect(0, 0, getWidth(), getHeight());
 
 		//TODO drawing of any background shit should go here

@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.image.*;
 import java.awt.event.*;
 import java.util.*;
+import javax.swing.border.*;
 
 import image.ImageLoader;
 
@@ -15,7 +16,11 @@ public class ItemPanel extends JPanel{
 	
 	private HashMap<String, String> buttonMap;
 	
+	private String currentButton;
+	
 	public ItemPanel(){
+		
+		super.setBorder(new StrokeBorder(new BasicStroke(4, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND)));
 		buttonMap = new HashMap<String, String>();
 		buttonMap.put("Button.png", "test");
 		GridBagConstraints gc = new GridBagConstraints();
@@ -24,6 +29,7 @@ public class ItemPanel extends JPanel{
 	}
 	
 	public void paintComponent(Graphics g){
+		g.setColor(Color.white);
 		g.fillRect(0,0,getWidth(), getHeight());
 	}
 	
@@ -39,12 +45,19 @@ public class ItemPanel extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				JButton b = (JButton)(arg0.getSource());
-				
-				System.out.println(b.getName());
+				currentButton = b.getName();
 			}
 			
 		});
 		
 		return button;
+	}
+	
+	public String getCurrentButton(){
+		return currentButton;
+	}
+	
+	public void resetCurrentButton(){
+		currentButton = null;
 	}
 }

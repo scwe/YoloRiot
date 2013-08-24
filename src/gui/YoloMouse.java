@@ -13,7 +13,6 @@ public class YoloMouse extends MouseAdapter{
     }
 
     public void mouseMoved(MouseEvent m){
-
     }
 
     public void mouseClicked(MouseEvent m){
