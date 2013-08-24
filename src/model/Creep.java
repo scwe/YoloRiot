@@ -1,20 +1,33 @@
 package model;
 
-public class Creep implements Entity, Hitboxable {
+import java.awt.Polygon;
+
+public class Creep extends EntityImpl implements Entity, Hitboxable {
+	
+	private static final int CREEP_SIZE_X = 32;
+	private static final int CREEP_SIZE_Y = 32;
+	
     public Creep(Location l){
 
     }
 
 	@Override
 	public void interact(Interaction i) {
-		// TODO Auto-generated method stub
-		
+			
+	}
+	
+	public Hitbox getHitbox() {
+		return hitbox;
 	}
 
-	@Override
-	public Hitbox getHitbox() {
-		// TODO Auto-generated method stub
-		return null;
+	public void makeHitbox() {
+		int[] xpoints = { -1 * ENTITY_SIZE_X / 2, ENTITY_SIZE_X / 2,
+				-1 * ENTITY_SIZE_X / 2, ENTITY_SIZE_X / 2 };
+		int[] ypoints = { ENTITY_SIZE_Y / 2, ENTITY_SIZE_Y / 2,
+				-1 * ENTITY_SIZE_Y / 2, -1 * ENTITY_SIZE_Y / 2 };
+		Polygon p = new Polygon(xpoints, ypoints, xpoints.length);
+
+		hitbox = new Hitbox(p);
 	}
 
 	@Override
@@ -22,11 +35,4 @@ public class Creep implements Entity, Hitboxable {
 		// TODO Auto-generated method stub
 		//
 	}
-
-	@Override
-	public void makeHitbox() {
-		// TODO Auto-generated method stub
-		
-	}
-
 }
