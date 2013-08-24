@@ -1,9 +1,11 @@
 package creeps;
 
 import java.awt.Graphics;
+import java.awt.Image;
 
 import model.AI;
 import model.Creep;
+import model.Interaction;
 import model.Location;
 import ais.SimpleCreepAI;
 
@@ -20,9 +22,15 @@ public class SimpleCreep extends Creep {
 	}
 
 	@Override
-	public void draw(Graphics g) {
+	public void interact(Interaction i) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	protected Image getSprite() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

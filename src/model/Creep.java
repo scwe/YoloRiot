@@ -1,21 +1,28 @@
 package model;
 
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Polygon;
 
 public abstract class Creep extends EntityImpl implements Entity, Hitboxable, Drawable {
 	private static final int CREEP_SIZE_X = 32;
 	private static final int CREEP_SIZE_Y = 32;
 
+	private int health;
+	
     public Creep(Location l){
     	this.location = l;
     	this.ai = makeAI ();
+    	health = 100;
     }
     
     protected abstract AI makeAI ();
-
-	@Override
-	public void interact(Interaction i) {
-			
+	public abstract void interact(Interaction i);
+	protected abstract Image getSprite ();
+	
+	
+	public void draw (Graphics g) {
+		g.drawImage(getSprite(), location.getX(), location.getLane() * 32, null); // MAKE THIS A CONSTANT
 	}
 	
 	@Override
