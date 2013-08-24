@@ -1,20 +1,11 @@
-package creeps;
+package model;
 
 import java.awt.Polygon;
 
-import ais.AI;
-import model.Entity;
-import model.EntityImpl;
-import model.Hitbox;
-import model.Hitboxable;
-import model.Interaction;
-import model.Location;
-
-public abstract class Creep extends EntityImpl implements Entity, Hitboxable {
-	
+public abstract class Creep extends EntityImpl implements Entity, Hitboxable, Drawable {
 	private static final int CREEP_SIZE_X = 32;
 	private static final int CREEP_SIZE_Y = 32;
-	
+
     public Creep(Location l){
     	this.location = l;
     	this.ai = makeAI ();

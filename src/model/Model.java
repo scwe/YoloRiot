@@ -3,9 +3,6 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
-import structures.Structure;
-import creeps.Creep;
-
 public class Model {
 	
 	List<Creep> creeps;

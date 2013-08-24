@@ -1,7 +1,10 @@
 package creeps;
 
+import java.awt.Graphics;
+
+import model.AI;
+import model.Creep;
 import model.Location;
-import ais.AI;
 import ais.SimpleCreepAI;
 
 public class SimpleCreep extends Creep {
@@ -14,6 +17,12 @@ public class SimpleCreep extends Creep {
 	@Override
 	protected AI makeAI() {
 		return new SimpleCreepAI ();
+	}
+
+	@Override
+	public void draw(Graphics g) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

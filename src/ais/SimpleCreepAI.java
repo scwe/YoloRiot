@@ -1,5 +1,6 @@
 package ais;
 
+import model.AI;
 import model.Action;
 import model.Location;
 

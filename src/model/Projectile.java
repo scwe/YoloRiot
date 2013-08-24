@@ -1,7 +1,7 @@
 package model;
 import java.awt.Graphics;
 
-public class Projectile implements Drawable, Hitboxable {
+public abstract class Projectile extends EntityImpl implements Drawable, Hitboxable {
 	Location l;
 	
     public void draw(Graphics g){

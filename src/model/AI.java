@@ -1,7 +1,4 @@
-package ais;
-
-import model.Action;
-import model.Location;
+package model;
 
 public interface AI {
 	public Action getNext (Location l);

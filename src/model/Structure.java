@@ -1,11 +1,7 @@
-package structures;
+package model;
 
-import model.Entity;
-import model.Hitbox;
-import model.Hitboxable;
-import model.Interaction;
 
-public class Structure implements Entity, Hitboxable {
+public abstract class Structure implements Entity, Hitboxable, Drawable {
 
 	@Override
 	public Hitbox getHitbox() {
