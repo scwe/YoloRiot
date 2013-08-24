@@ -8,7 +8,6 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 
 import model.AI;
-import model.Action;
 import model.Creep;
 import model.Entity;
 import model.Interaction;
