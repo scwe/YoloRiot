@@ -1,10 +1,15 @@
 package gui;
-import java.awt.event.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+import model.Model;
 
 
 public class YoloMouse extends MouseAdapter{
-    public YoloMouse(){
-
+	Model model;
+	
+    public YoloMouse(Model model){
+    	this.model = model;
     }
 
     public void mouseMoved(MouseEvent m){
@@ -15,7 +20,7 @@ public class YoloMouse extends MouseAdapter{
     	int x = m.getX();
     	int y = m.getY();
     	
-    	
+    	model.shoot(x, y);
     }
 
     public void mousePressed(MouseEvent m){

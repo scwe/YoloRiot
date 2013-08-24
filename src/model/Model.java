@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import projectiles.SimpleProjectile;
 import map.Map;
 import map.Tile;
 import creeps.SimpleCreep;
@@ -92,6 +93,13 @@ public class Model {
 		if (player.getHitbox().intersects(hitbox)) intersects.add(player);
 		
 		return intersects;
+	}
+	
+	public void shoot (int endX, int endY) {
+		int startX = player.getLocation().x;
+		int startY = player.getLocation().y;
+
+		//Projectile p = new SimpleProjectile(location, this);
 	}
 	
 	public Player getPlayer(){
