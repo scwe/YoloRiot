@@ -1,6 +1,7 @@
 package model;
 
-public class Structure implements Entity, Hitboxable {
+
+public abstract class Structure implements Entity, Hitboxable, Drawable {
 
 	@Override
 	public Hitbox getHitbox() {
