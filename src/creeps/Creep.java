@@ -2,7 +2,7 @@ package creeps;
 
 import java.awt.Polygon;
 
-import model.AI;
+import ais.AI;
 import model.Entity;
 import model.EntityImpl;
 import model.Hitbox;
