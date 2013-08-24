@@ -17,13 +17,18 @@ public class Player extends EntityImpl {
 	private int speed;
 	
 	public Ability curAbility;
-	public static Ability[] abilities = {new SimpleShoot ()};
 	
 	public Player(){
 		super (new Location(50, 50));
 		speed = 4;
-		curAbility = abilities[0];
+		curAbility = Model.abilities[0];
 		//sprites = new SpriteSheet(0, 0, CHARACTER_WIDTH, CHARACTER_HEIGHT, "character.png");  TODO, uncomment when we have a playe sprite
+	}
+	
+	public void changeAbility (int change) {
+		System.out.println (change % Model.abilities.length);
+	//	curAbility = abilities[change % abilities.length];
+		// TODO
 	}
     
     public void draw(Graphics g){
@@ -70,7 +75,7 @@ public class Player extends EntityImpl {
 	
 	@Override
 	public BufferedImage getSprite() {
-		// TODO Auto-generated method stub
+		// TODO fill this in
 		return null;
 	}
 

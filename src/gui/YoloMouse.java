@@ -3,14 +3,12 @@ package gui;
 import java.awt.IllegalComponentStateException;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
-import structures.SimpleStructure;
+import java.awt.event.MouseWheelEvent;
 
 import map.Map;
 import map.Tile;
+import model.Location;
 import model.Model;
-
-import model.*;
 
 public class YoloMouse extends MouseAdapter {
 	public static int mouseX = 0;
@@ -36,6 +34,11 @@ public class YoloMouse extends MouseAdapter {
 		} catch (IllegalComponentStateException e) {
 
 		}
+	}
+	
+	public void mouseWheelMoved (MouseWheelEvent e) {
+		int clicks = e.getWheelRotation();
+		Model.model.player.changeAbility(clicks);
 	}
 
 	public void mouseClicked(MouseEvent m) {

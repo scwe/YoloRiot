@@ -5,10 +5,10 @@ import model.Model;
 import projectiles.Projectile;
 import projectiles.SimpleProjectile;
 
-public class SimpleShoot implements Ability {
+public class SimpleShoot extends Ability {
 
 	@Override
-	public void use(int fromX, int fromY, int targetX, int targetY) {
+	public void activate (int fromX, int fromY, int targetX, int targetY) {
 		Projectile p = new SimpleProjectile(new Location(fromX, fromY), new Location(targetX, targetY));
 		Model.model.projectiles.add(p);
 	}

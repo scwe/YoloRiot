@@ -8,14 +8,15 @@ import java.util.Set;
 
 import map.Map;
 import map.Tile;
+import playerAbilities.Ability;
+import playerAbilities.SimpleShoot;
 import projectiles.Projectile;
-import projectiles.SimpleProjectile;
-import creeps.Creep;
-import creeps.RandomCreep;
 import structures.SimpleCannon;
 import structures.SimpleWall;
 import structures.Structure;
 import structures.Yolostone;
+import creeps.Creep;
+import creeps.RandomCreep;
 import creeps.SimpleCreep;
 
 public class Model {
@@ -28,12 +29,14 @@ public class Model {
 	public List<Structure> structures;
 	public List<Projectile> projectiles;
 	
+	public static Ability[] abilities = {new SimpleShoot ()};
+	
 	private Yolostone[] yolostones;
 	private int destroyed = 0;
 	
 	public double yolospeed = 1.0;
 	
-	private Player player;
+	public Player player;
 	
 	private int waveDifficulty = 3;
 	private int waveTick = 200;
@@ -79,6 +82,9 @@ public class Model {
 				destroyed++;
 			}
 		}
+		
+		for (Ability a : abilities) 
+			a.cooldown();		
 		
 		if (destroyed == Map.MAP_HEIGHT) {
 			// FIXME Lose.
