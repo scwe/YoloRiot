@@ -69,7 +69,6 @@ public class Hitbox{
 	
 	
 	public void draw(Graphics g){
-		g.setColor(Color.red);
 		g.drawPolygon(polygon);
 	}
 }

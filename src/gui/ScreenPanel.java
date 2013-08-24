@@ -16,22 +16,12 @@ public class ScreenPanel extends JPanel{
 	private Map map;
 	private Model model;
 	
-    public ScreenPanel(Model model){
+    public ScreenPanel(Model model, Map map){
         setFocusable(true);
         requestFocusInWindow();
-        mouse = new YoloMouse();
-        key = new YoloKeyboard();
-        
-        addMouseListener(mouse);
-        addMouseMotionListener(mouse);
-        addKeyListener(key);
-        
+
         this.model = model;
-        initGame();
-    }
-    
-    public void initGame(){
-    	this.map = new Map();
+        this.map = map;
     }
     
     @Override
@@ -52,6 +42,7 @@ public class ScreenPanel extends JPanel{
     	if(map != null){
     		map.draw(g);
     	}
+    	model.draw(g);
     }
     
     

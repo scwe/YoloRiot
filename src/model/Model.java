@@ -12,11 +12,16 @@ public class Model {
 	private List<Structure> structures;
 	private List<Projectile> projectiles;
 	
+	private Player player;
+	
 	private List<List<Entity>> lanes;
+ 
 	
 	public Model () {
+		player = new Player();
 		creeps = new ArrayList<Creep> ();
 		structures = new ArrayList<Structure> ();
+		projectiles = new ArrayList<Projectile>();
 		lanes = new ArrayList<List<Entity>> ();
 		for (int i=0; i < LANES; i++) {
 			lanes.add(new ArrayList<Entity> ());
@@ -40,6 +45,7 @@ public class Model {
 		for (Projectile p : projectiles) {
 			p.update();
 		}
+		player.update();
 	}
 	
 	public void draw (Graphics g) {
@@ -53,8 +59,17 @@ public class Model {
 		
 		for (Projectile p : projectiles) {
 			p.draw (g);
-		}		
+		}
+		
+		player.draw(g);
 	}
 	
+	public Player getPlayer(){
+		return player;
+	}
+	
+	public void setPlayer(Player p){
+		this.player = p;
+	}
 	
 }

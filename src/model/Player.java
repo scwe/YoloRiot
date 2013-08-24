@@ -1,15 +1,19 @@
 package model;
+import java.awt.Color;
 import java.awt.Graphics;
 import image.SpriteSheet;
 
-public class Character implements Drawable, Entity, Hitboxable{
+public class Player implements Drawable, Entity, Hitboxable{
 	public static final int CHARACTER_WIDTH = 40;
 	public static final int CHARACTER_HEIGHT = 64;
 	private SpriteSheet sprites;
 	private Location location;
 	private Hitbox hitbox;
-	
-	public Character(){
+	private int speed;
+
+
+	public Player(){
+		speed = 5;
 		location = new Location(50,50);
 		sprites = new SpriteSheet(0, 0, CHARACTER_WIDTH, CHARACTER_HEIGHT, "character.png");
 		hitbox = new Hitbox(location.x, location.y, CHARACTER_WIDTH, CHARACTER_HEIGHT);
@@ -18,7 +22,8 @@ public class Character implements Drawable, Entity, Hitboxable{
 
     
     public void draw(Graphics g){
-    	
+    	g.setColor(Color.blue);
+    	hitbox.draw(g);
     }
 
 	@Override
@@ -28,7 +33,20 @@ public class Character implements Drawable, Entity, Hitboxable{
 	}
 
 
-	public void move(int x, int y){
+	public void move(Direction d){
+		if(d == Direction.NORTH){
+			location.y -= speed;
+			hitbox.moveHitbox(0, -speed);
+		}else if(d == Direction.EAST){
+			location.x += speed;
+			hitbox.moveHitbox(speed, 0);
+		}else if(d == Direction.SOUTH){
+			location.y += speed;
+			hitbox.moveHitbox(0, speed);
+		}else if(d == Direction.WEST){
+			location.x -= speed;
+			hitbox.moveHitbox(-speed, 0);
+		}
 	}
 
 	@Override
@@ -37,17 +55,25 @@ public class Character implements Drawable, Entity, Hitboxable{
 	}
 
 
-
 	@Override
 	public Hitbox getHitbox() {
-		// TODO Auto-generated method stub
-		return null;
+		return hitbox;
 	}
 
 
 	@Override
 	public void setHitbox(Hitbox h) {
-		// TODO Auto-generated method stub
+		this.hitbox = h;
 		
+	}
+	
+	public int getSpeed() {
+		return speed;
+	}
+
+
+
+	public void setSpeed(int speed) {
+		this.speed = speed;
 	}
 }
