@@ -32,8 +32,12 @@ public class YoloMouse extends MouseAdapter {
 			mouseX = m.getX() - diffX;
 			mouseY = m.getY() - diffY;
 		} catch (IllegalComponentStateException e) {
-
+			
 		}
+	}
+	
+	public void mouseDragged (MouseEvent m) {
+		mouseMoved(m);	
 	}
 	
 	public void mouseWheelMoved (MouseWheelEvent e) {
@@ -50,14 +54,13 @@ public class YoloMouse extends MouseAdapter {
 		int diffX = map.getLocationOnScreen().x - yolo.getLocationOnScreen().x;
 		int diffY = map.getLocationOnScreen().y - yolo.getLocationOnScreen().y;
 		
-		
 		mouseX = m.getX() - diffX;
 		mouseY = m.getY() - diffY;
 
 		if (ItemPanel.currentButton == null) {
-			model.playerShoot(mouseX, mouseY);
+			model.mousePressed(true);
 		} else {
-
+			model.mousePressed(false);
 			int left = (mouseX / Tile.TILE_WIDTH) * Tile.TILE_WIDTH;
 			int top = (mouseY / Tile.TILE_HEIGHT) * Tile.TILE_HEIGHT;
 			
@@ -75,6 +78,6 @@ public class YoloMouse extends MouseAdapter {
 	}
 
 	public void mouseReleased(MouseEvent m) {
-
+		model.mousePressed(false);
 	}
 }

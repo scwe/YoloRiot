@@ -1,5 +1,7 @@
 package model;
 
+import gui.YoloMouse;
+
 import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -30,6 +32,7 @@ public class Model {
 	public List<Projectile> projectiles;
 	
 	public static Ability[] abilities = {new SimpleShoot ()};
+	private boolean mousePressed = false;
 	
 	private Yolostone[] yolostones;
 	private int destroyed = 0;
@@ -86,6 +89,11 @@ public class Model {
 		for (Ability a : abilities) 
 			a.cooldown();		
 		
+		if (mousePressed) {
+			playerShoot(YoloMouse.mouseX, YoloMouse.mouseY);
+		}
+		
+		
 		if (destroyed == Map.MAP_HEIGHT) {
 			// FIXME Lose.
 		}
@@ -118,8 +126,6 @@ public class Model {
 	}
 	
 	private void makeCreeps () {
-
-
 		double creepNo = Math.abs(Math.sin(tick)*20);
 
 		int end = Map.MAP_WIDTH * Tile.TILE_WIDTH;
@@ -150,7 +156,7 @@ public class Model {
 		return intersects;
 	}
 	
-	public void playerShoot (int endX, int endY) {
+	private void playerShoot (int endX, int endY) {
 		int startX = -1;
 		int startY = -1;
 		
@@ -208,6 +214,10 @@ public class Model {
 
 	public void addProjectile(Projectile p) {
 		projectiles.add(p);
+	}
+
+	public void mousePressed(boolean mousePressed) {
+		this.mousePressed = mousePressed;
 	}
 
 }
