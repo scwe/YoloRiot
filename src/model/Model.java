@@ -1,5 +1,7 @@
 package model;
 
+import gui.YoloMouse;
+
 import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -8,13 +10,15 @@ import java.util.Set;
 
 import map.Map;
 import map.Tile;
-import projectiles.SimpleProjectile;
-
-import creeps.RandomCreep;
-
+import playerAbilities.Ability;
+import playerAbilities.SimpleShoot;
+import projectiles.Projectile;
 import structures.SimpleCannon;
 import structures.SimpleWall;
-
+import structures.Structure;
+import structures.Yolostone;
+import creeps.Creep;
+import creeps.RandomCreep;
 import creeps.SimpleCreep;
 
 public class Model {
@@ -23,19 +27,27 @@ public class Model {
 	
 	public static Model model;
 	
-	private List<Creep> creeps;
-	private List<Structure> structures;
-	private List<Projectile> projectiles;
+	public List<Creep> creeps;
+	public List<Structure> structures;
+	public List<Projectile> projectiles;
+	
+	public static Ability[] abilities = {new SimpleShoot ()};
+	private boolean mousePressed = false;
+	
 	private Yolostone[] yolostones;
 	private int destroyed = 0;
 	
-	private Player player;
+	public double yolospeed = 1.0;
+	public boolean yolomode = false;
+	
+	public Player player;
 	
 	private int waveDifficulty = 3;
 	private int waveTick = 200;
 	private int tick = 0;
 	private int waveTickSpeed = 20;
-	boolean flag = false;
+	
+	public List<Pt> pts = new ArrayList<Pt> ();
 	
 	public Model () {
 		model = this;
@@ -45,7 +57,7 @@ public class Model {
 		projectiles = new ArrayList<Projectile>();
 		yolostones = new Yolostone[Map.MAP_HEIGHT];
 		for (int i=0; i < Map.MAP_HEIGHT; i++) {
-			yolostones[i] = new Yolostone (i, this);
+			yolostones[i] = new Yolostone (i);
 		}
 	}
 	
@@ -76,6 +88,14 @@ public class Model {
 			}
 		}
 		
+		for (Ability a : abilities) 
+			a.cooldown();		
+		
+		if (mousePressed) {
+			playerShoot(YoloMouse.mouseX, YoloMouse.mouseY);
+		}
+		
+		
 		if (destroyed == Map.MAP_HEIGHT) {
 			// FIXME Lose.
 		}
@@ -104,12 +124,13 @@ public class Model {
 			y.draw(g);
 		}
 		
+		for (Pt pt : pts)
+			pt.draw(g);
+		
 		player.draw(g);
 	}
 	
 	private void makeCreeps () {
-
-
 		double creepNo = Math.abs(Math.sin(tick)*20);
 
 		int end = Map.MAP_WIDTH * Tile.TILE_WIDTH;
@@ -118,8 +139,8 @@ public class Model {
 
 		for (int i = 0 ; i < creepNo; i++){
 			int laneLoc = (int)((Math.random())*10);
-			creeps.add(new SimpleCreep (new Location(end, laneLoc * laneHeight), this));
-			creeps.add(new RandomCreep (new Location(end, laneLoc * laneHeight), this, 8));
+			creeps.add(new SimpleCreep (new Location(end, laneLoc * laneHeight)));
+			creeps.add(new RandomCreep (new Location(end, laneLoc * laneHeight), 8));
 		}
 	}
 	
@@ -140,7 +161,44 @@ public class Model {
 		return intersects;
 	}
 	
-	public void playerShoot (int endX, int endY) {
+	public Set<Structure> inersectsStructures (Hitbox hitbox) {
+		Set<Structure> intersects = new HashSet<Structure> ();
+		
+		for (Structure s : structures) {
+			if (hitbox.intersects(s.getHitbox())) intersects.add(s);
+		}
+
+		return intersects;		
+	}
+	
+	public Set<Creep> intersectsCreeps (Hitbox hitbox) {
+		Set<Creep> intersects = new HashSet<Creep> ();
+		
+		for (Creep c : creeps) {
+			if (hitbox.intersects(c.getHitbox())) intersects.add(c);
+		}
+
+		return intersects;		
+	}
+	
+	public boolean intersectsPlayer (Hitbox hitbox) {
+		return player.hitbox.intersects(hitbox);
+	}
+	
+
+	public Set<Entity> intersectsFriendly(Hitbox hitbox) {
+		Set<Entity> intersects = new HashSet<Entity> ();
+		
+		for (Structure s : structures) {
+			if (hitbox.intersects(s.getHitbox())) intersects.add(s);
+		}
+		
+		if (player.getHitbox().intersects(hitbox)) intersects.add(player);
+		
+		return intersects;	
+	}
+	
+	private void playerShoot (int endX, int endY) {
 		int startX = -1;
 		int startY = -1;
 		
@@ -158,8 +216,7 @@ public class Model {
 			startY = player.getLocation().y + player.CHARACTER_HEIGHT/2;
 		}
 		
-		Projectile p = new SimpleProjectile(new Location(startX, startY), new Location(endX, endY), this);
-		projectiles.add(p);
+		player.curAbility.use(startX, startY, endX, endY);
 	}
 	
 	public Player getPlayer(){
@@ -182,9 +239,9 @@ public class Model {
 	
 	public void addStructure (Location l, int buttonnum) {
 		if (buttonnum == 0) {
-			structures.add(new SimpleCannon(l, this));
+			structures.add(new SimpleCannon(l));
 		} else if (buttonnum == 1) {
-			structures.add(new SimpleWall(l, this));
+			structures.add(new SimpleWall(l));
 		}
 	}
 
@@ -201,4 +258,13 @@ public class Model {
 		projectiles.add(p);
 	}
 
+	public void mousePressed(boolean mousePressed) {
+		this.mousePressed = mousePressed;
+	}
+
+	public void FULLYOL0() {
+		yolomode  = true;
+		yolospeed = 0.5;
+		player.speed *= 2;
+	}
 }

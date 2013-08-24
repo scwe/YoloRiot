@@ -1,9 +1,9 @@
-package ais;
+package creepAIs;
 
-import model.AI;
+import creeps.Creep;
 import model.Entity;
 
-public class RandomCreepAI implements AI {
+public class RandomCreepAI implements CreepAI {
 	State last;
 	private int randomness;
 	
@@ -16,26 +16,26 @@ public class RandomCreepAI implements AI {
 	
 	
 	@Override
-	public void next(Entity e) {
+	public void next(Creep c) {
 		int ran = (int)(Math.random()*10);
 
 		if (ran < randomness){
 
 			double ranDir = Math.random();
 			if (ranDir < 0.6){
-				e.move(-10, 0);
+				c.move(-10, 0);
 				return;
 			}
 			else if (ranDir < 0.7){
-				e.move(0, -10);
+				c.move(0, -10);
 				return;
 			}
 			else{
-				e.move(0,10);
+				c.move(0,10);
 			}
 		}
 		else{
-			e.move(-10, 0);
+			c.move(-10, 0);
 		}
 	}
 }

@@ -3,14 +3,13 @@ package gui;
 import java.awt.IllegalComponentStateException;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
-import structures.SimpleStructure;
+import java.awt.event.MouseWheelEvent;
 
 import map.Map;
 import map.Tile;
+import model.Location;
 import model.Model;
-
-import model.*;
+import model.Pt;
 
 public class YoloMouse extends MouseAdapter {
 	public static int mouseX = 0;
@@ -36,8 +35,17 @@ public class YoloMouse extends MouseAdapter {
 			mouseX = m.getX() - offsetX;
 			mouseY = m.getY() - offsetY;
 		} catch (IllegalComponentStateException e) {
-
+			
 		}
+	}
+	
+	public void mouseDragged (MouseEvent m) {
+		mouseMoved(m);	
+	}
+	
+	public void mouseWheelMoved (MouseWheelEvent e) {
+		int clicks = e.getWheelRotation();
+		Model.model.player.changeAbility(clicks);
 	}
 
 	public void mouseClicked(MouseEvent m) {
@@ -45,18 +53,19 @@ public class YoloMouse extends MouseAdapter {
 
 	public void mousePressed(MouseEvent m) {
 		YoloRiot yolo = (YoloRiot) m.getSource();
+		
+		Model.model.pts.add(new Pt(m.getX(), m.getY()));
 
 		int diffX = map.getLocationOnScreen().x - yolo.getLocationOnScreen().x;
 		int diffY = map.getLocationOnScreen().y - yolo.getLocationOnScreen().y;
-		
 		
 		mouseX = m.getX() - diffX;
 		mouseY = m.getY() - diffY;
 
 		if (ItemPanel.currentButton == null) {
-			model.playerShoot(mouseX, mouseY);
+			model.mousePressed(true);
 		} else {
-
+			model.mousePressed(false);
 			int left = (mouseX / Tile.TILE_WIDTH) * Tile.TILE_WIDTH;
 			int top = (mouseY / Tile.TILE_HEIGHT) * Tile.TILE_HEIGHT;
 			
@@ -74,6 +83,6 @@ public class YoloMouse extends MouseAdapter {
 	}
 
 	public void mouseReleased(MouseEvent m) {
-
+		model.mousePressed(false);
 	}
 }
