@@ -49,14 +49,13 @@ public class YoloMouse extends MouseAdapter {
 	public void mouseClicked(MouseEvent m) {
 	}
 
+	// FIXME cursor is effectively in the top-left.
 	public void mousePressed(MouseEvent m) {
 		YoloRiot yolo = (YoloRiot) m.getSource();
 		
-		Model.model.pts.add(new Pt(m.getX(), m.getY()));
-
 		int diffX = map.getLocationOnScreen().x - yolo.getLocationOnScreen().x;
 		int diffY = map.getLocationOnScreen().y - yolo.getLocationOnScreen().y;
-		
+
 		mouseX = m.getX() - diffX;
 		mouseY = m.getY() - diffY;
 

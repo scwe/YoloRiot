@@ -19,6 +19,8 @@ import model.Model;
 public abstract class Projectile extends EntityImpl {
 	private static final int MOVE_STEP = 2;
 	
+	protected int moveStep = MOVE_STEP;
+	
 	protected Location vector;
 	protected double angle;
 	protected double movelength = 10;
@@ -67,7 +69,7 @@ public abstract class Projectile extends EntityImpl {
 			if (friendly) es = Model.model.intersectsCreeps(hitbox);
 			else es = Model.model.intersectsFriendly(hitbox);
 			
-			unitMove(MOVE_STEP);
+			unitMove(moveStep);
 			
 			for (Entity e : es) {
 				e.interact(attack);
@@ -88,7 +90,9 @@ public abstract class Projectile extends EntityImpl {
 	protected final void unitMove(int magnitude) {
 		double xunit = Math.cos(angle);
 		double yunit = Math.sin(angle);
-
+		
+		// FIXME bug in projectile motion
+		
 		location.x += xunit * magnitude;
 		location.y += yunit * magnitude;
 		

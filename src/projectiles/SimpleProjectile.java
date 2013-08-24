@@ -17,10 +17,11 @@ import model.Model;
 public class SimpleProjectile extends Projectile {
 
 	private BufferedImage image;
-	private final Interaction attack = new SimpleDamage (10);
 	
 	public SimpleProjectile(Location location, Location direction) {
 		super (location, direction);
+		attack = new SimpleDamage (10);
+		System.out.println (angle);
 		tickspeed = 1;
 	}
 

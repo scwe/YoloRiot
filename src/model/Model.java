@@ -1,6 +1,7 @@
 package model;
 
 import gui.YoloMouse;
+import interactions.Interaction;
 
 import java.awt.Graphics;
 import java.util.ArrayList;
@@ -92,6 +93,7 @@ public class Model {
 			a.cooldown();		
 		
 		if (mousePressed) {
+			System.out.println ("(" + YoloMouse.mouseX + ", " + YoloMouse.mouseY + ")");
 			playerShoot(YoloMouse.mouseX, YoloMouse.mouseY);
 		}
 		
