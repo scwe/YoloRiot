@@ -2,28 +2,26 @@ package structures;
 
 import image.ImageLoader;
 
-import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
-import projectiles.SimpleProjectile;
-import structureais.SimpleCannonAI;
-import model.AI;
 import model.Location;
 import model.Model;
-import model.Projectile;
-import model.Structure;
+import projectiles.Projectile;
+import projectiles.SimpleProjectile;
+import structureAIs.SimpleCannonAI;
+import structureAIs.StructureAI;
 
 public class SimpleCannon extends Structure {
 
 	Location direction;
 	
-	public SimpleCannon(Location l, Model model) {
-		super(l, model);
-		direction = new Location(l.x + 10, l.y);
+	public SimpleCannon(Location location) {
+		super(location);
+		direction = new Location(location.x + 10, location.y);
 	}
 
 	@Override
-	protected AI makeAI() {
+	protected StructureAI makeAI() {
 		return new SimpleCannonAI ();
 	}
 
@@ -39,7 +37,7 @@ public class SimpleCannon extends Structure {
 
 	@Override
 	public void fire() {
-		Projectile p = new SimpleProjectile(new Location(location.x, location.y), direction, model);
-		model.addProjectile (p);
+		Projectile p = new SimpleProjectile(new Location(location.x, location.y), direction);
+		Model.model.addProjectile (p);
 	}
 }

@@ -1,19 +1,21 @@
-package model;
+package structures;
 
 import image.ImageLoader;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
+import structureAIs.StructureAI;
 import map.Tile;
+import model.Location;
 
-public class Yolostone extends Structure implements Drawable {
+public class Yolostone extends Structure {
 	
 	public boolean destroyed = false;
 	private int num;
 	
-	public Yolostone (int num, Model model) {
-		super(new Location(0, Tile.TILE_HEIGHT*num), model);
+	public Yolostone (int num) {
+		super(new Location(0, Tile.TILE_HEIGHT*num));
 		this.num = num;
 	}
 	
@@ -33,7 +35,7 @@ public class Yolostone extends Structure implements Drawable {
 	}
 
 	@Override
-	protected AI makeAI() {
+	protected StructureAI makeAI() {
 		return null; // needs no AI.
 	}
 

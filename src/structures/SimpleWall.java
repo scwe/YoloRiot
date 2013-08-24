@@ -2,23 +2,21 @@ package structures;
 
 import image.ImageLoader;
 
-import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
-import model.AI;
+import structureAIs.StructureAI;
 import model.Location;
 import model.Model;
-import model.Structure;
 
 public class SimpleWall extends Structure {
 	
-	public SimpleWall(Location l, Model model) {
-		super(l, model);
+	public SimpleWall(Location l) {
+		super(l);
 		this.health = 1000;
 	}
 
 	@Override
-	protected AI makeAI() { // no AI
+	protected StructureAI makeAI() { // no AI
 		return null;
 	}
 

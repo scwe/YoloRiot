@@ -75,6 +75,7 @@ public class YoloRiot extends JFrame implements ActionListener {
 
 		addMouseListener(mouse);
 		addMouseMotionListener(mouse);
+		addMouseWheelListener(mouse);
 		addKeyListener(key);
 
 		setFocusable(true);
