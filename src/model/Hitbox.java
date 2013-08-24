@@ -45,8 +45,7 @@ public class Hitbox{
 	}
 	
 	private boolean lineIntersection (int ax1, int ay1, int ax2, int ay2, int bx1, int bx2, int by1, int by2) {
-		return false;
-		/*int px = Math.min(ax1, ax2);
+		int px = Math.min(ax1, ax2);
 		int py = Math.min(ay1, ay2);
 		int rx = Math.abs(ax2 - ax1);
 		int ry = Math.abs(ay2 - ay1);
@@ -56,10 +55,11 @@ public class Hitbox{
 		int sx = Math.abs(bx2 - bx1);
 		int sy = Math.abs(by2 - by1);
 		
-		int t = ()
+		// potential div/0.
+		double t = ((qx - px)*sy - (qy - py)*sx) / (rx*sy - ry*sx);
+		double u = ((qx - px)*ry - (qy - py)*rx) / (rx*sy - ry*sx);
 		
-		t = (q − p) × s / (r × s)
-				u = (q − p) × r / (r × s)	*/	
+		return t >= 0 && u >= 0 && t <= 1 && u <= 1;
 	}
 	
 	
