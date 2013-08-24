@@ -99,4 +99,12 @@ public class Player implements Drawable, Entity, Hitboxable{
 		// TODO Auto-generated method stub
 		
 	}
+
+
+
+	@Override
+	public void reduceHealth(int amount) {
+		// TODO Auto-generated method stub
+		
+	}
 }
