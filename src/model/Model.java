@@ -36,7 +36,7 @@ public class Model {
 		projectiles = new ArrayList<Projectile>();
 		yolostones = new Yolostone[Map.MAP_HEIGHT];
 		for (int i=0; i < Map.MAP_HEIGHT; i++) {
-			yolostones[i] = new Yolostone (i);
+			yolostones[i] = new Yolostone (i, this);
 		}
 	}
 	

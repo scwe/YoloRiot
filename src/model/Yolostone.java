@@ -7,12 +7,13 @@ import java.awt.image.BufferedImage;
 
 import map.Tile;
 
-public class Yolostone extends EntityImpl implements Drawable {
+public class Yolostone extends Structure implements Drawable {
 	
 	public boolean destroyed = false;
 	private int num;
 	
-	public Yolostone (int num) {
+	public Yolostone (int num, Model model) {
+		super(new Location(0, Tile.TILE_HEIGHT*num), model);
 		this.num = num;
 	}
 	
@@ -35,5 +36,9 @@ public class Yolostone extends EntityImpl implements Drawable {
 	public void draw(Graphics g) {
 		g.drawImage(getSprite(), 0, Tile.TILE_HEIGHT*num,  Tile.TILE_WIDTH, Tile.TILE_HEIGHT, null);
 	}
-	
+
+	@Override
+	protected AI makeAI() {
+		return null; // needs no AI.
+	}
 }

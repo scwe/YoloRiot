@@ -37,10 +37,9 @@ public class SimpleProjectile extends Projectile {
 			for (Entity e : es) {
 				if (e instanceof Creep) {
 					e.interact(attack);
+					model.killEntity(this);
 				}
 			}
-			
-			//model.remove(this);
 		}
 	}
 
