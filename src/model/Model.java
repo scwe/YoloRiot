@@ -154,19 +154,15 @@ public class Model {
 	
 	public void addStructure (Location l, int buttonnum) {
 		if (buttonnum == 0) {
-			structures.add(new SimpleWall(l, this));
-		} else if (buttonnum == 1) {
 			structures.add(new SimpleCannon(l, this));
+		} else if (buttonnum == 1) {
+			structures.add(new SimpleWall(l, this));
 		}
 	}
 
 	private boolean outOfBounds (Entity e) {
 		Location l = e.getLocation();
 		return !(l.x >= 0 && l.y >= 0 && l.x <= FIELD_WIDTH && l.y <= FIELD_HEIGHT);
-	}
-	
-	public void addStructure(Structure s){
-		structures.add(s);
 	}
 
 }

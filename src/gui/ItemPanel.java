@@ -41,7 +41,6 @@ public class ItemPanel extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				JButton b = (JButton)(arg0.getSource());
-				System.out.println("Current button is updated");
 				currentButton = b.getName();
 			}
 			
