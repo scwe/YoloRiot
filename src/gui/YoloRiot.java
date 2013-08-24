@@ -2,6 +2,8 @@ package gui;
 
 
 import javax.swing.*;
+
+import java.awt.BorderLayout;
 import java.awt.event.*;
 
 import map.Map;
@@ -17,8 +19,9 @@ public class YoloRiot extends JFrame implements ActionListener{
     private Model model;
     private Map map;
 
-	ScreenPanel mainScreen;
-	StartScreen startScreen;
+	private ScreenPanel mainScreen;
+	private ItemPanel itemPanel;
+	private StartScreen startScreen;
 	
 	private SoundFactory sounds;   //use the sounds.playSound(filename) to play a sound
 	
@@ -34,19 +37,18 @@ public class YoloRiot extends JFrame implements ActionListener{
     	setTitle("Yolo Riot");
     	setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
     	model = new Model();
-    	map = new Map("images/TILESET1.png");
+    	map = new Map("TILESET1.png");
     	
     	startScreen = new StartScreen();
         add(startScreen);
         startScreen.setVisible(true);
     	
-        screen = new ScreenPanel(model, map);
+        itemPanel = new ItemPanel();
+        screen = new ScreenPanel(itemPanel, model, map);
         screen.setVisible(false);
         add(screen);
        
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        
-       
 
         mouse = new YoloMouse(model);
         key = new YoloKeyboard(model.getPlayer());
@@ -55,9 +57,6 @@ public class YoloRiot extends JFrame implements ActionListener{
         addMouseListener(mouse);
         addMouseMotionListener(mouse);
         addKeyListener(key);
-        
-        
-        
 
         setFocusable(true);
         setVisible(true);

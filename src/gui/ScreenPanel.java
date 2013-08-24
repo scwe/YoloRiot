@@ -14,15 +14,18 @@ public class ScreenPanel extends JPanel{
 	private Graphics2D buffer;
 	
 	private MapPanel mapPanel;
+	private ItemPanel itemPanel;
 	
 	private Map map;
 	private Model model;
 	
-    public ScreenPanel(Model model, Map map){
+    public ScreenPanel(ItemPanel itemPanel, Model model, Map map){
         setFocusable(true);
         requestFocusInWindow();
         
         mapPanel = new MapPanel(model, map);
+        this.itemPanel = itemPanel;
+        add(itemPanel);
         add(mapPanel);
 
         this.model = model;
