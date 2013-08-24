@@ -45,12 +45,12 @@ public class SimpleCreep extends Creep {
 	}*/
 
 	@Override
-	public Image getSprite() {
-		Image i = new BufferedImage (32, 32, BufferedImage.TYPE_INT_ARGB);
-		Graphics g = i.getGraphics();
+	public BufferedImage getSprite() {
+		BufferedImage im = new BufferedImage (32, 32, BufferedImage.TYPE_INT_ARGB);
+		Graphics g = im.getGraphics();
 		g.setColor(Color.BLUE);
 		g.fillRect(0, 0, 32, 32);
-		return i;
+		return im;
 	}
 
 }

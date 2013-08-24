@@ -1,6 +1,6 @@
 package model;
 
-import java.awt.Image;
+import java.awt.image.BufferedImage;
 
 public abstract class EntityImpl implements Entity {	
 	protected AI ai;
@@ -16,5 +16,5 @@ public abstract class EntityImpl implements Entity {
 	
 	public abstract void interact(Interaction i);
 	public abstract void update();
-	public abstract Image getSprite ();
+	public abstract BufferedImage getSprite ();
 }

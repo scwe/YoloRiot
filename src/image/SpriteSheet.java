@@ -23,11 +23,13 @@ public class SpriteSheet {
 		this.y = y;
 		this.spriteHeight = spriteHeight;
 		this.spriteWidth = spriteWidth;
+
 		sheets = new ArrayList<BufferedImage>();
 		
 		ImageLoader imLoad = new ImageLoader();
 		for (int i = 0; i < filenames.size(); i++){
 			sheets.add(imLoad.getImage(filenames.get(i)));
+
 		}
 		
 	

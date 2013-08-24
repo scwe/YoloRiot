@@ -17,14 +17,13 @@ public class YoloMouse extends MouseAdapter{
     }
 
     public void mouseClicked(MouseEvent m){
-    	int x = m.getX();
-    	int y = m.getY();
-    	
-    	model.shoot(x, y);
+
     }
 
     public void mousePressed(MouseEvent m){
-
+    	int x = m.getX();
+    	int y = m.getY();
+    	model.shoot(x, y);
     }
 
     public void mouseReleased(MouseEvent m){

@@ -35,7 +35,16 @@ public class Hitbox{
 		return polygon;
 	}
 	
+	public Rectangle getRect () {
+		return rect;
+	}
+	
 	public boolean intersects (Hitbox other) {
+		Rectangle otherR = other.getRect();
+		return rect.intersects(otherR);		
+	}
+	
+	public boolean intersectsOld (Hitbox other) {
 		Polygon otherP = other.getPoly ();
 		
 		for (int i=0; i < polygon.xpoints.length - 1; i++) {
