@@ -1,11 +1,18 @@
 package gui;
 
 
-import java.awt.*;
+import java.awt.AlphaComposite;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.RenderingHints;
+
+import javax.swing.JPanel;
 
 import map.Map;
-import model.*;
-import javax.swing.*;
+import model.Model;
 
 public class ScreenPanel extends JPanel{
 
@@ -31,10 +38,14 @@ public class ScreenPanel extends JPanel{
     public void paintComponent(Graphics g){
     	
 		Graphics2D g2d = (Graphics2D) g;
+		RenderingHints rh = new RenderingHints(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		
 		Image offscreen = createImage(getWidth(), getHeight());
+		
 		buffer = (Graphics2D) offscreen.getGraphics();
 		buffer.setColor(Color.white);
 		buffer.fillRect(0, 0, getWidth(), getHeight());
+		buffer.setRenderingHints(rh);
 
 		//TODO drawing of any background shit should go here
 		mapPanel.repaint();

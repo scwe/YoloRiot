@@ -1,16 +1,14 @@
 package creeps;
 
+import image.ImageLoader;
 import interactions.SimpleDamage;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.image.BufferedImage;
 
 import model.AI;
 import model.Creep;
-import model.Entity;
-import model.Hitbox;
 import model.Interaction;
 import model.Location;
 import model.Model;
@@ -19,6 +17,7 @@ import ais.SimpleCreepAI;
 public class SimpleCreep extends Creep {
 
 	private final Interaction attack = new SimpleDamage (5);
+	BufferedImage image;
 	
 	public SimpleCreep(Location location, Model model) {
 		super(location, model);
@@ -47,11 +46,13 @@ public class SimpleCreep extends Creep {
 
 	@Override
 	public BufferedImage getSprite() {
-		BufferedImage im = new BufferedImage (32, 32, BufferedImage.TYPE_INT_ARGB);
-		Graphics g = im.getGraphics();
-		g.setColor(Color.BLUE);
-		g.fillRect(0, 0, 32, 32);
-		return im;
+		if (image == null){
+			ImageLoader il = new ImageLoader();
+			image = il.getImage("CREEP1.png");
+		
+		}
+		return image;
+
 	}
 
 }

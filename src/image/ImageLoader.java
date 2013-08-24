@@ -13,7 +13,6 @@ public class ImageLoader {
 
 			try{
 				img = ImageIO.read(ImageLoader.class.getResource("/images/"+name)); 
-				
 			}catch (IOException e){ throw new Error(e); }
 		return img;
 	}

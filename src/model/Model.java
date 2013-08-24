@@ -1,14 +1,16 @@
 package model;
 
+import java.awt.AlphaComposite;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import projectiles.SimpleProjectile;
 import map.Map;
 import map.Tile;
+import projectiles.SimpleProjectile;
 import creeps.SimpleCreep;
 
 public class Model {
@@ -58,6 +60,7 @@ public class Model {
 	}
 	
 	public void draw (Graphics g) {
+
 		for (Creep c : creeps) {
 			c.draw (g);	
 		}
@@ -73,7 +76,7 @@ public class Model {
 		for (PositionTest t : tests) {
 			t.draw(g);
 		}
-		
+
 		player.draw(g);
 	}
 	
