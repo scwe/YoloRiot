@@ -6,6 +6,7 @@ public abstract class EntityImpl implements Entity {
 	protected static final int ENTITY_SIZE_X = 32;
 	protected static final int ENTITY_SIZE_Y = 32;
 	
+	AI ai;
 	Hitbox hitbox;
 	Location l;
 
