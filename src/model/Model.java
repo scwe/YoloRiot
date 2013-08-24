@@ -19,8 +19,6 @@ public class Model {
 	private List<Structure> structures;
 	private List<Projectile> projectiles;
 	
-	private List<PositionTest> tests;
-	
 	private Player player;
 	
 	private int waveDifficulty = 3;
@@ -33,12 +31,6 @@ public class Model {
 		creeps = new ArrayList<Creep> ();
 		structures = new ArrayList<Structure> ();
 		projectiles = new ArrayList<Projectile>();
-		
-		tests = new ArrayList<PositionTest> ();
-	}
-	
-	public void addTest (int x, int y) {
-		tests.add(new PositionTest(x,y));
 	}
 	
 	// update the data 
@@ -73,9 +65,7 @@ public class Model {
 			p.draw (g);
 		}
 		
-		for (PositionTest t : tests) {
-			t.draw(g);
-		}
+
 
 		player.draw(g);
 	}
@@ -91,10 +81,7 @@ public class Model {
 		int laneHeight = Tile.TILE_HEIGHT;
 		int numLanes = Map.MAP_HEIGHT;
 		
-		for (int i=0; i < waveDifficulty; i++) {
-			int curLane = (i * 2) % numLanes;
-			creeps.add(new SimpleCreep (new Location(end, curLane * laneHeight), this));
-		}
+		creeps.add(new SimpleCreep (new Location(end, 2 * laneHeight), this));
 	}
 	
 	public Set<Entity> intersects(Hitbox hitbox) {

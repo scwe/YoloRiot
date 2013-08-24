@@ -28,7 +28,7 @@ public class ScreenPanel extends JPanel{
         requestFocusInWindow();
         
         mapPanel = new MapPanel(model, map);
-        add(mapPanel, BorderLayout.CENTER);
+        //add(mapPanel);
 
         this.model = model;
         this.map = map;
