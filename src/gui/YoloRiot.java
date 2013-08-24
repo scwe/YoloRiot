@@ -1,11 +1,15 @@
 package gui;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JFrame;
+import javax.swing.Timer;
 
 import model.Model;
 import map.*;
 
-public class YoloRiot extends JFrame{
+public class YoloRiot extends JFrame implements ActionListener{
 	public static final int SCREEN_WIDTH = 1024;
 	public static final int SCREEN_HEIGHT = 720;
 	
@@ -16,9 +20,14 @@ public class YoloRiot extends JFrame{
     private Map map;
 
 	ScreenPanel mainScreen;
+	StartScreen startScreen;
 	
 	private YoloMouse mouse;
 	private YoloKeyboard key;
+	
+	private boolean startS = true, mainS = false;
+	
+	Timer t = new Timer(1000,this);
 	
     public YoloRiot(){
     	setTitle("Yolo Riot");
@@ -29,6 +38,9 @@ public class YoloRiot extends JFrame{
         add(screen);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         
+        startScreen = new StartScreen();
+        startScreen.setVisible(false);
+        add(startScreen);
         mouse = new YoloMouse();
         key = new YoloKeyboard(model.getPlayer());
         
@@ -41,16 +53,22 @@ public class YoloRiot extends JFrame{
         setVisible(true);
         
         gameLoop();
+        Timer t = new Timer(10,this);
+        t.start();
     }
     
     public void gameLoop() {
-    	while(true){
+   
     		model.tick ();
     		screen.repaint();
-    	}
     }
 
     public static void main(String[] args){
         new YoloRiot();
     }
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		gameLoop();
+	}
 }
