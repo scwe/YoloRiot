@@ -14,6 +14,12 @@ public abstract class EntityImpl implements Entity {
 		return location;
 	}
 	
+	public void move (int x, int y) {
+		location.x += x;
+		location.y += y;
+		hitbox.translate(x, y);
+	}
+	
 	public abstract void interact(Interaction i);
 	public abstract void update();
 	public abstract BufferedImage getSprite ();

@@ -51,7 +51,8 @@ public abstract class Creep extends EntityImpl implements Entity, Hitboxable, Dr
 				-1 * ENTITY_SIZE_Y / 2, -1 * ENTITY_SIZE_Y / 2 };
 		Polygon p = new Polygon(xpoints, ypoints, xpoints.length);*/
 
-		hitbox = new Hitbox(new Rectangle (location.x - Tile.TILE_WIDTH/2, location.y - Tile.TILE_HEIGHT/2, Tile.TILE_WIDTH, Tile.TILE_HEIGHT));
+		//hitbox = new Hitbox(this, new Rectangle (Tile.TILE_WIDTH/2,  Tile.TILE_HEIGHT/2, Tile.TILE_WIDTH, Tile.TILE_HEIGHT));
+		hitbox = new Hitbox(this, new Rectangle (location.x,  location.y, Tile.TILE_WIDTH, Tile.TILE_HEIGHT));
 	}
 	
 	public Hitbox getHitbox() {
