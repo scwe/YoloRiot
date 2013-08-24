@@ -1,10 +1,9 @@
 package image;
-import java.awt.*;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
+import java.util.ArrayList;
 
-import javax.imageio.ImageIO;
+import map.Tile;
 
 public class SpriteSheet {
 
@@ -13,24 +12,37 @@ public class SpriteSheet {
 	private int spriteWidth;
 	private int spriteHeight;
 	
-	private BufferedImage image;
+	private ArrayList<BufferedImage> sheets;
+	private ArrayList<BufferedImage> edgeTiles;
+	private ArrayList<BufferedImage> groundTiles;
 	
-	public SpriteSheet(int x, int y, int spriteWidth, int spriteHeight, String filename){
+	
+	
+	public SpriteSheet(int x, int y, int spriteWidth, int spriteHeight, ArrayList<String> filenames){
 		this.x = x;
 		this.y = y;
 		this.spriteHeight = spriteHeight;
 		this.spriteWidth = spriteWidth;
-		try {
-			image = ImageIO.read(new File(filename));
-		} catch (IOException e) {
-			System.out.println(e.toString());
-			System.out.println("Shit son, something went wrong");
-			//e.printStackTrace(); 
+		sheets = new ArrayList<BufferedImage>();
+		
+		ImageLoader imLoad = new ImageLoader();
+		for (int i = 0; i < filenames.size(); i++){
+			sheets.add(imLoad.getImage(filenames.get(i)));
 		}
+		
+	
 	}
 	
+	public Image getImage(int sheet){
+		
+		
+		return null;
+		
+	}
+	
+	
 	public Image getImage(){
-		return image.getSubimage(x*spriteWidth, y*spriteHeight, spriteWidth, spriteHeight);
+		return sheets.get(0).getSubimage(x*spriteWidth, y*spriteHeight, spriteWidth, spriteHeight);
 	}
 	
 	public int getX() {
@@ -69,11 +81,11 @@ public class SpriteSheet {
 	 * @return
 	 */
 	public int getWidth(){
-		return image.getWidth()/spriteWidth;
+		return sheets.get(0).getWidth()/spriteWidth;
 	}
 	
 	public int getHeight(){
-		return image.getHeight()/spriteHeight;
+		return sheets.get(0).getHeight()/spriteHeight;
 	}
 
 }

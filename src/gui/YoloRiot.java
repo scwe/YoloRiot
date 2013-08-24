@@ -1,5 +1,6 @@
 package gui;
 
+import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -34,19 +35,18 @@ public class YoloRiot extends JFrame implements ActionListener{
     	setTitle("Yolo Riot");
     	setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
     	model = new Model();
-    	map = new Map("images/TILESET1.png");
+    	map = new Map("TILESET1.png");
     	
     	startScreen = new StartScreen();
         add(startScreen);
         startScreen.setVisible(true);
     	
         screen = new ScreenPanel(model, map);
-        screen.setVisible(false);
         add(screen);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        screen.setVisible(false);
+    
         
-       
-
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
         mouse = new YoloMouse(model);
         key = new YoloKeyboard(model.getPlayer());
         
@@ -54,13 +54,10 @@ public class YoloRiot extends JFrame implements ActionListener{
         addMouseMotionListener(mouse);
         addKeyListener(key);
         
-
         setFocusable(true);
         setVisible(true);
         
-        gameLoop();
         t = new Timer(TICK,this);
-       
         startTimer = new Timer(1000,this);
         startTimer.start();
     }
@@ -69,9 +66,11 @@ public class YoloRiot extends JFrame implements ActionListener{
     	if (startS){
     		startScreen.repaint();
     	}
-    	model.tick();
-    	key.update();
-    	repaint();
+    	else{
+	    	model.tick();
+	    	key.update();
+	    	screen.repaint();
+    	}
     	
     }
 
@@ -88,7 +87,6 @@ public class YoloRiot extends JFrame implements ActionListener{
 			startS = false;
 			startTimer.stop();
 			t.start();
-			revalidate();
 		}
 		gameLoop();
 	}
