@@ -17,17 +17,26 @@ public class Model {
 	private List<Structure> structures;
 	private List<Projectile> projectiles;
 	
+	private List<PositionTest> tests;
+	
 	private Player player;
 	
 	private int waveDifficulty = 3;
 	private int waveTick = 0;
-	private int waveTickSpeed = 1000;
+	private int waveTickSpeed = 10;
+	boolean flag = false;
 	
 	public Model () {
 		player = new Player();
 		creeps = new ArrayList<Creep> ();
 		structures = new ArrayList<Structure> ();
 		projectiles = new ArrayList<Projectile>();
+		
+		tests = new ArrayList<PositionTest> ();
+	}
+	
+	public void addTest (int x, int y) {
+		tests.add(new PositionTest(x,y));
 	}
 	
 	// update the data 
@@ -61,12 +70,18 @@ public class Model {
 			p.draw (g);
 		}
 		
+		for (PositionTest t : tests) {
+			t.draw(g);
+		}
+		
 		player.draw(g);
 	}
 	
 	private void makeCreeps () {
+		if (flag) return;
+		flag = true;
 		waveTick ++;
-		if (waveTick != waveTickSpeed) return;
+		//if (waveTick != waveTickSpeed) return;
 		waveTick = 0;		
 		
 		int end = Map.MAP_WIDTH * Tile.TILE_WIDTH;
