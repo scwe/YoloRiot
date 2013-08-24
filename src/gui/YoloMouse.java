@@ -9,6 +9,7 @@ import map.Map;
 import map.Tile;
 import model.Location;
 import model.Model;
+import model.Pt;
 
 public class YoloMouse extends MouseAdapter {
 	public static int mouseX = 0;
@@ -50,6 +51,9 @@ public class YoloMouse extends MouseAdapter {
 
 	public void mousePressed(MouseEvent m) {
 		YoloRiot yolo = (YoloRiot) m.getSource();
+		
+		System.out.println ("added");
+		Model.model.pts.add(new Pt(m.getX(), m.getY()));
 
 		int diffX = map.getLocationOnScreen().x - yolo.getLocationOnScreen().x;
 		int diffY = map.getLocationOnScreen().y - yolo.getLocationOnScreen().y;

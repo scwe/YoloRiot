@@ -47,6 +47,8 @@ public class Model {
 	private int tick = 0;
 	private int waveTickSpeed = 20;
 	
+	public List<Pt> pts = new ArrayList<Pt> ();
+	
 	public Model () {
 		model = this;
 		player = new Player();
@@ -121,6 +123,9 @@ public class Model {
 		for (Yolostone y : yolostones) {
 			y.draw(g);
 		}
+		
+		for (Pt pt : pts)
+			pt.draw(g);
 		
 		player.draw(g);
 	}
