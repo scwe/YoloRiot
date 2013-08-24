@@ -7,9 +7,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Random;
 
-import model.Drawable;
-
-public class Map implements Drawable {
+public class Map {
 	public static final int MAP_WIDTH = 15;
 	public static final int MAP_HEIGHT = 10;
 
@@ -38,7 +36,6 @@ public class Map implements Drawable {
 		return tiles;
 	}
 
-	@Override
 	public void draw(Graphics g) {
 		if (buffer != null){
 			for (int h = 0; h < MAP_HEIGHT; h++) {

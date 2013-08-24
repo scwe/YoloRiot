@@ -1,4 +1,6 @@
-package model;
+package projectiles;
+
+import interactions.Interaction;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -6,24 +8,18 @@ import java.awt.Polygon;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 
-public abstract class Projectile extends EntityImpl implements Drawable,
-		Hitboxable {
+import model.EntityImpl;
+import model.Hitbox;
+import model.Location;
+
+public abstract class Projectile extends EntityImpl {
 
 	protected Location vector;
 	protected double angle;
 	protected double movelength = 10;
 
-	protected Hitbox hitbox;
-	protected Model model;
-
-	public Projectile(Location location, Model model) {
-		this.location = location;
-		this.model = model;
-	}
-
-	public Projectile(Location start, Location direction, Model model) {
-		this.model = model;
-		location = start;
+	public Projectile(Location start, Location direction) {
+		super(start);
 		vector = direction;
 		angle = Math.atan2(vector.y - location.y, vector.x - location.x);
 	}
@@ -68,13 +64,13 @@ public abstract class Projectile extends EntityImpl implements Drawable,
 		location.x += xunit * magnitude;
 		location.y += yunit * magnitude;
 		
-		hitbox.translate((int)(xunit*magnitude), (int)(yunit*magnitude));
+		hitbox.move((int)(xunit*magnitude), (int)(yunit*magnitude));
 	}
 
 	/**
 	 * another maths helper.
 	 */
-	protected final void setHitbox(int width, int length) {
+/*	protected final void makeHitbox(int width, int length) {
 		/*BufferedImage sprite = getSprite ();
 		int imgW = sprite.getWidth();
 		int imgH = sprite.getHeight();
@@ -82,9 +78,13 @@ public abstract class Projectile extends EntityImpl implements Drawable,
 		int[] xpts = {location.x, location.x + imgW, location.x + imgW, location.x};
 		int[] ypts = {location.y, location.y, location.y + imgH, location.y + imgH};
 		Polygon poly = new Polygon(xpts, ypts, xpts.length);
-		*/
-		hitbox = new Hitbox (this, location.x, location.y, 10, 10);
+		/
 		//poly.
+	}*/
+	
+	@Override
+	protected Hitbox makeHitbox() {
+		return new Hitbox (location.x, location.y, 10, 10);
 	}
 
 	public abstract void update();

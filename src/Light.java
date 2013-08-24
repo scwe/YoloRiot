@@ -1,13 +1,12 @@
 import java.awt.*;
 
 import map.Location;
-import model.Drawable;
 
 import javax.imageio.ImageIO;
 import java.io.*;
 
 
-public class Light implements Drawable{
+public class Light {
 	private Image image;
 	
 	

@@ -8,13 +8,14 @@ import java.util.Set;
 
 import map.Map;
 import map.Tile;
+import projectiles.Projectile;
 import projectiles.SimpleProjectile;
-
+import creeps.Creep;
 import creeps.RandomCreep;
-
 import structures.SimpleCannon;
 import structures.SimpleWall;
-
+import structures.Structure;
+import structures.Yolostone;
 import creeps.SimpleCreep;
 
 public class Model {
@@ -45,7 +46,7 @@ public class Model {
 		projectiles = new ArrayList<Projectile>();
 		yolostones = new Yolostone[Map.MAP_HEIGHT];
 		for (int i=0; i < Map.MAP_HEIGHT; i++) {
-			yolostones[i] = new Yolostone (i, this);
+			yolostones[i] = new Yolostone (i);
 		}
 	}
 	
@@ -118,8 +119,8 @@ public class Model {
 
 		for (int i = 0 ; i < creepNo; i++){
 			int laneLoc = (int)((Math.random())*10);
-			creeps.add(new SimpleCreep (new Location(end, laneLoc * laneHeight), this));
-			creeps.add(new RandomCreep (new Location(end, laneLoc * laneHeight), this, 8));
+			creeps.add(new SimpleCreep (new Location(end, laneLoc * laneHeight)));
+			creeps.add(new RandomCreep (new Location(end, laneLoc * laneHeight), 8));
 		}
 	}
 	
@@ -158,7 +159,7 @@ public class Model {
 			startY = player.getLocation().y + player.CHARACTER_HEIGHT/2;
 		}
 		
-		Projectile p = new SimpleProjectile(new Location(startX, startY), new Location(endX, endY), this);
+		Projectile p = new SimpleProjectile(new Location(startX, startY), new Location(endX, endY));
 		projectiles.add(p);
 	}
 	
@@ -182,9 +183,9 @@ public class Model {
 	
 	public void addStructure (Location l, int buttonnum) {
 		if (buttonnum == 0) {
-			structures.add(new SimpleCannon(l, this));
+			structures.add(new SimpleCannon(l));
 		} else if (buttonnum == 1) {
-			structures.add(new SimpleWall(l, this));
+			structures.add(new SimpleWall(l));
 		}
 	}
 

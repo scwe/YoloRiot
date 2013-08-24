@@ -1,89 +1,71 @@
 package model;
 
+import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Polygon;
 import java.awt.Rectangle;
-import java.awt.geom.Rectangle2D;
 
-/**
- * hitboxes are centered on the object, so the 'middle' of the object
- * is considered (0, 0) for the hithbox.
- * 
- * @author Tony
- */
-public class Hitbox{
-	public enum Type {RECT, POLY};
+public class Hitbox {
+
+	private int[] xpoints;
+	private int[] ypoints;
+	private int length;
 	
-	public final Type hitboxtype;
-	public final Entity owner;
+	private int centreX;
+	private int centreY;
 	
-	private Polygon polygon;
-	private Rectangle rect;
+	private boolean noRotation = true;
+	Rectangle bounding;
 	
-	public Hitbox (Entity owner, Polygon poly) {
-		this.owner = owner;
-		this.polygon = poly;
-		hitboxtype = Type.POLY;
+	public Hitbox (int x, int y, int width, int height) {
+		xpoints = new int[] {x, x + width, x + width, x, x + width};	
+		ypoints = new int[] {y, y, y + height, y + height, y};
+		length = 5;
+
+		centreX = x + width/2;
+		centreY = y + height/2;
+		
+		bounding = new Rectangle (x, y, width, height);
 	}
 	
-	public Hitbox(Entity owner, Rectangle r){
-		this.owner = owner;
-		this.rect = r;
-		hitboxtype = Type.RECT;
-	}
-	
-	public Hitbox(Entity owner, int x, int y, int width, int height){
-		//int[] xPoints = {x, x+ width, x + width, x};
-		//int[] yPoints = {y, y, y + height, y + height};
-		//polygon = new Polygon(xPoints, yPoints, xPoints.length);
-		this.owner = owner;
-		rect = new Rectangle (x, y, width, height);		
-		hitboxtype = Type.RECT;
-	}
-	
-	public Polygon getPoly () {
-		return polygon;
-	}
-	
-	public Rectangle getRect () {
-		return rect;
-	}
-	
-	public void translate (int x, int y) {
-		if (hitboxtype == Type.POLY) {
-			polygon.translate(x,y);
-		} else {
-			rect.translate(x, y);
+	public void rotate (double angle) {
+		double sin = Math.sin(angle);
+		double cos = Math.cos(angle);
+		
+		double rotX; double rotY;
+
+		for (int i = 0; i < length; i++) {
+			xpoints[i] -= centreX;
+			ypoints[i] -= centreY;
+			
+			rotX = xpoints[i] * cos - ypoints[i] * sin;
+			rotY = xpoints[i] * sin - ypoints[i] * cos;
+			
+			xpoints[i] = (int) rotX + centreX;
+			xpoints[i] = (int) rotY + centreY;
 		}
 	}
 	
 	public boolean intersects (Hitbox other) {
-		if (other.hitboxtype == Type.RECT && hitboxtype == Type.RECT) {
-			boolean ret = rect.intersects(other.rect);
-			return ret;
-		} else if (other.hitboxtype == Type.POLY && hitboxtype == Type.RECT) {
-			boolean ret = other.polygon.intersects((Rectangle2D) rect);
-			return ret;
-		} else if (other.hitboxtype == Type.RECT && hitboxtype == Type.POLY) {
-			boolean ret = polygon.intersects((Rectangle2D) other.rect);
-			return ret;
-		} else {
-			boolean ret = intersectsPoly (other);
-			return ret;
+		if (!bounding.intersects(other.bounding)) return false;
+		if (noRotation && other.noRotation && bounding.intersects(other.bounding)) return true;
+		
+		for (int i=0; i < length; i++) {
+			for (int j=0; j < other.length; j++) {
+				if (lineIntersection(xpoints[i], ypoints[i], xpoints[i+1], ypoints[i+1], other.xpoints[j], other.ypoints[j], other.xpoints[j+1], other.ypoints[j+1])) return true;
+			}
 		}
+		return false;		
 	}
 	
-	public boolean intersectsPoly (Hitbox other) {
-		Polygon otherP = other.getPoly ();
-		
-		for (int i=0; i < polygon.xpoints.length - 1; i++) {
-			for (int j=0; j < otherP.xpoints.length - 1; j++) {
-				if (lineIntersection(polygon.xpoints[i], polygon.ypoints[i], polygon.xpoints[i+1], polygon.ypoints[i+1], otherP.xpoints[j], otherP.ypoints[j], otherP.xpoints[j+1], otherP.ypoints[j+1])) return true;
-			}
-			if (lineIntersection (polygon.xpoints[i], polygon.ypoints[i], polygon.xpoints[i+1], polygon.ypoints[i+1], otherP.xpoints[0], otherP.ypoints[0], otherP.xpoints[otherP.xpoints.length - 1], otherP.ypoints[otherP.xpoints.length - 1])) return true;
+	public void move (int x, int y) {
+		for (int i=0; i < length; i++) {
+			xpoints[i] += x;
+			ypoints[i] += y;
 		}
-		if (lineIntersection (polygon.xpoints[0], polygon.ypoints[0], polygon.xpoints[polygon.xpoints.length-1], polygon.ypoints[polygon.xpoints.length-1], otherP.xpoints[0], otherP.ypoints[0], otherP.xpoints[otherP.xpoints.length - 1], otherP.ypoints[otherP.xpoints.length - 1])) return true;
-		return false;		
+		
+		centreX += x;
+		centreY += y;
+		bounding.translate(x, y);		
 	}
 	
 	private boolean lineIntersection (int ax1, int ay1, int ax2, int ay2, int bx1, int bx2, int by1, int by2) {
@@ -102,16 +84,10 @@ public class Hitbox{
 		double u = ((qx - px)*ry - (qy - py)*rx) / (rx*sy - ry*sx);
 		
 		return t >= 0 && u >= 0 && t <= 1 && u <= 1;
-	}
+	}	
 	
-	public void moveHitbox(int x, int y){
-		if (hitboxtype == Type.POLY) polygon.translate(x, y);
-		else rect.translate(x, y);
-	}
-	
-	
-	public void draw(Graphics g){
-		if (hitboxtype == Type.RECT) g.drawRect(rect.x, rect.y, rect.width, rect.height); 
-		else g.drawPolygon(polygon);
+	public void draw(Graphics g) {
+		g.setColor(Color.BLUE);
+		g.fillRect(bounding.x, bounding.y, bounding.width, bounding.height);
 	}
 }
