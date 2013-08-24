@@ -20,17 +20,15 @@ public class ScreenPanel extends JPanel{
 
 	private Graphics2D buffer;
 	
-	private MapPanel mapPanel;
 	
 	private Map map;
 	private Model model;
 	
+	private String currentTurret;
+	
     public ScreenPanel(Model model, Map map){
         setFocusable(true);
         requestFocusInWindow();
-        
-        mapPanel = new MapPanel(model, map);
-        //add(mapPanel);
 
         this.model = model;
         this.map = map;
@@ -52,7 +50,6 @@ public class ScreenPanel extends JPanel{
 		buffer.setRenderingHints(rh);
 
 		//TODO drawing of any background shit should go here
-		mapPanel.repaint();
 		
 		g2d.drawImage(offscreen, 0, 0, this);
     }
