@@ -13,6 +13,9 @@ import creeps.SimpleCreep;
 
 public class Model {
 	
+	private static final int FIELD_WIDTH = Map.MAP_WIDTH*Tile.TILE_WIDTH;
+	private static final int FIELD_HEIGHT = Map.MAP_HEIGHT*Tile.TILE_HEIGHT;
+	
 	private List<Creep> creeps;
 	private List<Structure> structures;
 	private List<Projectile> projectiles;
@@ -51,6 +54,7 @@ public class Model {
 		
 		for (Projectile p : projectiles) {
 			p.update();
+			if (outOfBounds(p)) killEntity(p);
 		}
 		
 		makeCreeps ();
@@ -133,4 +137,9 @@ public class Model {
 			projectiles.remove(e);
 		}
 	}	
+	
+	private boolean outOfBounds (Entity e) {
+		Location l = e.getLocation();
+		return !(l.x >= 0 && l.y >= 0 && l.x <= FIELD_WIDTH && l.y >= FIELD_HEIGHT);
+	}
 }
