@@ -6,6 +6,8 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 
+import map.Tile;
+
 public abstract class Projectile extends EntityImpl implements Drawable,
 		Hitboxable {
 
@@ -40,14 +42,15 @@ public abstract class Projectile extends EntityImpl implements Drawable,
 	public void draw(Graphics g) {
 		Graphics2D g2d = (Graphics2D) g;
 		BufferedImage sprite = getSprite ();
+		int imgsize = Math.max(sprite.getHeight() * 2, sprite.getWidth() * 2);
 		
-	    BufferedImage dimg = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
+	    BufferedImage dimg = new BufferedImage(imgsize, imgsize, BufferedImage.TYPE_INT_ARGB);
 	    Graphics2D gimg = dimg.createGraphics();
-	    gimg.rotate(angle, sprite.getWidth()/2, sprite.getHeight()/2);
-	    gimg.drawImage(getSprite(), 15, 15, null);
+	    gimg.rotate(angle, imgsize/2, imgsize/2);
+	    gimg.drawImage(getSprite(), imgsize/4, imgsize/4, null);
 	    gimg.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-	    
-	    g2d.drawImage(dimg, null, location.x, location.y);
+
+	    g2d.drawImage(dimg, null, location.x + Tile.TILE_WIDTH/2, location.y + Tile.TILE_HEIGHT/2);
 	}
 
 	@Override
