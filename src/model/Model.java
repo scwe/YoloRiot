@@ -9,10 +9,11 @@ import java.util.Set;
 import map.Map;
 import map.Tile;
 import projectiles.SimpleProjectile;
+import structures.SimpleCannon;
+import structures.SimpleWall;
 import creeps.SimpleCreep;
 
 public class Model {
-	
 	private static final int FIELD_WIDTH = Map.MAP_WIDTH*Tile.TILE_WIDTH;
 	private static final int FIELD_HEIGHT = Map.MAP_HEIGHT*Tile.TILE_HEIGHT;
 	
@@ -76,8 +77,6 @@ public class Model {
 	}
 	
 	public void draw (Graphics g) {
-		
-		
 		for (Creep c : creeps) {
 			c.draw (g);	
 		}
@@ -153,6 +152,13 @@ public class Model {
 		}
 	}	
 	
+	public void addStructure (Location l, int buttonnum) {
+		if (buttonnum == 0) {
+			structures.add(new SimpleWall(l, this));
+		} else if (buttonnum == 1) {
+			structures.add(new SimpleCannon(l, this));
+		}
+	}
 
 	private boolean outOfBounds (Entity e) {
 		Location l = e.getLocation();
