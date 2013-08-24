@@ -1,6 +1,7 @@
 package model;
 
 import java.awt.*;
+import map.Map;
 
 /**
  * hitboxes are centered on the object, so the 'middle' of the object

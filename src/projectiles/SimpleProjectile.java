@@ -1,29 +1,30 @@
 package projectiles;
 
-import java.awt.Graphics;
+import java.awt.Image;
 
-import model.Hitbox;
 import model.Interaction;
+import model.Location;
 import model.Projectile;
 
 public class SimpleProjectile extends Projectile {
 
+	public SimpleProjectile(Location location) {
+		super(location);
+	}
+
 	@Override
 	public void interact(Interaction i) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void update() {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void draw(Graphics g) {
-		// TODO Auto-generated method stub
-		
+	public Image getSprite () {
+		return null;
 	}
 
 }

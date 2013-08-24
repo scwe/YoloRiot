@@ -4,6 +4,8 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.List;
 
+import creeps.SimpleCreep;
+
 public class Model {
 	
 	private static final int LANES = 10;
@@ -14,22 +16,13 @@ public class Model {
 	
 	private Player player;
 	
-	private List<List<Entity>> lanes;
- 
-	
 	public Model () {
 		player = new Player();
 		creeps = new ArrayList<Creep> ();
 		structures = new ArrayList<Structure> ();
 		projectiles = new ArrayList<Projectile>();
-		lanes = new ArrayList<List<Entity>> ();
-		for (int i=0; i < LANES; i++) {
-			lanes.add(new ArrayList<Entity> ());
-		}
-	}
-
-	public List<Entity> getLane (int i) {
-		return lanes.get(i);
+		
+		creeps.add(new SimpleCreep(new Location(50, 50), this));
 	}
 	
 	// update the data 
@@ -45,6 +38,7 @@ public class Model {
 		for (Projectile p : projectiles) {
 			p.update();
 		}
+		
 		player.update();
 	}
 	
