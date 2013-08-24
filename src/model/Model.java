@@ -2,11 +2,16 @@ package model;
 
 import java.awt.Graphics;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
+import projectiles.SimpleProjectile;
+import map.Map;
+import map.Tile;
+import creeps.SimpleCreep;
 
 public class Model {
-	
-	private static final int LANES = 10;
 	
 	private List<Creep> creeps;
 	private List<Structure> structures;
@@ -14,22 +19,15 @@ public class Model {
 	
 	private Player player;
 	
-	private List<List<Entity>> lanes;
- 
+	private int waveDifficulty = 3;
+	private int waveTick = 0;
+	private int waveTickSpeed = 1000;
 	
 	public Model () {
 		player = new Player();
 		creeps = new ArrayList<Creep> ();
 		structures = new ArrayList<Structure> ();
 		projectiles = new ArrayList<Projectile>();
-		lanes = new ArrayList<List<Entity>> ();
-		for (int i=0; i < LANES; i++) {
-			lanes.add(new ArrayList<Entity> ());
-		}
-	}
-
-	public List<Entity> getLane (int i) {
-		return lanes.get(i);
 	}
 	
 	// update the data 
@@ -45,6 +43,8 @@ public class Model {
 		for (Projectile p : projectiles) {
 			p.update();
 		}
+		
+		makeCreeps ();
 		player.update();
 	}
 	
@@ -64,12 +64,49 @@ public class Model {
 		player.draw(g);
 	}
 	
+	private void makeCreeps () {
+		waveTick ++;
+		if (waveTick != waveTickSpeed) return;
+		waveTick = 0;		
+		
+		int end = Map.MAP_WIDTH * Tile.TILE_WIDTH;
+		int laneHeight = Tile.TILE_HEIGHT;
+		int numLanes = Map.MAP_HEIGHT;
+		
+		for (int i=0; i < waveDifficulty; i++) {
+			int curLane = (i * 2) % numLanes;
+			creeps.add(new SimpleCreep (new Location(end, curLane * laneHeight), this));
+		}
+	}
+	
+	public Set<Entity> intersects(Hitbox hitbox) {
+		Set<Entity> intersects = new HashSet<Entity> ();
+		
+		for (Creep c : creeps) {
+			if (c.getHitbox().intersects(hitbox)) intersects.add(c);
+		}
+		
+		for (Structure s : structures) {
+			if (s.getHitbox().intersects(hitbox)) intersects.add(s);
+		}
+		
+		if (player.getHitbox().intersects(hitbox)) intersects.add(player);
+		
+		return intersects;
+	}
+	
+	public void shoot (int endX, int endY) {
+		int startX = player.getLocation().x;
+		int startY = player.getLocation().y;
+
+		//Projectile p = new SimpleProjectile(location, this);
+	}
+	
 	public Player getPlayer(){
 		return player;
 	}
 	
 	public void setPlayer(Player p){
 		this.player = p;
-	}
-	
+	}	
 }

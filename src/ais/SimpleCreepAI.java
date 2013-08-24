@@ -8,7 +8,6 @@ public class SimpleCreepAI implements AI {
 	
 	@Override
 	public void next(Entity e) {
-		last = State.MOVE;
-		e.getLocation().moveLeft(10);		
+		e.getLocation().moveLeft(10);
 	}
 }

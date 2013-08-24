@@ -45,7 +45,7 @@ public class SimpleCreep extends Creep {
 	}*/
 
 	@Override
-	protected Image getSprite() {
+	public Image getSprite() {
 		Image i = new BufferedImage (32, 32, BufferedImage.TYPE_INT_ARGB);
 		Graphics g = i.getGraphics();
 		g.setColor(Color.BLUE);

@@ -1,6 +1,8 @@
 package model;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Image;
+
 import image.SpriteSheet;
 
 public class Player implements Drawable, Entity, Hitboxable{
@@ -78,5 +80,13 @@ public class Player implements Drawable, Entity, Hitboxable{
 	@Override
 	public Location getLocation() {
 		return location;
+	}
+
+
+
+	@Override
+	public Image getSprite() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

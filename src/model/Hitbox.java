@@ -1,6 +1,7 @@
 package model;
 
 import java.awt.*;
+import map.Map;
 
 /**
  * hitboxes are centered on the object, so the 'middle' of the object
@@ -10,6 +11,7 @@ import java.awt.*;
  */
 public class Hitbox{
 	private Polygon polygon;
+	private Rectangle rect;
 	
 	public Hitbox (Polygon poly) {
 		this.polygon = poly;
@@ -19,13 +21,14 @@ public class Hitbox{
 		int[] xPoints = {r.x, r.x+ r.width, r.x + r.width, r.x};
 		int[] yPoints = {r.y, r.y, r.y + r.height, r.y + r.height};
 		polygon = new Polygon(xPoints, yPoints, xPoints.length);
+		this.rect = r;
 	}
 	
 	public Hitbox(int x, int y, int width, int height){
 		int[] xPoints = {x, x+ width, x + width, x};
 		int[] yPoints = {y, y, y + height, y + height};
 		polygon = new Polygon(xPoints, yPoints, xPoints.length);
-		
+		rect = new Rectangle (x, y, width, height);		
 	}
 	
 	public Polygon getPoly () {
