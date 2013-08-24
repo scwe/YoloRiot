@@ -1,4 +1,6 @@
 import java.awt.*;
+
+import map.Location;
 import model.Drawable;
 
 import javax.imageio.ImageIO;

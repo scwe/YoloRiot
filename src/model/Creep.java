@@ -1,23 +1,30 @@
 package model;
 
+ 
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Polygon;
 
+import map.Tile;
+import map.Map;
+
 public abstract class Creep extends EntityImpl implements Entity, Hitboxable, Drawable {
-	private static final int CREEP_SIZE_X = 32;
-	private static final int CREEP_SIZE_Y = 32;
+	private static final int CREEP_HEIGHT = 32;
+	private static final int CREEP_WIDTH = 32;
 
 	protected Model model;
 	
 	protected boolean dead = false;
 	protected int health;
 	
+	protected int lane;
+	
     public Creep(Location l, Model model){
     	this.location = l;
     	this.model = model;
     	this.ai = makeAI ();
     	this.health = 100;
+    	lane = (l.y - Map.MAP_OFFSET_Y)/Tile.TILE_HEIGHT;  //this should work for finding the lane based on a y position
     }
     
     protected abstract AI makeAI ();
@@ -26,7 +33,7 @@ public abstract class Creep extends EntityImpl implements Entity, Hitboxable, Dr
 	
 	
 	public void draw (Graphics g) {
-		g.drawImage(getSprite(), location.getX(), location.getLane() * 32, null); // MAKE THIS A CONSTANT
+		g.drawImage(getSprite(), location.x, location.y,  CREEP_WIDTH, CREEP_HEIGHT, null);
 	}
 	
 	@Override

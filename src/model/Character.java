@@ -12,7 +12,7 @@ public class Character implements Drawable, Entity, Hitboxable{
 	public Character(){
 		location = new Location(50,50);
 		sprites = new SpriteSheet(0, 0, CHARACTER_WIDTH, CHARACTER_HEIGHT, "character.png");
-		
+		hitbox = new Hitbox(location.x, location.y, CHARACTER_WIDTH, CHARACTER_HEIGHT);
 	}
     
 

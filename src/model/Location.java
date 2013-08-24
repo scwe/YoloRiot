@@ -9,13 +9,6 @@ public class Location {
 		this.y = y;
 	}
 
-	public int getX() {
-		return x;
-	}
-	public void setX(int x) {
-		this.x = x;
-	}
-
 	public void moveLeft(int amount) {
 		x -= amount;
 	}
