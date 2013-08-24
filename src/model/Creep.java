@@ -31,7 +31,7 @@ public abstract class Creep extends EntityImpl implements Entity, Hitboxable, Dr
 	
 	@Override
 	public void update() {
-		Action a = ai.getNext (this);
+		ai.next (this);
 	}
 
 	public void makeHitbox() {

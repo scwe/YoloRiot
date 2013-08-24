@@ -10,6 +10,10 @@ public abstract class EntityImpl implements Entity {
 	protected Hitbox hitbox;
 	protected Location location;
 
+	public Location getLocation () {
+		return location;
+	}
+	
 	public abstract void interact(Interaction i);
 	public abstract void update();
 }

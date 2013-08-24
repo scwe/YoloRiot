@@ -34,7 +34,7 @@ public class SimpleCreep extends Creep {
 		dead = true;
 	}
 	
-	public void update() {
+	/*public void update() {
 		Action a = ai.getNext (this);
 		if (a.state == Action.State.ATTACK) {
 			Entity attacking = a.interacting;
@@ -42,7 +42,7 @@ public class SimpleCreep extends Creep {
 		} else if (a.state == Action.State.MOVE) {
 			location.moveLeft (1);
 		}
-	}
+	}*/
 
 	@Override
 	protected Image getSprite() {
