@@ -32,8 +32,7 @@ public class SimpleProjectile extends Projectile {
 		if (ticks == tickspeed) {
 			ticks = 0;
 			Set<Entity> es = model.intersects(hitbox);
-			
-			unitMove(2);
+			unitMove(15);
 			
 			for (Entity e : es) {
 				if (e instanceof Creep) {
