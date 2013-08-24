@@ -2,13 +2,13 @@ package gui;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.*;
 import java.awt.event.*;
 import java.util.*;
 import javax.swing.border.*;
 
 import image.ImageLoader;
 
+@SuppressWarnings("serial")
 public class ItemPanel extends JPanel{
 	
 	private static final int BUTTON_WIDTH = 64;
@@ -23,8 +23,7 @@ public class ItemPanel extends JPanel{
 		super.setBorder(new StrokeBorder(new BasicStroke(4, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND)));
 		buttonMap = new HashMap<String, String>();
 		buttonMap.put("Button.png", "test");
-		setFocusable(true);
-		GridBagConstraints gc = new GridBagConstraints();
+		setFocusable(false);
 		setPreferredSize(new Dimension(120, YoloRiot.SCREEN_HEIGHT));
 		add(newButton("Button.png"));
 	}

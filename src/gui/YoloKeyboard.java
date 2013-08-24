@@ -19,7 +19,6 @@ public class YoloKeyboard extends KeyAdapter{
     }
 
     public void keyPressed(KeyEvent k){
-    	System.out.println("Key pressed");
     	if(k.getKeyCode() == KeyEvent.VK_W){
     		upPressed = true;
     	}else if(k.getKeyCode() == KeyEvent.VK_A){

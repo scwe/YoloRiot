@@ -1,8 +1,6 @@
 package model;
 
-import java.awt.AlphaComposite;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -15,9 +13,14 @@ import creeps.SimpleCreep;
 
 public class Model {
 	
+	private static final int FIELD_WIDTH = Map.MAP_WIDTH*Tile.TILE_WIDTH;
+	private static final int FIELD_HEIGHT = Map.MAP_HEIGHT*Tile.TILE_HEIGHT;
+	
 	private List<Creep> creeps;
 	private List<Structure> structures;
 	private List<Projectile> projectiles;
+	private Yolostone[] yolostones;
+	private int destroyed = 0;
 	
 	private Player player;
 	
@@ -31,6 +34,10 @@ public class Model {
 		creeps = new ArrayList<Creep> ();
 		structures = new ArrayList<Structure> ();
 		projectiles = new ArrayList<Projectile>();
+		yolostones = new Yolostone[Map.MAP_HEIGHT];
+		for (int i=0; i < Map.MAP_HEIGHT; i++) {
+			yolostones[i] = new Yolostone (0);
+		}
 	}
 	
 	// update the data 
@@ -43,8 +50,25 @@ public class Model {
 			s.update ();
 		}
 		
-		for (Projectile p : projectiles) {
+		Projectile p;
+		for (int i=0; i < projectiles.size(); i++) {
+			p = projectiles.get(i);
 			p.update();
+			if (outOfBounds(p)) {
+				killEntity(p);
+				i--;
+			}
+		}
+		
+		for (Yolostone y : yolostones) {
+			if (y.health < 10) {
+				y.destroyed = true;
+				destroyed++;
+			}
+		}
+		
+		if (destroyed == Map.MAP_HEIGHT) {
+			// FIXME Lose.
 		}
 		
 		makeCreeps ();
@@ -66,8 +90,10 @@ public class Model {
 			p.draw (g);
 		}
 		
-
-
+		for (Yolostone y : yolostones) {
+			y.draw(g);
+		}
+		
 		player.draw(g);
 	}
 	
@@ -119,7 +145,6 @@ public class Model {
 
 	public void killEntity(Entity e) {
 		if (e instanceof Creep) {
-			System.out.println ("kill");
 			creeps.remove(e);
 		} else if (e instanceof Structure) {
 			structures.remove(e);
@@ -128,6 +153,10 @@ public class Model {
 		}
 	}	
 	
-	
-	
+
+	private boolean outOfBounds (Entity e) {
+		Location l = e.getLocation();
+		return !(l.x >= 0 && l.y >= 0 && l.x <= FIELD_WIDTH && l.y <= FIELD_HEIGHT);
+	}
+
 }

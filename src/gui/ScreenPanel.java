@@ -1,13 +1,16 @@
 package gui;
 
 
-import java.awt.AlphaComposite;
-import java.awt.BorderLayout;
+import image.ImageLoader;
+
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.Point;
 import java.awt.RenderingHints;
+import java.awt.Toolkit;
 
 import javax.swing.JPanel;
 
@@ -18,20 +21,26 @@ public class ScreenPanel extends JPanel{
 
 	private Graphics2D buffer;
 	
-	private MapPanel mapPanel;
 	
 	private Map map;
 	private Model model;
 	
-    public ScreenPanel(Model model, Map map){
+	private String currentTurret;
+	
+	private Cursor cursor;
+	
+	
+    public ScreenPanel(Model model, Map map, String currentTurret){
         setFocusable(true);
         requestFocusInWindow();
-        
-        mapPanel = new MapPanel(model, map);
-        //add(mapPanel);
+        this.currentTurret = currentTurret;
 
         this.model = model;
         this.map = map;
+        
+        cursor = Toolkit.getDefaultToolkit().createCustomCursor(new ImageLoader().getImage("cursor.png"), new Point(0,0), "crosshair");
+        
+        super.setCursor(cursor);
     }
     
     @Override
@@ -46,9 +55,14 @@ public class ScreenPanel extends JPanel{
 		buffer.setColor(Color.white);
 		buffer.fillRect(0, 0, getWidth(), getHeight());
 		buffer.setRenderingHints(rh);
+		
+		if(currentTurret != null){
+			cursor = Toolkit.getDefaultToolkit().createCustomCursor(new ImageLoader().getImage(currentTurret), new Point(0,0), currentTurret);
+			//super.setCursor(cursor);
+			System.out.println("Changed the cursor to "+currentTurret);
+		}
 
 		//TODO drawing of any background shit should go here
-		mapPanel.repaint();
 		
 		g2d.drawImage(offscreen, 0, 0, this);
     }
