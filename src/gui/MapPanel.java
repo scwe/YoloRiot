@@ -29,9 +29,6 @@ public class MapPanel extends JPanel{
 		model.draw(buffer);
 		
 		g2d.drawImage(offscreen, 0, 0, this);
-		
-		Point p = super.getLocationOnScreen();
-		Point a = super.getTopLevelAncestor().getLocationOnScreen();
 
 	}
 }

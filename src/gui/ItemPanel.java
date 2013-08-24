@@ -3,7 +3,6 @@ package gui;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.*;
 import javax.swing.border.*;
 
 import image.ImageLoader;
@@ -14,15 +13,11 @@ public class ItemPanel extends JPanel{
 	private static final int BUTTON_WIDTH = 64;
 	private static final int BUTTON_HEIGHT = 64;
 	
-	private HashMap<String, String> buttonMap;
-	
-	private String currentButton;
+	public static String currentButton;
 	
 	public ItemPanel(){
 		
 		super.setBorder(new StrokeBorder(new BasicStroke(4, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND)));
-		buttonMap = new HashMap<String, String>();
-		buttonMap.put("Button.png", "test");
 		setFocusable(false);
 		setPreferredSize(new Dimension(120, YoloRiot.SCREEN_HEIGHT));
 		add(newButton("Button.png"));
@@ -38,7 +33,7 @@ public class ItemPanel extends JPanel{
 		
 		JButton button = new JButton(new ImageIcon(image));
 		button.setFocusable(false);
-		button.setName(buttonMap.get(imageFile));
+		button.setName(imageFile);
 		button.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
 		
 		button.addActionListener(new ActionListener(){
@@ -46,6 +41,7 @@ public class ItemPanel extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				JButton b = (JButton)(arg0.getSource());
+				System.out.println("Current button is updated");
 				currentButton = b.getName();
 			}
 			
@@ -54,11 +50,7 @@ public class ItemPanel extends JPanel{
 		return button;
 	}
 	
-	public String getCurrentButton(){
-		return currentButton;
-	}
-	
-	public void resetCurrentButton(){
+	public static void resetCurrentButton(){
 		currentButton = null;
 	}
 }
