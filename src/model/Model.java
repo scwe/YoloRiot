@@ -112,7 +112,6 @@ public class Model {
 
 		double creepNo = Math.abs(Math.sin(tick)*20);
 
-		System.out.println("creepno = "+creepNo);
 		int end = Map.MAP_WIDTH * Tile.TILE_WIDTH;
 		int laneHeight = Tile.TILE_HEIGHT;
 		int numLanes = Map.MAP_HEIGHT;
@@ -141,10 +140,24 @@ public class Model {
 		return intersects;
 	}
 	
-	public void shoot (int endX, int endY) {
-		int startX = player.getLocation().x;
-		int startY = player.getLocation().y;
-
+	public void playerShoot (int endX, int endY) {
+		int startX = -1;
+		int startY = -1;
+		
+		if (player.curDirection == Direction.NORTH) {
+			startX = player.getLocation().x + player.CHARACTER_WIDTH/2;
+			startY = player.getLocation().y;
+		} else if (player.curDirection == Direction.EAST) {
+			startX = player.getLocation().x + player.CHARACTER_WIDTH;
+			startY = player.getLocation().y + player.CHARACTER_HEIGHT/2;
+		} else if (player.curDirection == Direction.SOUTH) {
+			startX = player.getLocation().x + player.CHARACTER_WIDTH/2;
+			startY = player.getLocation().y + player.CHARACTER_HEIGHT;			
+		} else if (player.curDirection == Direction.WEST) {
+			startX = player.getLocation().x;
+			startY = player.getLocation().y + player.CHARACTER_HEIGHT/2;
+		}
+		
 		Projectile p = new SimpleProjectile(new Location(startX, startY), new Location(endX, endY), this);
 		projectiles.add(p);
 	}
@@ -169,9 +182,9 @@ public class Model {
 	
 	public void addStructure (Location l, int buttonnum) {
 		if (buttonnum == 0) {
-			structures.add(new SimpleWall(l, this));
-		} else if (buttonnum == 1) {
 			structures.add(new SimpleCannon(l, this));
+		} else if (buttonnum == 1) {
+			structures.add(new SimpleWall(l, this));
 		}
 	}
 

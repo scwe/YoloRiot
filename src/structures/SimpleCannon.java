@@ -31,7 +31,7 @@ public class SimpleCannon extends Structure {
 	public BufferedImage getSprite() {
 		if (image == null){
 			ImageLoader il = new ImageLoader();
-			image = il.getImage("wip yolo crystal.png");
+			image = il.getImage("Button.png");
 		
 		}
 		return image;
@@ -39,7 +39,7 @@ public class SimpleCannon extends Structure {
 
 	@Override
 	public void fire() {
-		Projectile p = new SimpleProjectile(location, direction, model);
+		Projectile p = new SimpleProjectile(new Location(location.x, location.y), direction, model);
 		model.addProjectile (p);
 	}
 }

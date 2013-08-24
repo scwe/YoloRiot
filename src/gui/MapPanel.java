@@ -1,10 +1,22 @@
 package gui;
 
+import image.ImageLoader;
+
+import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.Point;
+import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
+
 import javax.swing.JPanel;
+
 import map.Map;
 import map.Tile;
 import model.Model;
-import java.awt.*;
 
 public class MapPanel extends JPanel{
 	private Map map;
@@ -15,7 +27,10 @@ public class MapPanel extends JPanel{
 		this.map = m;
 		this.model = model;
 		setFocusable(true);
-		
+
+		Cursor cursor = Toolkit.getDefaultToolkit().createCustomCursor(new ImageLoader().getImage("cursor.png"), new Point(0, 0), "crosshair");
+
+		super.setCursor(cursor);
 	}
 	
 	public Map getMap(){
@@ -28,9 +43,23 @@ public class MapPanel extends JPanel{
 		Graphics2D buffer = (Graphics2D) offscreen.getGraphics();
 		buffer.setColor(Color.black);
 		buffer.fillRect(0, 0, getWidth(), getHeight());
-
+		
 		map.draw(buffer);
 		model.draw(buffer);
+
+		if (ItemPanel.currentButton != null) {
+			int left = (YoloMouse.mouseX / Tile.TILE_WIDTH) * Tile.TILE_WIDTH;
+			int top = (YoloMouse.mouseY / Tile.TILE_HEIGHT) * Tile.TILE_HEIGHT;
+			
+			buffer.drawImage(new ImageLoader().getImage(ItemPanel.currentButton).getScaledInstance(64, 64, Image.SCALE_FAST), left, top, 64, 64, null);
+			Cursor cursor = Toolkit.getDefaultToolkit().createCustomCursor(new BufferedImage(10, 10, BufferedImage.TYPE_INT_ARGB), new Point(0, 0),
+					ItemPanel.currentButton);
+			super.setCursor(cursor);
+		}else{
+			Cursor cursor = Toolkit.getDefaultToolkit().createCustomCursor(new ImageLoader().getImage("cursor.png"), new Point(0, 0), "crosshair");
+
+			super.setCursor(cursor);
+		}
 		
 		g2d.drawImage(offscreen, 0, 0, this);
 
