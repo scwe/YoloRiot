@@ -1,4 +1,6 @@
 package map;
+import image.SpriteSheet;
+
 import java.awt.*;
 
 import javax.imageio.ImageIO;
@@ -14,15 +16,11 @@ public class Map implements Drawable {
 	public static final int MAP_HEIGHT = 10;
 
 	private Tile[][] tiles;
-	private Image tileImage;
+	private SpriteSheet tileSet;
 
 	public Map() {
 		tiles = new Tile[MAP_HEIGHT][MAP_WIDTH];
-		try {
-			tileImage = ImageIO.read(new File("tile.png"));
-		} catch (IOException e) {
-			//e.printStackTrace();  TODO, remove this comment when we have an image file
-		}
+		tileSet = new SpriteSheet(0,0,Tile.TILE_WIDTH, Tile.TILE_HEIGHT, "filename");
 	}
 
 	public Tile[][] getTiles() {
@@ -34,7 +32,7 @@ public class Map implements Drawable {
 		for (int h = 0; h < MAP_HEIGHT; h++) {
 			for (int w = 0; w < MAP_WIDTH; w++) {
 				if (tiles[h][w] != null) {   //TODO, once we have a tile image, this can be changed
-					g.drawImage(tileImage, MAP_OFFSET_X + w * Tile.TILE_WIDTH,
+					g.drawImage(tileSet.getImage(), MAP_OFFSET_X + w * Tile.TILE_WIDTH,
 							MAP_OFFSET_Y + h * Tile.TILE_HEIGHT, Tile.TILE_WIDTH,
 							Tile.TILE_HEIGHT, null);
 				}else{
