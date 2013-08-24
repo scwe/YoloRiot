@@ -1,14 +1,20 @@
-package model;
+package creeps;
 
 import java.awt.Polygon;
 
-public class Creep extends EntityImpl implements Entity, Hitboxable {
+import model.Entity;
+import model.EntityImpl;
+import model.Hitbox;
+import model.Hitboxable;
+import model.Interaction;
+import model.Location;
+
+public abstract class Creep extends EntityImpl implements Entity, Hitboxable {
 	
 	private static final int CREEP_SIZE_X = 32;
 	private static final int CREEP_SIZE_Y = 32;
 	
     public Creep(Location l){
-
     }
 
 	@Override

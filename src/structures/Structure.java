@@ -1,4 +1,9 @@
-package model;
+package structures;
+
+import model.Entity;
+import model.Hitbox;
+import model.Hitboxable;
+import model.Interaction;
 
 public class Structure implements Entity, Hitboxable {
 

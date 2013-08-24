@@ -7,7 +7,7 @@ public abstract class EntityImpl implements Entity {
 	protected static final int ENTITY_SIZE_Y = 32;
 	
 	AI ai;
-	Hitbox hitbox;
+	protected Hitbox hitbox;
 	Location l;
 
 	public abstract void interact(Interaction i);
