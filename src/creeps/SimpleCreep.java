@@ -19,6 +19,7 @@ public class SimpleCreep extends Creep {
 
 	public SimpleCreep(Location location, Model model) {
 		super(location, model);
+		tickspeed = 25;
 	}
 
 	@Override
