@@ -7,16 +7,22 @@ import java.awt.Graphics2D;
 import java.awt.Polygon;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
+import java.util.Set;
 
+import creeps.Creep;
+import model.Entity;
 import model.EntityImpl;
 import model.Hitbox;
 import model.Location;
+import model.Model;
 
 public abstract class Projectile extends EntityImpl {
 
 	protected Location vector;
 	protected double angle;
 	protected double movelength = 10;
+	
+	protected Interaction attack;
 
 	public Projectile(Location start, Location direction) {
 		super(start);
@@ -49,6 +55,24 @@ public abstract class Projectile extends EntityImpl {
 	}
 
 	@Override
+	public void update() {
+		ticks++;
+		
+		if (ticks == tickspeed) {
+			ticks = 0;
+			Set<Entity> es = Model.model.intersects(hitbox);
+			unitMove(30);
+			
+			for (Entity e : es) {
+				if (e instanceof Creep) {
+					e.interact(attack);
+					Model.model.killEntity(this);
+				}
+			}
+		}
+	}
+	
+	@Override
 	public void interact(Interaction i) {
 		// not needed for projectiles, as they only interact with others.
 	}
@@ -67,25 +91,11 @@ public abstract class Projectile extends EntityImpl {
 		hitbox.move((int)(xunit*magnitude), (int)(yunit*magnitude));
 	}
 
-	/**
-	 * another maths helper.
-	 */
-/*	protected final void makeHitbox(int width, int length) {
-		/*BufferedImage sprite = getSprite ();
-		int imgW = sprite.getWidth();
-		int imgH = sprite.getHeight();
-	
-		int[] xpts = {location.x, location.x + imgW, location.x + imgW, location.x};
-		int[] ypts = {location.y, location.y, location.y + imgH, location.y + imgH};
-		Polygon poly = new Polygon(xpts, ypts, xpts.length);
-		/
-		//poly.
-	}*/
-	
 	@Override
 	protected Hitbox makeHitbox() {
-		return new Hitbox (location.x, location.y, 10, 10);
+		BufferedImage sprite = getSprite ();
+		Hitbox h = new Hitbox (location.x, location.y, sprite.getWidth(), sprite.getHeight());
+		h.rotate(angle);
+		return h;
 	}
-
-	public abstract void update();
 }

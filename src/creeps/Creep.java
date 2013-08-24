@@ -12,6 +12,7 @@ import map.Tile;
 import model.EntityImpl;
 import model.Hitbox;
 import model.Location;
+import model.Model;
 
 public abstract class Creep extends EntityImpl {
 	protected boolean dead = false;
@@ -37,7 +38,7 @@ public abstract class Creep extends EntityImpl {
 	public void update() {
 		ticks ++;
 		
-		if (ticks == tickspeed) {
+		if (ticks == (int) (tickspeed * Model.model.yolospeed)) {
 			AI.next (this);
 			ticks = 0;
 		}

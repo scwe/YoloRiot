@@ -23,26 +23,6 @@ public class SimpleProjectile extends Projectile {
 		super (location, direction);
 		tickspeed = 1;
 	}
-	
-	
-	
-	@Override
-	public void update() {
-		ticks++;
-		
-		if (ticks == tickspeed) {
-			ticks = 0;
-			Set<Entity> es = Model.model.intersects(hitbox);
-			unitMove(30);
-			
-			for (Entity e : es) {
-				if (e instanceof Creep) {
-					e.interact(attack);
-					Model.model.killEntity(this);
-				}
-			}
-		}
-	}
 
 	@Override
 	public BufferedImage getSprite () {

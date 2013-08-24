@@ -24,11 +24,14 @@ public class Model {
 	
 	public static Model model;
 	
-	private List<Creep> creeps;
-	private List<Structure> structures;
-	private List<Projectile> projectiles;
+	public List<Creep> creeps;
+	public List<Structure> structures;
+	public List<Projectile> projectiles;
+	
 	private Yolostone[] yolostones;
 	private int destroyed = 0;
+	
+	public double yolospeed = 1.0;
 	
 	private Player player;
 	
@@ -159,8 +162,7 @@ public class Model {
 			startY = player.getLocation().y + player.CHARACTER_HEIGHT/2;
 		}
 		
-		Projectile p = new SimpleProjectile(new Location(startX, startY), new Location(endX, endY));
-		projectiles.add(p);
+		player.curAbility.use(startX, startY, endX, endY);
 	}
 	
 	public Player getPlayer(){

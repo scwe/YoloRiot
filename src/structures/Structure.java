@@ -11,6 +11,7 @@ import map.Tile;
 import model.EntityImpl;
 import model.Hitbox;
 import model.Location;
+import model.Model;
 
 public abstract class Structure extends EntityImpl {
 	private StructureAI ai;
@@ -32,7 +33,7 @@ public abstract class Structure extends EntityImpl {
 	public void update() {
 		ticks ++;
 		
-		if (ticks == tickspeed) {
+		if (ticks == (int) (tickspeed * Model.model.yolospeed)) {
 			ai.next (this);
 			ticks = 0;
 		}

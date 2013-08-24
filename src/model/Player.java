@@ -4,8 +4,10 @@ import interactions.Interaction;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.image.BufferedImage;
+
+import playerAbilities.Ability;
+import playerAbilities.SimpleShoot;
 
 public class Player extends EntityImpl {
 	public static final int CHARACTER_WIDTH = 40;
@@ -13,11 +15,14 @@ public class Player extends EntityImpl {
 	private SpriteSheet sprites;
 	public Direction curDirection;
 	private int speed;
-
-
+	
+	public Ability curAbility;
+	public static Ability[] abilities = {new SimpleShoot ()};
+	
 	public Player(){
 		super (new Location(50, 50));
 		speed = 4;
+		curAbility = abilities[0];
 		//sprites = new SpriteSheet(0, 0, CHARACTER_WIDTH, CHARACTER_HEIGHT, "character.png");  TODO, uncomment when we have a playe sprite
 	}
     
@@ -28,8 +33,7 @@ public class Player extends EntityImpl {
 
 	@Override
 	public void interact(Interaction i) {
-		// TODO Auto-generated method stub
-		
+		i.apply(this);
 	}
 
 	public void move(Direction d){
@@ -47,9 +51,6 @@ public class Player extends EntityImpl {
 			curDirection = Direction.WEST;
 		}
 	}
-
-	@Override
-	public void update() {}
 	
 	public int getSpeed() {
 		return speed;
@@ -64,6 +65,9 @@ public class Player extends EntityImpl {
 		return location;
 	}
 
+	@Override
+	public void update() {} // not needed, player controlled.
+	
 	@Override
 	public BufferedImage getSprite() {
 		// TODO Auto-generated method stub
