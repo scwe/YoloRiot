@@ -10,7 +10,7 @@ import map.Map;
 import model.Model;
 
 public class YoloRiot extends JFrame implements ActionListener{
-	public static final int SCREEN_WIDTH = 1024;
+	public static final int SCREEN_WIDTH = 1200;
 	public static final int SCREEN_HEIGHT = 720;
 	
 	private static final int TICK = 10;
@@ -44,8 +44,10 @@ public class YoloRiot extends JFrame implements ActionListener{
         startScreen.setVisible(true);
     	
         itemPanel = new ItemPanel();
-        screen = new ScreenPanel(itemPanel, model, map);
+        screen = new ScreenPanel(model, map);
         screen.setVisible(false);
+        itemPanel.setVisible(false);
+        add(itemPanel, BorderLayout.WEST);
         add(screen);
        
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -87,6 +89,7 @@ public class YoloRiot extends JFrame implements ActionListener{
 		if (event.getSource() == startTimer && startS){
 			startScreen.setVisible(false);
 			screen.setVisible(true);
+			itemPanel.setVisible(true);
 			startS = false;
 			startTimer.stop();
 			t.start();

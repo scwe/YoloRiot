@@ -11,11 +11,11 @@ public class ItemPanel extends JPanel{
 	
 	public ItemPanel(){
 		GridBagConstraints gc = new GridBagConstraints();
-		setPreferredSize(new Dimension(100, YoloRiot.SCREEN_HEIGHT));
+		setPreferredSize(new Dimension(120, YoloRiot.SCREEN_HEIGHT));
 	}
 	
 	public void paintComponent(Graphics g){
-		g.fillRect(0,0,100, YoloRiot.SCREEN_HEIGHT);
+		g.fillRect(0,0,getWidth(), getHeight());
 	}
 	
 	public JButton newButton(String imageFile){
