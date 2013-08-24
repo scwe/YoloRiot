@@ -9,4 +9,5 @@ public interface Entity {
 	public Image getSprite ();
 	public void move (int x, int y);
 	public void reduceHealth(int amount);
+	public Hitbox getHitBox();
 }

@@ -1,10 +1,10 @@
 package projectiles;
 
+import image.ImageLoader;
 import interactions.SimpleDamage;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.util.Set;
 
@@ -17,6 +17,7 @@ import model.Projectile;
 
 public class SimpleProjectile extends Projectile {
 
+	private BufferedImage image;
 	private final Interaction attack = new SimpleDamage (10);
 	
 	public SimpleProjectile(Location location, Location direction, Model model) {
@@ -32,7 +33,7 @@ public class SimpleProjectile extends Projectile {
 		if (ticks == tickspeed) {
 			ticks = 0;
 			Set<Entity> es = model.intersects(hitbox);
-			unitMove(15);
+			unitMove(30);
 			
 			for (Entity e : es) {
 				if (e instanceof Creep) {
@@ -45,11 +46,12 @@ public class SimpleProjectile extends Projectile {
 
 	@Override
 	public BufferedImage getSprite () {
-		BufferedImage im = new BufferedImage (32, 32, BufferedImage.TYPE_INT_ARGB);
-		Graphics g = im.getGraphics();
-		g.setColor(Color.BLUE);
-		g.fillRect(0, 0, 32, 32);
-		return im;
+		if(image==null){
+			ImageLoader imload = new ImageLoader();
+			image = imload.getImage("FIREPOWER.png");
+		}
+		
+		return image;
 	}
 
 }

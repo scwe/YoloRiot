@@ -16,7 +16,7 @@ import ais.SimpleCreepAI;
 
 public class SimpleCreep extends Creep {
 	private final Interaction attack = new SimpleDamage (5);
-
+	
 	public SimpleCreep(Location location, Model model) {
 		super(location, model);
 		tickspeed = 25;
@@ -44,13 +44,17 @@ public class SimpleCreep extends Creep {
 
 	@Override
 	public BufferedImage getSprite() {
-		if (image == null){
+		if (image == null || attackingImage == null){
 			ImageLoader il = new ImageLoader();
 			image = il.getImage("CREEP1.png");
-		
+			attackingImage = il.getImage("CREEP1_ATTACKING.png");
+			return image;
 		}
+		if (this.state == CreepState.ATTACKING)
+			return attackingImage;
 		return image;
 
 	}
+
 
 }

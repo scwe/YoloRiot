@@ -107,4 +107,12 @@ public class Player implements Drawable, Entity, Hitboxable{
 		// TODO Auto-generated method stub
 		
 	}
+
+
+
+	@Override
+	public Hitbox getHitBox() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

@@ -7,6 +7,7 @@ public abstract class EntityImpl implements Entity {
 	protected Hitbox hitbox;
 	protected Location location;
 	protected BufferedImage image;
+	protected BufferedImage attackingImage;
 	
 	protected int tickspeed = 100; // number of ticks to get before update
 	protected int ticks = 0;
@@ -32,6 +33,10 @@ public abstract class EntityImpl implements Entity {
 		location.x += x;
 		location.y += y;
 		hitbox.translate(x, y);
+	}
+	
+	public Hitbox getHitBox(){
+		return this.hitbox;
 	}
 	
 	public abstract void update();

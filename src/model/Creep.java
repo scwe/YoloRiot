@@ -12,7 +12,7 @@ public abstract class Creep extends EntityImpl implements Entity, Hitboxable, Dr
 	
 	protected boolean dead = false;
 	protected int health;
-	
+	protected CreepState state = CreepState.MOVING;
 	protected int lane;
 	
     public Creep(Location l, Model model){
@@ -53,5 +53,15 @@ public abstract class Creep extends EntityImpl implements Entity, Hitboxable, Dr
 	public void setHitbox(Hitbox h){
 		this.hitbox = h;
 	}
+	
+	public void setState(CreepState s){
+		this.state = s;
+	}
+	
+	public enum CreepState{
+		MOVING,ATTACKING,SLEEPING, FULLYOLO;
+	}
+	
+	
 
 }

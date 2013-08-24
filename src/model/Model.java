@@ -21,6 +21,8 @@ public class Model {
 	private static final int FIELD_WIDTH = Map.MAP_WIDTH*Tile.TILE_WIDTH;
 	private static final int FIELD_HEIGHT = Map.MAP_HEIGHT*Tile.TILE_HEIGHT;
 	
+	public static Model model;
+	
 	private List<Creep> creeps;
 	private List<Structure> structures;
 	private List<Projectile> projectiles;
@@ -36,6 +38,7 @@ public class Model {
 	boolean flag = false;
 	
 	public Model () {
+		model = this;
 		player = new Player();
 		creeps = new ArrayList<Creep> ();
 		structures = new ArrayList<Structure> ();
@@ -119,9 +122,8 @@ public class Model {
 			creeps.add(new SimpleCreep (new Location(end, laneLoc * laneHeight), this));
 			creeps.add(new RandomCreep (new Location(end, laneLoc * laneHeight), this, 8));
 		}
-		
-
 	}
+	
 	
 	public Set<Entity> intersects(Hitbox hitbox) {
 		Set<Entity> intersects = new HashSet<Entity> ();
