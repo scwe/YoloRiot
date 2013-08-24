@@ -85,7 +85,6 @@ public class YoloRiot extends JFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent event) {
 		if (event.getSource() == startTimer && startS){
-			System.out.println("true");
 			startScreen.setVisible(false);
 			screen.setVisible(true);
 			startS = false;

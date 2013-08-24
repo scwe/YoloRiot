@@ -89,7 +89,7 @@ public class Model {
 		for (Structure s : structures) {
 			if (s.getHitbox().intersects(hitbox)) intersects.add(s);
 		}
-		
+
 		if (player.getHitbox().intersects(hitbox)) intersects.add(player);
 		
 		return intersects;
@@ -99,7 +99,8 @@ public class Model {
 		int startX = player.getLocation().x;
 		int startY = player.getLocation().y;
 
-		//Projectile p = new SimpleProjectile(location, this);
+		Projectile p = new SimpleProjectile(new Location(startX, startY), new Location(endX, endY), this);
+		projectiles.add(p);
 	}
 	
 	public Player getPlayer(){

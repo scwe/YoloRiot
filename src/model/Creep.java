@@ -2,10 +2,9 @@ package model;
 
  
 import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
 
-import map.Map;
 import map.Tile;
 
 public abstract class Creep extends EntityImpl implements Entity, Hitboxable, Drawable {
@@ -26,7 +25,7 @@ public abstract class Creep extends EntityImpl implements Entity, Hitboxable, Dr
     
     protected abstract AI makeAI ();
 	public abstract void interact(Interaction i);
-	public abstract Image getSprite ();
+	public abstract BufferedImage getSprite ();
 	
 	
 	public void draw (Graphics g) {
