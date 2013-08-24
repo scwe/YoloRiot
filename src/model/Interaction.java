@@ -1,5 +1,5 @@
 package model;
 
-public class Interaction {
+public abstract class Interaction {
 
 }
