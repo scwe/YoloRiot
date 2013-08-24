@@ -180,6 +180,19 @@ public class Model {
 		return player.hitbox.intersects(hitbox);
 	}
 	
+
+	public Set<Entity> intersectsFriendly(Hitbox hitbox) {
+		Set<Entity> intersects = new HashSet<Entity> ();
+		
+		for (Structure s : structures) {
+			if (hitbox.intersects(s.getHitbox())) intersects.add(s);
+		}
+		
+		if (player.getHitbox().intersects(hitbox)) intersects.add(player);
+		
+		return intersects;	
+	}
+	
 	private void playerShoot (int endX, int endY) {
 		int startX = -1;
 		int startY = -1;
@@ -249,5 +262,4 @@ public class Model {
 		yolospeed = 0.5;
 		player.speed *= 2;
 	}
-
 }

@@ -17,10 +17,13 @@ import model.Location;
 import model.Model;
 
 public abstract class Projectile extends EntityImpl {
-
+	private static final int MOVE_STEP = 2;
+	
 	protected Location vector;
 	protected double angle;
 	protected double movelength = 10;
+	
+	public boolean friendly = true;
 	
 	protected Interaction attack;
 
@@ -51,7 +54,6 @@ public abstract class Projectile extends EntityImpl {
 	    gimg.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
 	    g2d.drawImage(dimg, null, location.x - imgsize/2, location.y - imgsize/2);
-
 	}
 
 	@Override
@@ -60,14 +62,16 @@ public abstract class Projectile extends EntityImpl {
 		
 		if (ticks == tickspeed) {
 			ticks = 0;
-			Set<Entity> es = Model.model.intersects(hitbox);
-			unitMove(30);
+			
+			Set<? extends Entity> es;
+			if (friendly) es = Model.model.intersectsCreeps(hitbox);
+			else es = Model.model.intersectsFriendly(hitbox);
+			
+			unitMove(MOVE_STEP);
 			
 			for (Entity e : es) {
-				if (e instanceof Creep) {
-					e.interact(attack);
-					Model.model.killEntity(this);
-				}
+				e.interact(attack);
+				Model.model.killEntity(this);
 			}
 		}
 	}

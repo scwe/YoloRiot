@@ -15,7 +15,7 @@ public class SimpleCreepAI implements CreepAI {
 	@Override
 	public void next(Creep c) {
 		
-		Set<Entity> intersected = Model.model.intersects(c.getHitbox());
+		Set<Entity> intersected = Model.model.intersectsFriendly(c.getHitbox());
 		boolean attacking = false;
 		for (Entity ent : intersected){
 			if (ent instanceof Structure){
