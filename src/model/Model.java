@@ -6,6 +6,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import map.Map;
+import map.Tile;
 import creeps.SimpleCreep;
 
 public class Model {
@@ -16,13 +18,15 @@ public class Model {
 	
 	private Player player;
 	
+	private int waveDifficulty = 3;
+	private int waveTick = 0;
+	private int waveTickSpeed = 1000;
+	
 	public Model () {
 		player = new Player();
 		creeps = new ArrayList<Creep> ();
 		structures = new ArrayList<Structure> ();
 		projectiles = new ArrayList<Projectile>();
-		
-		creeps.add(new SimpleCreep(new Location(50, 50), this));
 	}
 	
 	// update the data 
@@ -39,6 +43,7 @@ public class Model {
 			p.update();
 		}
 		
+		makeCreeps ();
 		player.update();
 	}
 	
@@ -58,6 +63,21 @@ public class Model {
 		player.draw(g);
 	}
 	
+	private void makeCreeps () {
+		waveTick ++;
+		if (waveTick != waveTickSpeed) return;
+		waveTick = 0;		
+		
+		int end = Map.MAP_WIDTH * Tile.TILE_WIDTH;
+		int laneHeight = Tile.TILE_HEIGHT;
+		int numLanes = Map.MAP_HEIGHT;
+		
+		for (int i=0; i < waveDifficulty; i++) {
+			int curLane = (i * 2) % numLanes;
+			creeps.add(new SimpleCreep (new Location(end, curLane * laneHeight), this));
+		}
+	}
+	
 	public Set<Entity> intersects(Hitbox hitbox) {
 		Set<Entity> intersects = new HashSet<Entity> ();
 		
@@ -69,7 +89,9 @@ public class Model {
 			if (s.getHitbox().intersects(hitbox)) intersects.add(s);
 		}
 		
-		return intersects;		
+		if (player.getHitbox().intersects(hitbox)) intersects.add(player);
+		
+		return intersects;
 	}
 	
 	public Player getPlayer(){

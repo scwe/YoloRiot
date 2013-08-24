@@ -12,7 +12,10 @@ public class YoloMouse extends MouseAdapter{
     }
 
     public void mouseClicked(MouseEvent m){
-
+    	int x = m.getX();
+    	int y = m.getY();
+    	
+    	
     }
 
     public void mousePressed(MouseEvent m){

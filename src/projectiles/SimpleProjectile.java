@@ -2,7 +2,10 @@ package projectiles;
 
 import interactions.SimpleDamage;
 
+import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.util.Set;
 
 import model.Creep;
@@ -18,6 +21,7 @@ public class SimpleProjectile extends Projectile {
 	
 	public SimpleProjectile(Location location, Model model) {
 		super(location, model);
+		tickspeed = 30;
 	}
 
 	@Override
@@ -40,7 +44,11 @@ public class SimpleProjectile extends Projectile {
 
 	@Override
 	public Image getSprite () {
-		return null;
+		Image im = new BufferedImage (8, 4, BufferedImage.TYPE_INT_ARGB);
+		Graphics g = im.getGraphics();
+		g.setColor(Color.GREEN);
+		g.fillRect(0, 0, 8, 4);
+		return im;
 	}
 
 }
