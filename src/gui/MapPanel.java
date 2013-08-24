@@ -18,6 +18,10 @@ public class MapPanel extends JPanel{
 		
 	}
 	
+	public Map getMap(){
+		return map;
+	}
+	
 	public void paintComponent(Graphics g){
 		Graphics2D g2d = (Graphics2D) g;
 		Image offscreen = createImage(getWidth(), getHeight());

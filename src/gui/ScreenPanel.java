@@ -56,8 +56,7 @@ public class ScreenPanel extends JPanel{
 		
 		if(ItemPanel.currentButton != null){
 			Image image = new ImageLoader().getImage(ItemPanel.currentButton).getScaledInstance(64, 64, Image.SCALE_FAST);
-			buffer.drawImage(image, 0, 0, 64, 64, null);
-			cursor = Toolkit.getDefaultToolkit().createCustomCursor(image, new Point(1,1), ItemPanel.currentButton);
+			cursor = Toolkit.getDefaultToolkit().createCustomCursor(image, new Point(0,0), ItemPanel.currentButton);
 			super.setCursor(cursor);
 		}
 

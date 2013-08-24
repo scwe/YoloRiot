@@ -158,5 +158,9 @@ public class Model {
 		Location l = e.getLocation();
 		return !(l.x >= 0 && l.y >= 0 && l.x <= FIELD_WIDTH && l.y <= FIELD_HEIGHT);
 	}
+	
+	public void addStructure(Structure s){
+		structures.add(s);
+	}
 
 }
