@@ -3,6 +3,7 @@ package gui;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.*;
+import java.awt.event.*;
 
 import image.ImageLoader;
 
@@ -20,6 +21,21 @@ public class ItemPanel extends JPanel{
 	
 	public JButton newButton(String imageFile){
 		BufferedImage image = new ImageLoader().getImage(imageFile);
-		return null;
+		
+		JButton button = new JButton(new ImageIcon(image));
+		button.setPreferredSize(new Dimension(64, 64));
+		
+		button.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				JButton b = (JButton)(arg0.getSource());
+				
+				System.out.println(b.getName());
+			}
+			
+		});
+		
+		return button;
 	}
 }
