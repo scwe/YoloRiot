@@ -76,10 +76,7 @@ public class Model {
 		int laneHeight = Tile.TILE_HEIGHT;
 		int numLanes = Map.MAP_HEIGHT;
 		
-		for (int i=0; i < waveDifficulty; i++) {
-			int curLane = (i * 2) % numLanes;
-			creeps.add(new SimpleCreep (new Location(end, curLane * laneHeight), this));
-		}
+		creeps.add(new SimpleCreep (new Location(end, 2 * laneHeight), this));
 	}
 	
 	public Set<Entity> intersects(Hitbox hitbox) {
