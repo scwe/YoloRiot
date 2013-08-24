@@ -124,5 +124,16 @@ public class Model {
 	
 	public void setPlayer(Player p){
 		this.player = p;
+	}
+
+	public void killEntity(Entity e) {
+		if (e instanceof Creep) {
+			System.out.println ("kill");
+			creeps.remove(e);
+		} else if (e instanceof Structure) {
+			structures.remove(e);
+		} else if (e instanceof Projectile) {
+			projectiles.remove(e);
+		}
 	}	
 }

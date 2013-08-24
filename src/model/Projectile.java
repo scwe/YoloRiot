@@ -50,7 +50,7 @@ public abstract class Projectile extends EntityImpl implements Drawable,
 	    gimg.drawImage(getSprite(), imgsize/4, imgsize/4, null);
 	    gimg.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-	    g2d.drawImage(dimg, null, location.x + Tile.TILE_WIDTH/2, location.y + Tile.TILE_HEIGHT/2);
+	    g2d.drawImage(dimg, null, location.x - imgsize/2, location.y - imgsize/2);
 	}
 
 	@Override
@@ -74,7 +74,7 @@ public abstract class Projectile extends EntityImpl implements Drawable,
 	 * another maths helper.
 	 */
 	protected final void setHitbox(int width, int length) {
-		hitbox = new Hitbox(-1, -1, 1, 1);
+		hitbox = new Hitbox(this, location.x, location.y, 10, 10);
 	}
 
 	public abstract void update();

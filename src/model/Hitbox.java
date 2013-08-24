@@ -15,24 +15,28 @@ public class Hitbox{
 	public enum Type {RECT, POLY};
 	
 	public final Type hitboxtype;
+	public final Entity owner;
 	
 	private Polygon polygon;
 	private Rectangle rect;
 	
-	public Hitbox (Polygon poly) {
+	public Hitbox (Entity owner, Polygon poly) {
+		this.owner = owner;
 		this.polygon = poly;
 		hitboxtype = Type.POLY;
 	}
 	
-	public Hitbox(Rectangle r){
+	public Hitbox(Entity owner, Rectangle r){
+		this.owner = owner;
 		this.rect = r;
 		hitboxtype = Type.RECT;
 	}
 	
-	public Hitbox(int x, int y, int width, int height){
+	public Hitbox(Entity owner, int x, int y, int width, int height){
 		//int[] xPoints = {x, x+ width, x + width, x};
 		//int[] yPoints = {y, y, y + height, y + height};
 		//polygon = new Polygon(xPoints, yPoints, xPoints.length);
+		this.owner = owner;
 		rect = new Rectangle (x, y, width, height);		
 		hitboxtype = Type.RECT;
 	}
@@ -45,15 +49,27 @@ public class Hitbox{
 		return rect;
 	}
 	
+	public void translate (int x, int y) {
+		if (hitboxtype == Type.POLY) {
+			polygon.translate(x,y);
+		} else {
+			rect.translate(x, y);
+		}
+	}
+	
 	public boolean intersects (Hitbox other) {
 		if (other.hitboxtype == Type.RECT && hitboxtype == Type.RECT) {
-			return rect.intersects(other.rect);
+			boolean ret = rect.intersects(other.rect);
+			return ret;
 		} else if (other.hitboxtype == Type.POLY && hitboxtype == Type.RECT) {
-			return other.polygon.intersects((Rectangle2D) rect);
+			boolean ret = other.polygon.intersects((Rectangle2D) rect);
+			return ret;
 		} else if (other.hitboxtype == Type.RECT && hitboxtype == Type.POLY) {
-			return polygon.intersects((Rectangle2D) other.rect);
+			boolean ret = polygon.intersects((Rectangle2D) other.rect);
+			return ret;
 		} else {
-			return intersectsPoly (other);
+			boolean ret = intersectsPoly (other);
+			return ret;
 		}
 	}
 	

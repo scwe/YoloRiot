@@ -31,7 +31,8 @@ public class SimpleCreep extends Creep {
 
 	@Override
 	public void interact(Interaction i) {
-		dead = true;
+		System.out.println ("interacted");
+		model.killEntity(this);
 	}
 	
 	/*public void update() {
