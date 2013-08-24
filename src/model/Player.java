@@ -34,7 +34,6 @@ public class Player implements Drawable, Entity, Hitboxable{
 
 
 	public void move(Direction d){
-		System.out.println("Moving in "+d.toString());
 		if(d == Direction.NORTH){
 			location.y -= speed;
 			hitbox.moveHitbox(0, -speed);
@@ -48,8 +47,6 @@ public class Player implements Drawable, Entity, Hitboxable{
 			location.x -= speed;
 			hitbox.moveHitbox(-speed, 0);
 		}
-		
-		System.out.println("Now at "+location.x+" "+location.y);
 	}
 
 	@Override
