@@ -20,6 +20,7 @@ public class Model {
 	private List<Structure> structures;
 	private List<Projectile> projectiles;
 	private Yolostone[] yolostones;
+	private int destroyed = 0;
 	
 	private Player player;
 	
@@ -35,7 +36,7 @@ public class Model {
 		projectiles = new ArrayList<Projectile>();
 		yolostones = new Yolostone[Map.MAP_HEIGHT];
 		for (int i=0; i < Map.MAP_HEIGHT; i++) {
-			yolostones[i] = new Yolostone ();
+			yolostones[i] = new Yolostone (0);
 		}
 	}
 	
@@ -59,6 +60,17 @@ public class Model {
 			}
 		}
 		
+		for (Yolostone y : yolostones) {
+			if (y.health < 10) {
+				y.destroyed = true;
+				destroyed++;
+			}
+		}
+		
+		if (destroyed == Map.MAP_HEIGHT) {
+			// FIXME Lose.
+		}
+		
 		makeCreeps ();
 		player.update();
 	}
@@ -75,6 +87,10 @@ public class Model {
 		
 		for (Projectile p : projectiles) {
 			p.draw (g);
+		}
+		
+		for (Yolostone y : yolostones) {
+			y.draw(g);
 		}
 		
 		player.draw(g);

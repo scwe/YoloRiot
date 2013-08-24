@@ -30,7 +30,6 @@ public abstract class Creep extends EntityImpl implements Entity, Hitboxable, Dr
 	
 	
 	public void draw (Graphics g) {
-		g.fillRect(location.x, location.y,  Tile.TILE_WIDTH, Tile.TILE_HEIGHT);
 		g.drawImage(getSprite(), location.x, location.y,  Tile.TILE_WIDTH, Tile.TILE_HEIGHT, null);
 	}
 	
