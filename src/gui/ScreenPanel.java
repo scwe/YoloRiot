@@ -4,6 +4,7 @@ package gui;
 import image.ImageLoader;
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -26,14 +27,20 @@ public class ScreenPanel extends JPanel{
 	
 	private String currentTurret;
 	
-    public ScreenPanel(Model model, Map map){
+	private Cursor cursor;
+	
+	
+    public ScreenPanel(Model model, Map map, String currentTurret){
         setFocusable(true);
         requestFocusInWindow();
+        this.currentTurret = currentTurret;
 
         this.model = model;
         this.map = map;
         
-        super.setCursor(Toolkit.getDefaultToolkit().createCustomCursor(new ImageLoader().getImage("cursor.png"), new Point(0,0), "crosshair"));
+        cursor = Toolkit.getDefaultToolkit().createCustomCursor(new ImageLoader().getImage("cursor.png"), new Point(0,0), "crosshair");
+        
+        super.setCursor(cursor);
     }
     
     @Override
@@ -48,6 +55,12 @@ public class ScreenPanel extends JPanel{
 		buffer.setColor(Color.white);
 		buffer.fillRect(0, 0, getWidth(), getHeight());
 		buffer.setRenderingHints(rh);
+		
+		if(currentTurret != null){
+			cursor = Toolkit.getDefaultToolkit().createCustomCursor(new ImageLoader().getImage(currentTurret), new Point(0,0), currentTurret);
+			//super.setCursor(cursor);
+			System.out.println("Changed the cursor to "+currentTurret);
+		}
 
 		//TODO drawing of any background shit should go here
 		

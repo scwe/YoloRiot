@@ -23,8 +23,7 @@ public class ItemPanel extends JPanel{
 		super.setBorder(new StrokeBorder(new BasicStroke(4, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND)));
 		buttonMap = new HashMap<String, String>();
 		buttonMap.put("Button.png", "test");
-		setFocusable(true);
-		GridBagConstraints gc = new GridBagConstraints();
+		setFocusable(false);
 		setPreferredSize(new Dimension(120, YoloRiot.SCREEN_HEIGHT));
 		add(newButton("Button.png"));
 	}

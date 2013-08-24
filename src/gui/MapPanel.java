@@ -32,8 +32,6 @@ public class MapPanel extends JPanel{
 		
 		Point p = super.getLocationOnScreen();
 		Point a = super.getTopLevelAncestor().getLocationOnScreen();
-		
-		//System.out.println((p.x - a.x)+ " "+(p.y-a.y));
 
 	}
 }
