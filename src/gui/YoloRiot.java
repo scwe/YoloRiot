@@ -1,14 +1,13 @@
 package gui;
 
-
-import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JFrame;
+import javax.swing.Timer;
 
-import javax.swing.*;
-import java.awt.event.*;
-
+import map.LevelData;
+import map.LevelData.LevelName;
 import map.Map;
 import model.Model;
 
@@ -39,7 +38,8 @@ public class YoloRiot extends JFrame implements ActionListener{
     	setTitle("Yolo Riot");
     	setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
     	model = new Model();
-    	map = new Map("TILESET1.png");
+    	LevelData startLevel = new LevelData(LevelName.START);
+    	map = new Map(startLevel);
     	
     	startScreen = new StartScreen();
         add(startScreen);

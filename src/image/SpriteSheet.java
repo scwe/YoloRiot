@@ -2,7 +2,9 @@ package image;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.Random;
 
+import map.Map.TileType;
 import map.Tile;
 
 public class SpriteSheet {
@@ -11,40 +13,47 @@ public class SpriteSheet {
 	private int y;
 	private int spriteWidth;
 	private int spriteHeight;
-	
-	private ArrayList<BufferedImage> sheets;
-	private ArrayList<BufferedImage> edgeTiles;
-	private ArrayList<BufferedImage> groundTiles;
+	private BufferedImage image;
 	
 	
-	
-	public SpriteSheet(int x, int y, int spriteWidth, int spriteHeight, ArrayList<String> filenames){
+	public SpriteSheet(int x, int y, int spriteWidth, int spriteHeight, String filename){
 		this.x = x;
 		this.y = y;
 		this.spriteHeight = spriteHeight;
 		this.spriteWidth = spriteWidth;
 
-		sheets = new ArrayList<BufferedImage>();
 		
 		ImageLoader imLoad = new ImageLoader();
-		for (int i = 0; i < filenames.size(); i++){
-			sheets.add(imLoad.getImage(filenames.get(i)));
-
-		}
-		
+		image = imLoad.getImage(filename);
 	
 	}
-	
-	public Image getImage(int sheet){
-		
-		
-		return null;
-		
-	}
-	
 	
 	public Image getImage(){
-		return sheets.get(0).getSubimage(x*spriteWidth, y*spriteHeight, spriteWidth, spriteHeight);
+		return image.getSubimage(x*spriteWidth, y*spriteHeight, spriteWidth, spriteHeight);
+	}
+	
+	public BufferedImage getImage(String val){
+		int xVal = 0;
+		if (val.equals("RIGHT")){
+			xVal = 3;
+		}
+		else if (val.equals("LEFT")){
+			xVal = 0;
+		}
+		else if (val.equals("TOP")){
+			xVal = 1;
+		}
+		else if (val.equals("BOTTOM")){
+			xVal = 2;
+		}
+		return image.getSubimage(xVal*spriteWidth, y*spriteHeight, spriteWidth, spriteHeight);
+
+	}
+	
+	public BufferedImage getRandomImage(){
+		Random r = new Random();
+		int choice = (int)(r.nextDouble()*getWidth());
+		return image.getSubimage(choice*spriteWidth, y*spriteHeight, spriteWidth, spriteHeight);
 	}
 	
 	public int getX() {
@@ -83,11 +92,13 @@ public class SpriteSheet {
 	 * @return
 	 */
 	public int getWidth(){
-		return sheets.get(0).getWidth()/spriteWidth;
+		return image.getWidth()/spriteWidth;
 	}
 	
 	public int getHeight(){
-		return sheets.get(0).getHeight()/spriteHeight;
+		return image.getHeight()/spriteHeight;
 	}
+	
+	
 
 }
