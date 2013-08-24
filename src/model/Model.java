@@ -128,7 +128,6 @@ public class Model {
 
 	public void killEntity(Entity e) {
 		if (e instanceof Creep) {
-			System.out.println ("kill");
 			creeps.remove(e);
 		} else if (e instanceof Structure) {
 			structures.remove(e);
@@ -139,7 +138,6 @@ public class Model {
 	
 	private boolean outOfBounds (Entity e) {
 		Location l = e.getLocation();
-		System.out.println( !(l.x >= 0 && l.y >= 0 && l.x <= FIELD_WIDTH && l.y <= FIELD_HEIGHT));
 		return !(l.x >= 0 && l.y >= 0 && l.x <= FIELD_WIDTH && l.y <= FIELD_HEIGHT);
 	}
 }
