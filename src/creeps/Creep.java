@@ -2,6 +2,7 @@ package creeps;
 
 import java.awt.Polygon;
 
+import model.AI;
 import model.Entity;
 import model.EntityImpl;
 import model.Hitbox;
@@ -15,15 +16,21 @@ public abstract class Creep extends EntityImpl implements Entity, Hitboxable {
 	private static final int CREEP_SIZE_Y = 32;
 	
     public Creep(Location l){
+    	this.location = l;
+    	this.ai = makeAI ();
     }
+    
+    protected abstract AI makeAI ();
 
 	@Override
 	public void interact(Interaction i) {
 			
 	}
 	
-	public Hitbox getHitbox() {
-		return hitbox;
+	@Override
+	public void update() {
+		// TODO Auto-generated method stub
+		//
 	}
 
 	public void makeHitbox() {
@@ -35,10 +42,9 @@ public abstract class Creep extends EntityImpl implements Entity, Hitboxable {
 
 		hitbox = new Hitbox(p);
 	}
-
-	@Override
-	public void update() {
-		// TODO Auto-generated method stub
-		//
+	
+	public Hitbox getHitbox() {
+		return hitbox;
 	}
+
 }
