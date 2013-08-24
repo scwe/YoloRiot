@@ -1,7 +1,9 @@
 package creeps;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.image.BufferedImage;
 
 import model.AI;
 import model.Creep;
@@ -11,9 +13,8 @@ import ais.SimpleCreepAI;
 
 public class SimpleCreep extends Creep {
 
-	public SimpleCreep(Location l) {
-		super(l);
-		// TODO Auto-generated constructor stub
+	public SimpleCreep(Location location) {
+		super(location);
 	}
 
 	@Override
@@ -29,8 +30,10 @@ public class SimpleCreep extends Creep {
 
 	@Override
 	protected Image getSprite() {
-		// TODO Auto-generated method stub
-		return null;
+		Image i = new BufferedImage (32, 32, BufferedImage.TYPE_INT_ARGB);
+		Graphics g = i.getGraphics();
+		g.setColor(Color.BLUE);
+		g.fillRect(0, 0, 32, 32);
+		return i;
 	}
-
 }
