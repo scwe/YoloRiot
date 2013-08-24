@@ -27,7 +27,6 @@ public class MapPanel extends JPanel{
 		this.map = m;
 		this.model = model;
 		setFocusable(true);
-		
 
 		Cursor cursor = Toolkit.getDefaultToolkit().createCustomCursor(new ImageLoader().getImage("cursor.png"), new Point(0, 0), "crosshair");
 
