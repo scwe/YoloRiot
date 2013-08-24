@@ -4,8 +4,6 @@ import java.awt.IllegalComponentStateException;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import structures.SimpleStructure;
-
 import map.Map;
 import map.Tile;
 import model.Model;
