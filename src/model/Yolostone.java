@@ -26,7 +26,7 @@ public class Yolostone extends Structure implements Drawable {
 	public BufferedImage getSprite() {
 		if (image == null){
 			ImageLoader il = new ImageLoader();
-			image = il.getImage("CREEP1.png");
+			image = il.getImage("wip yolo crystal.png");
 		
 		}
 		return image;
@@ -40,5 +40,9 @@ public class Yolostone extends Structure implements Drawable {
 	@Override
 	protected AI makeAI() {
 		return null; // needs no AI.
+	}
+
+	@Override
+	public void fire() { // does nothing
 	}
 }

@@ -38,4 +38,6 @@ public abstract class Structure extends EntityImpl implements Entity, Hitboxable
 	public void interact(Interaction i) {
 		i.apply(this);
 	}
+
+	public abstract void fire ();
 }
