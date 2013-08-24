@@ -6,6 +6,7 @@ import model.AI;
 import model.Creep.CreepState;
 import model.Entity;
 import model.Model;
+import model.Player;
 import model.Structure;
 import creeps.SimpleCreep;
 
@@ -17,17 +18,26 @@ public class SimpleCreepAI implements AI {
 		
 		Set<Entity> intersected = Model.model.intersects(e.getHitBox());
 		boolean attacking = false;
+		SimpleCreep sc = (SimpleCreep)e;
 		for (Entity ent : intersected){
+			
 			if (ent instanceof Structure){
-				SimpleCreep sc = (SimpleCreep)e;
 				sc.setState(CreepState.ATTACKING);
 				Structure attackedStruct = (Structure)ent;
 				attackedStruct.reduceHealth(4);
 				attacking = true;
 			}
+			else if(ent instanceof Player){
+				sc.setState(CreepState.ATTACKING);
+				Player attackedPlayer = (Player)ent;
+				attackedPlayer.reduceHealth(4);
+				attacking = true;
+				
+			}
 		}
 		if(!attacking){
 			e.move(-10,0);
+			sc.setState(CreepState.MOVING);
 		}
 	}
 }
