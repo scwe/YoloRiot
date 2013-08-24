@@ -7,13 +7,15 @@ import java.awt.event.ActionListener;
 
 
 import javax.swing.*;
+
+import java.awt.BorderLayout;
 import java.awt.event.*;
 
 import map.Map;
 import model.Model;
 
 public class YoloRiot extends JFrame implements ActionListener{
-	public static final int SCREEN_WIDTH = 1024;
+	public static final int SCREEN_WIDTH = 1200;
 	public static final int SCREEN_HEIGHT = 720;
 	
 	private static final int TICK = 10;
@@ -22,8 +24,9 @@ public class YoloRiot extends JFrame implements ActionListener{
     private Model model;
     private Map map;
 
-	ScreenPanel mainScreen;
-	StartScreen startScreen;
+	private ScreenPanel mainScreen;
+	private ItemPanel itemPanel;
+	private StartScreen startScreen;
 	
 	private SoundFactory sounds;   //use the sounds.playSound(filename) to play a sound
 	
@@ -45,8 +48,14 @@ public class YoloRiot extends JFrame implements ActionListener{
         add(startScreen);
         startScreen.setVisible(true);
     	
+        itemPanel = new ItemPanel();
         screen = new ScreenPanel(model, map);
+        screen.setVisible(false);
+        itemPanel.setVisible(false);
+        add(itemPanel, BorderLayout.WEST);
         add(screen);
+       
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         screen.setVisible(false);
 
@@ -58,7 +67,6 @@ public class YoloRiot extends JFrame implements ActionListener{
         addMouseListener(mouse);
         addMouseMotionListener(mouse);
         addKeyListener(key);
-        
 
         setFocusable(true);
         setVisible(true);
@@ -89,6 +97,7 @@ public class YoloRiot extends JFrame implements ActionListener{
 		if (event.getSource() == startTimer && startS){
 			startScreen.setVisible(false);
 			screen.setVisible(true);
+			itemPanel.setVisible(true);
 			startS = false;
 			startTimer.stop();
 			t.start();
