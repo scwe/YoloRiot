@@ -6,8 +6,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.Timer;
 
+import map.Map;
 import model.Model;
-import map.*;
 
 public class YoloRiot extends JFrame implements ActionListener{
 	public static final int SCREEN_WIDTH = 1024;
@@ -41,7 +41,7 @@ public class YoloRiot extends JFrame implements ActionListener{
        /* startScreen = new StartScreen();
         startScreen.setVisible(false);
         add(startScreen);*/
-        mouse = new YoloMouse();
+        mouse = new YoloMouse(model);
         key = new YoloKeyboard(model.getPlayer());
         
         addMouseListener(mouse);
