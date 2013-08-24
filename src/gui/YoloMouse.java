@@ -52,7 +52,6 @@ public class YoloMouse extends MouseAdapter {
 	public void mousePressed(MouseEvent m) {
 		YoloRiot yolo = (YoloRiot) m.getSource();
 		
-		System.out.println ("added");
 		Model.model.pts.add(new Pt(m.getX(), m.getY()));
 
 		int diffX = map.getLocationOnScreen().x - yolo.getLocationOnScreen().x;
