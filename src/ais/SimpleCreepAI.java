@@ -1,7 +1,6 @@
 package ais;
 
 import model.AI;
-import model.Action;
 import model.Entity;
 
 public class SimpleCreepAI implements AI {
