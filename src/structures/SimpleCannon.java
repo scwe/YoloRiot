@@ -39,7 +39,7 @@ public class SimpleCannon extends Structure {
 
 	@Override
 	public void fire() {
-		Projectile p = new SimpleProjectile(location, direction, model);
+		Projectile p = new SimpleProjectile(new Location(location.x, location.y), direction, model);
 		model.addProjectile (p);
 	}
 }
