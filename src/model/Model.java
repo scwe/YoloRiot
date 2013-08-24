@@ -17,8 +17,6 @@ public class Model {
 	private List<Structure> structures;
 	private List<Projectile> projectiles;
 	
-	private List<PositionTest> tests;
-	
 	private Player player;
 	
 	private int waveDifficulty = 3;
@@ -31,12 +29,6 @@ public class Model {
 		creeps = new ArrayList<Creep> ();
 		structures = new ArrayList<Structure> ();
 		projectiles = new ArrayList<Projectile>();
-		
-		tests = new ArrayList<PositionTest> ();
-	}
-	
-	public void addTest (int x, int y) {
-		tests.add(new PositionTest(x,y));
 	}
 	
 	// update the data 
@@ -68,10 +60,6 @@ public class Model {
 		
 		for (Projectile p : projectiles) {
 			p.draw (g);
-		}
-		
-		for (PositionTest t : tests) {
-			t.draw(g);
 		}
 		
 		player.draw(g);

@@ -1,5 +1,4 @@
 package gui;
-import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -32,7 +31,6 @@ public class YoloMouse extends MouseAdapter{
     	int x = m.getX() - diffX;
     	int y = m.getY() - diffY;
     	model.shoot(x, y);
-    	model.addTest(x, y);
     }
 
     public void mouseReleased(MouseEvent m){
