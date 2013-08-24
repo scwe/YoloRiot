@@ -19,11 +19,11 @@ public class SimpleProjectile extends Projectile {
 
 	private final Interaction attack = new SimpleDamage (10);
 	
-	public SimpleProjectile(Location location, Model model) {
-		super(location, model);
+	public SimpleProjectile(Location location, Location direction, Model model) {
+		super (location, direction, model);
 		tickspeed = 30;
 	}
-
+	
 	@Override
 	public void update() {
 		ticks++;
