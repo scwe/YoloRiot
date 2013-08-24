@@ -41,7 +41,7 @@ public abstract class Projectile extends EntityImpl implements Drawable,
 		Graphics2D g2d = (Graphics2D) g;
 		g.setColor(Color.GREEN);
 
-		AffineTransform tx = AffineTransform.getRotateInstance(angle, location.x, location.y);
+		AffineTransform tx = AffineTransform.getRotateInstance(angle, location.x + 15, location.y+ 15);
 		AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
 		g2d.drawImage(op.filter(getSprite(), null), location.x, location.y,	null);
 
