@@ -22,7 +22,7 @@ public class SimpleProjectile extends Projectile {
 	public SimpleProjectile(Location location, Location direction, Model model) {
 		super (location, direction, model);
 		setHitbox(0,0);
-		tickspeed = 30;
+		tickspeed = 1;
 	}
 	
 	@Override
@@ -33,7 +33,7 @@ public class SimpleProjectile extends Projectile {
 			ticks = 0;
 			Set<Entity> es = model.intersects(hitbox);
 			
-			unitMove(10);
+			unitMove(2);
 			
 			for (Entity e : es) {
 				if (e instanceof Creep) {
