@@ -33,11 +33,6 @@ public class Yolostone extends Structure implements Drawable {
 	}
 
 	@Override
-	public void draw(Graphics g) {
-		g.drawImage(getSprite(), 0, Tile.TILE_HEIGHT*num,  Tile.TILE_WIDTH, Tile.TILE_HEIGHT, null);
-	}
-
-	@Override
 	protected AI makeAI() {
 		return null; // needs no AI.
 	}

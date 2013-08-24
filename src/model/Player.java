@@ -9,6 +9,7 @@ public class Player implements Drawable, Entity, Hitboxable{
 	public static final int CHARACTER_WIDTH = 40;
 	public static final int CHARACTER_HEIGHT = 64;
 	private SpriteSheet sprites;
+	public Direction curDirection;
 	private Location location;
 	private Hitbox hitbox;
 	private int speed;
@@ -41,15 +42,19 @@ public class Player implements Drawable, Entity, Hitboxable{
 		if(d == Direction.NORTH){
 			location.y -= speed;
 			hitbox.moveHitbox(0, -speed);
+			curDirection = Direction.NORTH;
 		}else if(d == Direction.EAST){
 			location.x += speed;
 			hitbox.moveHitbox(speed, 0);
+			curDirection = Direction.EAST;
 		}else if(d == Direction.SOUTH){
 			location.y += speed;
 			hitbox.moveHitbox(0, speed);
+			curDirection = Direction.SOUTH;
 		}else if(d == Direction.WEST){
 			location.x -= speed;
 			hitbox.moveHitbox(-speed, 0);
+			curDirection = Direction.WEST;
 		}
 	}
 

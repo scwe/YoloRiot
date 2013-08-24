@@ -139,10 +139,24 @@ public class Model {
 		return intersects;
 	}
 	
-	public void shoot (int endX, int endY) {
-		int startX = player.getLocation().x;
-		int startY = player.getLocation().y;
-
+	public void playerShoot (int endX, int endY) {
+		int startX = -1;
+		int startY = -1;
+		
+		if (player.curDirection == Direction.NORTH) {
+			startX = player.getLocation().x + player.CHARACTER_WIDTH/2;
+			startY = player.getLocation().y;
+		} else if (player.curDirection == Direction.EAST) {
+			startX = player.getLocation().x + player.CHARACTER_WIDTH;
+			startY = player.getLocation().y + player.CHARACTER_HEIGHT/2;
+		} else if (player.curDirection == Direction.SOUTH) {
+			startX = player.getLocation().x + player.CHARACTER_WIDTH/2;
+			startY = player.getLocation().y + player.CHARACTER_HEIGHT;			
+		} else if (player.curDirection == Direction.WEST) {
+			startX = player.getLocation().x;
+			startY = player.getLocation().y + player.CHARACTER_HEIGHT/2;
+		}
+		
 		Projectile p = new SimpleProjectile(new Location(startX, startY), new Location(endX, endY), this);
 		projectiles.add(p);
 	}

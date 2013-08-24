@@ -51,7 +51,7 @@ public class YoloMouse extends MouseAdapter {
 		mouseY = m.getY() - diffY;
 
 		if (ItemPanel.currentButton == null) {
-			model.shoot(mouseX, mouseY);
+			model.playerShoot(mouseX, mouseY);
 		} else {
 			System.out.println(mouseX / Tile.TILE_WIDTH + " " + mouseY / Tile.TILE_HEIGHT);
 

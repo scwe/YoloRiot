@@ -1,12 +1,10 @@
 package model;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Polygon;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
-
-import map.Tile;
 
 public abstract class Projectile extends EntityImpl implements Drawable,
 		Hitboxable {
@@ -49,8 +47,9 @@ public abstract class Projectile extends EntityImpl implements Drawable,
 	    gimg.rotate(angle, imgsize/2, imgsize/2);
 	    gimg.drawImage(getSprite(), imgsize/4, imgsize/4, null);
 	    gimg.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-	    
+
 	    g2d.drawImage(dimg, null, location.x - imgsize/2, location.y - imgsize/2);
+
 	}
 
 	@Override
@@ -58,8 +57,6 @@ public abstract class Projectile extends EntityImpl implements Drawable,
 		// not needed for projectiles, as they only interact with others.
 	}
 	
-	//FIXME hitboxes for projs are small.
-
 	/**
 	 * helper function that calculates and applies unit movement ratios so we
 	 * don't have to always copy out the fucking trig.
@@ -78,7 +75,16 @@ public abstract class Projectile extends EntityImpl implements Drawable,
 	 * another maths helper.
 	 */
 	protected final void setHitbox(int width, int length) {
-		hitbox = new Hitbox(this, location.x, location.y, 10, 10);
+		/*BufferedImage sprite = getSprite ();
+		int imgW = sprite.getWidth();
+		int imgH = sprite.getHeight();
+	
+		int[] xpts = {location.x, location.x + imgW, location.x + imgW, location.x};
+		int[] ypts = {location.y, location.y, location.y + imgH, location.y + imgH};
+		Polygon poly = new Polygon(xpts, ypts, xpts.length);
+		*/
+		hitbox = new Hitbox (this, location.x, location.y, 10, 10);
+		//poly.
 	}
 
 	public abstract void update();
