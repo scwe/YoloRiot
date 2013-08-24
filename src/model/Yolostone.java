@@ -33,8 +33,7 @@ public class Yolostone extends EntityImpl implements Drawable {
 
 	@Override
 	public void draw(Graphics g) {
-		g.fillRect(location.x, location.y,  Tile.TILE_WIDTH, Tile.TILE_HEIGHT);
-		g.drawImage(getSprite(), location.x, location.y,  Tile.TILE_WIDTH, Tile.TILE_HEIGHT, null);
+		g.drawImage(getSprite(), 0, Tile.TILE_HEIGHT*num,  Tile.TILE_WIDTH, Tile.TILE_HEIGHT, null);
 	}
 	
 }
