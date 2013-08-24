@@ -28,6 +28,7 @@ public class YoloRiot extends JFrame implements ActionListener{
 	private boolean startS = true, mainS = false;
 	
 	Timer t = new Timer(1000,this);
+	Timer startTimer;
 	
     public YoloRiot(){
     	setTitle("Yolo Riot");
@@ -38,9 +39,10 @@ public class YoloRiot extends JFrame implements ActionListener{
         add(screen);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         
-       /* startScreen = new StartScreen();
-        startScreen.setVisible(false);
-        add(startScreen);*/
+        startScreen = new StartScreen();
+        startScreen.setVisible(true);
+        add(startScreen);
+
         mouse = new YoloMouse(model);
         key = new YoloKeyboard(model.getPlayer());
         
@@ -53,16 +55,21 @@ public class YoloRiot extends JFrame implements ActionListener{
         setVisible(true);
         
         gameLoop();
-        Timer t = new Timer(TICK,this);
-        t.start();
+        t = new Timer(TICK,this);
+       
+        startTimer = new Timer(1000,this);
+        startTimer.start();
     }
     
     public void gameLoop() {
-   
-    		model.tick ();
-    		screen.repaint();
-    		key.update();
-  
+    		if (startS){
+    			screen.repaint();
+    		}
+    		else{
+	    		model.tick ();
+	    		screen.repaint();
+	    		key.update();
+    		}
     }
 
     public static void main(String[] args){
@@ -70,7 +77,14 @@ public class YoloRiot extends JFrame implements ActionListener{
     }
 
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
+	public void actionPerformed(ActionEvent event) {
+		if (event.getSource() == startTimer){
+			startScreen.setVisible(false);
+			startS = false;
+			startTimer.stop();
+			t.start();
+			return;
+		}
 		gameLoop();
 	}
 }
