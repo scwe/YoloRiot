@@ -15,7 +15,7 @@ public class Player implements Drawable, Entity, Hitboxable{
 
 
 	public Player(){
-		speed = 5;
+		speed = 1;
 		location = new Location(50,50);
 		sprites = new SpriteSheet(0, 0, CHARACTER_WIDTH, CHARACTER_HEIGHT, "character.png");
 		hitbox = new Hitbox(location.x, location.y, CHARACTER_WIDTH, CHARACTER_HEIGHT);
@@ -36,6 +36,7 @@ public class Player implements Drawable, Entity, Hitboxable{
 
 
 	public void move(Direction d){
+		System.out.println("Moving in "+d.toString());
 		if(d == Direction.NORTH){
 			location.y -= speed;
 			hitbox.moveHitbox(0, -speed);
@@ -49,6 +50,8 @@ public class Player implements Drawable, Entity, Hitboxable{
 			location.x -= speed;
 			hitbox.moveHitbox(-speed, 0);
 		}
+		
+		System.out.println("Now at "+location.x+" "+location.y);
 	}
 
 	@Override

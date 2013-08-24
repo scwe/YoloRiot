@@ -2,8 +2,8 @@ package map;
 
 public class Tile {
 	
-	public static final int TILE_WIDTH = 32;
-	public static final int TILE_HEIGHT = 32;
+	public static final int TILE_WIDTH = 64;
+	public static final int TILE_HEIGHT = 64;
 	
 	int xLoc;
 	int yLoc;

@@ -21,7 +21,7 @@ public abstract class Creep extends EntityImpl implements Entity, Hitboxable, Dr
     	this.model = model;
     	this.ai = makeAI ();
     	this.health = 100;
-    	lane = (l.y - Map.MAP_OFFSET_Y)/Tile.TILE_HEIGHT;  //this should work for finding the lane based on a y position
+    	lane = (l.y)/Tile.TILE_HEIGHT;  //this should work for finding the lane based on a y position
     }
     
     protected abstract AI makeAI ();
