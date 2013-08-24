@@ -3,8 +3,8 @@ package model;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.geom.AffineTransform;
-import java.awt.image.AffineTransformOp;
+import java.awt.RenderingHints;
+import java.awt.image.BufferedImage;
 
 public abstract class Projectile extends EntityImpl implements Drawable,
 		Hitboxable {
@@ -39,14 +39,15 @@ public abstract class Projectile extends EntityImpl implements Drawable,
 
 	public void draw(Graphics g) {
 		Graphics2D g2d = (Graphics2D) g;
-		g.setColor(Color.GREEN);
-
-		AffineTransform tx = AffineTransform.getRotateInstance(angle, location.x + 15, location.y+ 15);
-		AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
-		g2d.drawImage(op.filter(getSprite(), null), location.x, location.y,	null);
-
-		//g.fillRect(location.x, location.y, 30, 30);
-		//g.drawImage(getSprite(), location.x, location.y, null);
+		BufferedImage sprite = getSprite ();
+		
+	    BufferedImage dimg = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
+	    Graphics2D gimg = dimg.createGraphics();
+	    gimg.rotate(angle, sprite.getWidth()/2, sprite.getHeight()/2);
+	    gimg.drawImage(getSprite(), 15, 15, null);
+	    gimg.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+	    
+	    g2d.drawImage(dimg, null, location.x, location.y);
 	}
 
 	@Override

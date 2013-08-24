@@ -89,7 +89,8 @@ public class Hitbox{
 	}
 	
 	public void moveHitbox(int x, int y){
-		polygon.translate(x, y);
+		if (hitboxtype == Type.POLY) polygon.translate(x, y);
+		else rect.translate(x, y);
 	}
 	
 	
