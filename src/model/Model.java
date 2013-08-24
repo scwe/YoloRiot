@@ -52,7 +52,8 @@ public class Model {
 	}
 	
 	public void draw (Graphics g) {
-
+		
+		
 		for (Creep c : creeps) {
 			c.draw (g);	
 		}
@@ -126,4 +127,7 @@ public class Model {
 			projectiles.remove(e);
 		}
 	}	
+	
+	
+	
 }
