@@ -1,6 +1,11 @@
 package gui;
 
 
+import java.awt.Frame;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+
 import javax.swing.*;
 
 import java.awt.BorderLayout;
@@ -52,6 +57,9 @@ public class YoloRiot extends JFrame implements ActionListener{
        
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
+        screen.setVisible(false);
+
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
         mouse = new YoloMouse(model);
         key = new YoloKeyboard(model.getPlayer());
         sounds = new SoundFactory();
@@ -63,9 +71,7 @@ public class YoloRiot extends JFrame implements ActionListener{
         setFocusable(true);
         setVisible(true);
         
-        gameLoop();
         t = new Timer(TICK,this);
-       
         startTimer = new Timer(1000,this);
         startTimer.start();
     }
@@ -74,9 +80,11 @@ public class YoloRiot extends JFrame implements ActionListener{
     	if (startS){
     		startScreen.repaint();
     	}
-    	model.tick();
-    	key.update();
-    	repaint();
+    	else{
+	    	model.tick();
+	    	key.update();
+	    	screen.repaint();
+    	}
     	
     }
 
@@ -93,7 +101,6 @@ public class YoloRiot extends JFrame implements ActionListener{
 			startS = false;
 			startTimer.stop();
 			t.start();
-			revalidate();
 		}
 		gameLoop();
 	}

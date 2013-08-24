@@ -17,7 +17,9 @@ public class Player implements Drawable, Entity, Hitboxable{
 	public Player(){
 		speed = 4;
 		location = new Location(50,50);
+
 		//sprites = new SpriteSheet(0, 0, CHARACTER_WIDTH, CHARACTER_HEIGHT, "character.png");  TODO, uncomment when we have a playe sprite
+
 		hitbox = new Hitbox(location.x, location.y, CHARACTER_WIDTH, CHARACTER_HEIGHT);
 	}
     

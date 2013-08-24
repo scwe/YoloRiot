@@ -3,6 +3,7 @@ package map;
 import image.SpriteSheet;
 
 import java.awt.Graphics;
+import java.util.ArrayList;
 import java.util.Random;
 
 import model.Drawable;
@@ -19,8 +20,9 @@ public class Map implements Drawable {
 
 	public Map(String filename) {
 		tiles = new Tile[MAP_HEIGHT][MAP_WIDTH];
-		tileSet = new SpriteSheet(0, 0, Tile.TILE_WIDTH/2, Tile.TILE_HEIGHT/2,
-				filename);
+		ArrayList<String> sheets = new ArrayList<String>();
+		sheets.add(filename);
+		tileSet = new SpriteSheet(0, 0, Tile.TILE_WIDTH/2, Tile.TILE_HEIGHT/2,sheets);
 		seed = (int)Math.random()*32034;
 		r = new Random(seed);
 	}

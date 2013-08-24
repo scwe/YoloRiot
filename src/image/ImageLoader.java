@@ -10,12 +10,11 @@ public class ImageLoader {
 	public BufferedImage getImage(String name) {
 
 		BufferedImage img;
-		try {
-			img = ImageIO.read(ImageLoader.class.getResource(name));
-		} catch (IOException e) {
-			throw new Error(e);
-		}
 
+			try{
+				img = ImageIO.read(ImageLoader.class.getResource("/images/"+name)); 
+				
+			}catch (IOException e){ throw new Error(e); }
 		return img;
 	}
 
