@@ -1,14 +1,16 @@
 package model;
 
+import java.awt.AlphaComposite;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import projectiles.SimpleProjectile;
 import map.Map;
 import map.Tile;
+import projectiles.SimpleProjectile;
 import creeps.SimpleCreep;
 
 public class Model {
@@ -19,8 +21,6 @@ public class Model {
 	private List<Creep> creeps;
 	private List<Structure> structures;
 	private List<Projectile> projectiles;
-	
-	private List<PositionTest> tests;
 	
 	private Player player;
 	
@@ -34,12 +34,6 @@ public class Model {
 		creeps = new ArrayList<Creep> ();
 		structures = new ArrayList<Structure> ();
 		projectiles = new ArrayList<Projectile>();
-		
-		tests = new ArrayList<PositionTest> ();
-	}
-	
-	public void addTest (int x, int y) {
-		tests.add(new PositionTest(x,y));
 	}
 	
 	// update the data 
@@ -62,6 +56,7 @@ public class Model {
 	}
 	
 	public void draw (Graphics g) {
+
 		for (Creep c : creeps) {
 			c.draw (g);	
 		}
@@ -74,10 +69,8 @@ public class Model {
 			p.draw (g);
 		}
 		
-		for (PositionTest t : tests) {
-			t.draw(g);
-		}
-		
+
+
 		player.draw(g);
 	}
 	
