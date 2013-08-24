@@ -2,12 +2,12 @@ package ais;
 
 import model.AI;
 import model.Action;
-import model.Location;
+import model.Entity;
 
 public class SimpleCreepAI implements AI {
 
 	@Override
-	public Action getNext(Location l) {
+	public Action getNext(Entity e) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -1,20 +1,27 @@
 package creeps;
 
+import interactions.SimpleDamage;
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 
 import model.AI;
+import model.Action;
 import model.Creep;
+import model.Entity;
 import model.Interaction;
 import model.Location;
+import model.Model;
 import ais.SimpleCreepAI;
 
 public class SimpleCreep extends Creep {
 
-	public SimpleCreep(Location location) {
-		super(location);
+	private final Interaction attack = new SimpleDamage (5);
+	
+	public SimpleCreep(Location location, Model model) {
+		super(location, model);
 	}
 
 	@Override
@@ -24,8 +31,17 @@ public class SimpleCreep extends Creep {
 
 	@Override
 	public void interact(Interaction i) {
-		// TODO Auto-generated method stub
-		
+		dead = true;
+	}
+	
+	public void update() {
+		Action a = ai.getNext (this);
+		if (a.state == Action.State.ATTACK) {
+			Entity attacking = a.interacting;
+			attacking.interact(attack);
+		} else if (a.state == Action.State.MOVE) {
+			location.moveLeft (1);
+		}
 	}
 
 	@Override

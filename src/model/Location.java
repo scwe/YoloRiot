@@ -21,4 +21,12 @@ public class Location {
 	public void setX(int x) {
 		this.x = x;
 	}
+
+	public void moveLeft(int amount) {
+		x -= amount;
+	}
+	
+	public void moveRight (int amount) {
+		x += amount;
+	}
 }

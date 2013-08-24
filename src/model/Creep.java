@@ -8,12 +8,16 @@ public abstract class Creep extends EntityImpl implements Entity, Hitboxable, Dr
 	private static final int CREEP_SIZE_X = 32;
 	private static final int CREEP_SIZE_Y = 32;
 
-	private int health;
+	protected Model model;
 	
-    public Creep(Location l){
+	protected boolean dead = false;
+	protected int health;
+	
+    public Creep(Location l, Model model){
     	this.location = l;
+    	this.model = model;
     	this.ai = makeAI ();
-    	health = 100;
+    	this.health = 100;
     }
     
     protected abstract AI makeAI ();
@@ -27,8 +31,7 @@ public abstract class Creep extends EntityImpl implements Entity, Hitboxable, Dr
 	
 	@Override
 	public void update() {
-		// TODO Auto-generated method stub
-		//
+		Action a = ai.getNext (this);
 	}
 
 	public void makeHitbox() {

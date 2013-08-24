@@ -6,15 +6,25 @@ import java.util.List;
 
 public class Model {
 	
+	private static final int LANES = 10;
+	
 	private List<Creep> creeps;
 	private List<Structure> structures;
 	private List<Projectile> projectiles;
 	
-	
+	private List<List<Entity>> lanes;
 	
 	public Model () {
 		creeps = new ArrayList<Creep> ();
 		structures = new ArrayList<Structure> ();
+		lanes = new ArrayList<List<Entity>> ();
+		for (int i=0; i < LANES; i++) {
+			lanes.add(new ArrayList<Entity> ());
+		}
+	}
+
+	public List<Entity> getLane (int i) {
+		return lanes.get(i);
 	}
 	
 	// update the data 
