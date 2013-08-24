@@ -2,9 +2,19 @@ package model;
 
 import image.ImageLoader;
 
+import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
-public class Yolostone extends EntityImpl {
+import map.Tile;
+
+public class Yolostone extends EntityImpl implements Drawable {
+	
+	public boolean destroyed = false;
+	private int num;
+	
+	public Yolostone (int num) {
+		this.num = num;
+	}
 	
 	@Override
 	public void update() {
@@ -19,6 +29,12 @@ public class Yolostone extends EntityImpl {
 		
 		}
 		return image;
+	}
+
+	@Override
+	public void draw(Graphics g) {
+		g.fillRect(location.x, location.y,  Tile.TILE_WIDTH, Tile.TILE_HEIGHT);
+		g.drawImage(getSprite(), location.x, location.y,  Tile.TILE_WIDTH, Tile.TILE_HEIGHT, null);
 	}
 	
 }
