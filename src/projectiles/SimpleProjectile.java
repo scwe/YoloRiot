@@ -35,6 +35,8 @@ public class SimpleProjectile extends Projectile {
 			
 			unitMove(10);
 			
+			System.out.println (es.size());
+			
 			for (Entity e : es) {
 				if (e instanceof Creep) {
 					e.interact(attack);
