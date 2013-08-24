@@ -13,7 +13,7 @@ public class YoloRiot extends JFrame implements ActionListener{
 	public static final int SCREEN_WIDTH = 1024;
 	public static final int SCREEN_HEIGHT = 720;
 	
-	private static final int TICK = 20;
+	private static final int TICK = 10;
 
     private ScreenPanel screen;
     private Model model;
@@ -38,9 +38,9 @@ public class YoloRiot extends JFrame implements ActionListener{
         add(screen);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         
-        startScreen = new StartScreen();
+       /* startScreen = new StartScreen();
         startScreen.setVisible(false);
-        add(startScreen);
+        add(startScreen);*/
         mouse = new YoloMouse();
         key = new YoloKeyboard(model.getPlayer());
         

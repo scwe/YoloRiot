@@ -7,6 +7,8 @@ public abstract class Projectile extends EntityImpl implements Drawable, Hitboxa
 	protected Hitbox hitbox;
 	protected Model model;
 	
+	
+	
 	public Projectile (Location location, Model model) {
 		this.location = location;
 		this.model = model;

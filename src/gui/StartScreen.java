@@ -16,8 +16,8 @@ public class StartScreen extends JComponent implements SplashScreen{
 	ImageLoader imLoad;
 	
 	public StartScreen(){
-		imLoad = new ImageLoader();
-		mainIm = imLoad.getImage("/images/StartScreen.png");
+		//imLoad = new ImageLoader();
+		//mainIm = imLoad.getImage("/images/StartScreen.png");
 	}
 
 	@Override

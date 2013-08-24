@@ -7,7 +7,7 @@ public abstract class EntityImpl implements Entity {
 	protected Hitbox hitbox;
 	protected Location location;
 	
-	protected int tickspeed = 10; // number of ticks to get before update
+	protected int tickspeed = 100; // number of ticks to get before update
 	protected int ticks = 0;
 
 	public Location getLocation () {
