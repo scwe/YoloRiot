@@ -71,9 +71,12 @@ public class Player implements Drawable, Entity, Hitboxable{
 		return speed;
 	}
 
-
-
 	public void setSpeed(int speed) {
 		this.speed = speed;
+	}
+
+	@Override
+	public Location getLocation() {
+		return location;
 	}
 }

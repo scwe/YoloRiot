@@ -23,8 +23,8 @@ public class YoloRiot extends JFrame{
     public YoloRiot(){
     	setTitle("Yolo Riot");
     	setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
-    	model = new Model ();
-    	map = new Map();
+    	model = new Model();
+    	map = new Map("images/TILESET1.png");
         screen = new ScreenPanel(model, map);
         add(screen);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
