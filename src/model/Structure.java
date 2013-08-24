@@ -1,12 +1,12 @@
 package model;
 
+import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
 import map.Tile;
 
 public abstract class Structure extends EntityImpl implements Entity, Hitboxable, Drawable {
-	public abstract void update();
 	public Model model;
 	
     public Structure (Location l, Model model){
@@ -27,6 +27,22 @@ public abstract class Structure extends EntityImpl implements Entity, Hitboxable
 	@Override
 	public void setHitbox (Hitbox h) {
 		hitbox = h;
+	}
+	
+	@Override
+	public void update() {
+		ticks ++;
+		
+		if (ticks == tickspeed) {
+			ai.next (this);
+			ticks = 0;
+		}
+	}
+
+	
+	@Override
+	public void draw(Graphics g) {
+		g.drawImage(getSprite(), location.x, location.y,  Tile.TILE_WIDTH, Tile.TILE_HEIGHT, null);
 	}
 	
 	@Override

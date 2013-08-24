@@ -9,8 +9,12 @@ import java.util.Set;
 import map.Map;
 import map.Tile;
 import projectiles.SimpleProjectile;
+
+import creeps.RandomCreep;
+
 import structures.SimpleCannon;
 import structures.SimpleWall;
+
 import creeps.SimpleCreep;
 
 public class Model {
@@ -26,8 +30,9 @@ public class Model {
 	private Player player;
 	
 	private int waveDifficulty = 3;
-	private int waveTick = 0;
-	private int waveTickSpeed = 10;
+	private int waveTick = 200;
+	private int tick = 0;
+	private int waveTickSpeed = 20;
 	boolean flag = false;
 	
 	public Model () {
@@ -71,8 +76,11 @@ public class Model {
 		if (destroyed == Map.MAP_HEIGHT) {
 			// FIXME Lose.
 		}
-		
-		makeCreeps ();
+		if (tick > waveTick){
+			makeCreeps ();
+			tick = 0;
+		}
+		tick++;
 		player.update();
 	}
 	
@@ -97,17 +105,22 @@ public class Model {
 	}
 	
 	private void makeCreeps () {
-		if (flag) return;
-		flag = true;
-		waveTick ++;
-		//if (waveTick != waveTickSpeed) return;
-		waveTick = 0;		
-		
+
+
+		double creepNo = Math.abs(Math.sin(tick)*20);
+
+		System.out.println("creepno = "+creepNo);
 		int end = Map.MAP_WIDTH * Tile.TILE_WIDTH;
 		int laneHeight = Tile.TILE_HEIGHT;
 		int numLanes = Map.MAP_HEIGHT;
+
+		for (int i = 0 ; i < creepNo; i++){
+			int laneLoc = (int)((Math.random())*10);
+			creeps.add(new SimpleCreep (new Location(end, laneLoc * laneHeight), this));
+			creeps.add(new RandomCreep (new Location(end, laneLoc * laneHeight), this, 8));
+		}
 		
-		creeps.add(new SimpleCreep (new Location(end, 2 * laneHeight), this));
+
 	}
 	
 	public Set<Entity> intersects(Hitbox hitbox) {
@@ -163,6 +176,14 @@ public class Model {
 	private boolean outOfBounds (Entity e) {
 		Location l = e.getLocation();
 		return !(l.x >= 0 && l.y >= 0 && l.x <= FIELD_WIDTH && l.y <= FIELD_HEIGHT);
+	}
+	
+	public void addStructure(Structure s){
+		structures.add(s);
+	}
+
+	public void addProjectile(Projectile p) {
+		projectiles.add(p);
 	}
 
 }

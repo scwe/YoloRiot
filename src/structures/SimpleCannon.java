@@ -1,46 +1,45 @@
 package structures;
 
+import image.ImageLoader;
+
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
+import projectiles.SimpleProjectile;
+import structureais.SimpleCannonAI;
 import model.AI;
 import model.Location;
 import model.Model;
+import model.Projectile;
 import model.Structure;
 
 public class SimpleCannon extends Structure {
 
+	Location direction;
+	
 	public SimpleCannon(Location l, Model model) {
 		super(l, model);
-		// TODO Auto-generated constructor stub
-	}
-
-	@Override
-	public void draw(Graphics g) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void update() {
-		// TODO Auto-generated method stub
-		
+		direction = new Location(l.x + 10, l.y);
 	}
 
 	@Override
 	protected AI makeAI() {
-		// TODO Auto-generated method stub
-		return null;
+		return new SimpleCannonAI ();
 	}
 
 	@Override
 	public BufferedImage getSprite() {
-		// TODO Auto-generated method stub
-		return null;
+		if (image == null){
+			ImageLoader il = new ImageLoader();
+			image = il.getImage("wip yolo crystal.png");
+		
+		}
+		return image;
 	}
 
 	@Override
 	public void fire() {
-		
+		Projectile p = new SimpleProjectile(location, direction, model);
+		model.addProjectile (p);
 	}
 }

@@ -1,5 +1,7 @@
 package structures;
 
+import image.ImageLoader;
+
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
@@ -16,24 +18,18 @@ public class SimpleWall extends Structure {
 	}
 
 	@Override
-	public void draw(Graphics g) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void update() { // does nothing
-	}
-
-	@Override
 	protected AI makeAI() { // no AI
 		return null;
 	}
 
 	@Override
 	public BufferedImage getSprite() {
-		// TODO Auto-generated method stub
-		return null;
+		if (image == null){
+			ImageLoader il = new ImageLoader();
+			image = il.getImage("wip yolo crystal.png");
+		
+		}
+		return image;
 	}
 
 	@Override
