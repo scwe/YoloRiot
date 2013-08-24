@@ -15,6 +15,8 @@ import model.*;
 public class YoloMouse extends MouseAdapter {
 	public static int mouseX = 0;
 	public static int mouseY = 0;
+	public static int offsetX;
+	public static int offsetY;
 	private Model model;
 	private MapPanel map;
 
@@ -28,11 +30,11 @@ public class YoloMouse extends MouseAdapter {
 	public void mouseMoved(MouseEvent m) {
 		try {
 			YoloRiot yolo = (YoloRiot) m.getSource();
-			int diffX = map.getLocationOnScreen().x - yolo.getLocationOnScreen().x;
-			int diffY = map.getLocationOnScreen().y - yolo.getLocationOnScreen().y;
+			offsetX = map.getLocationOnScreen().x - yolo.getLocationOnScreen().x;
+			offsetY = map.getLocationOnScreen().y - yolo.getLocationOnScreen().y;
 
-			mouseX = m.getX() - diffX;
-			mouseY = m.getY() - diffY;
+			mouseX = m.getX() - offsetX;
+			mouseY = m.getY() - offsetY;
 		} catch (IllegalComponentStateException e) {
 
 		}
