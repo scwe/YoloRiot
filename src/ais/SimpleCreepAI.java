@@ -8,8 +8,7 @@ public class SimpleCreepAI implements AI {
 
 	@Override
 	public Action getNext(Entity e) {
-		// TODO Auto-generated method stub
-		return null;
+		return new Action(Action.State.MOVE);
 	}
 
 }
