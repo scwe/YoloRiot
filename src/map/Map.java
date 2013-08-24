@@ -8,8 +8,6 @@ import java.util.Random;
 import model.Drawable;
 
 public class Map implements Drawable {
-	public static final int MAP_OFFSET_X = 20;
-	public static final int MAP_OFFSET_Y = 50;
 	public static final int MAP_WIDTH = 15;
 	public static final int MAP_HEIGHT = 10;
 
@@ -21,7 +19,7 @@ public class Map implements Drawable {
 
 	public Map(String filename) {
 		tiles = new Tile[MAP_HEIGHT][MAP_WIDTH];
-		tileSet = new SpriteSheet(0, 0, Tile.TILE_WIDTH, Tile.TILE_HEIGHT,
+		tileSet = new SpriteSheet(0, 0, Tile.TILE_WIDTH/2, Tile.TILE_HEIGHT/2,
 				filename);
 		seed = (int)Math.random()*32034;
 		r = new Random(seed);
@@ -39,9 +37,8 @@ public class Map implements Drawable {
 				
 				tileSet.setX((int)(r.nextDouble()*tileSet.getWidth()));   //change the tile we are using randomly
 				
-				
-				g.drawImage(tileSet.getImage(), MAP_OFFSET_X + w
-						* Tile.TILE_WIDTH, MAP_OFFSET_Y + h * Tile.TILE_HEIGHT,
+				g.drawImage(tileSet.getImage(), w
+						* Tile.TILE_WIDTH, h * Tile.TILE_HEIGHT,
 						Tile.TILE_WIDTH, Tile.TILE_HEIGHT, null);
 
 			}

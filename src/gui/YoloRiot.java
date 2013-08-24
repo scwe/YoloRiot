@@ -53,7 +53,7 @@ public class YoloRiot extends JFrame implements ActionListener{
         setVisible(true);
         
         gameLoop();
-        Timer t = new Timer(10,this);
+        Timer t = new Timer(TICK,this);
         t.start();
     }
     
@@ -61,6 +61,8 @@ public class YoloRiot extends JFrame implements ActionListener{
    
     		model.tick ();
     		screen.repaint();
+    		key.update();
+  
     }
 
     public static void main(String[] args){
