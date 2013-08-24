@@ -9,8 +9,6 @@ import javax.swing.*;
 
 public class ScreenPanel extends JPanel{
 
-	private YoloKeyboard key;
-	private YoloMouse mouse;
 	private Graphics2D buffer;
 	
 	private MapPanel mapPanel;
@@ -23,7 +21,7 @@ public class ScreenPanel extends JPanel{
         requestFocusInWindow();
         
         mapPanel = new MapPanel(model, map);
-        add(mapPanel);
+        add(mapPanel, BorderLayout.CENTER);
 
         this.model = model;
         this.map = map;
@@ -31,6 +29,7 @@ public class ScreenPanel extends JPanel{
     
     @Override
     public void paintComponent(Graphics g){
+    	
 		Graphics2D g2d = (Graphics2D) g;
 		Image offscreen = createImage(getWidth(), getHeight());
 		buffer = (Graphics2D) offscreen.getGraphics();

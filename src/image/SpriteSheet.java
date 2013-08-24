@@ -88,7 +88,7 @@ public class SpriteSheet {
 	}
 	
 	/**
-	 * The width of the sprtie sheet, i.e. how many sprites there are in the row
+	 * The width of the sprite sheet, i.e. how many sprites there are in the row
 	 * @return
 	 */
 	public int getWidth(){

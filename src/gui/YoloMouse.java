@@ -13,7 +13,6 @@ public class YoloMouse extends MouseAdapter{
     }
 
     public void mouseMoved(MouseEvent m){
-
     }
 
     public void mouseClicked(MouseEvent m){
@@ -24,6 +23,7 @@ public class YoloMouse extends MouseAdapter{
     	int x = m.getX();
     	int y = m.getY();
     	model.shoot(x, y);
+    	model.addTest(x, y);
     }
 
     public void mouseReleased(MouseEvent m){

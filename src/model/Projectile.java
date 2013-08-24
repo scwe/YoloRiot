@@ -3,8 +3,10 @@ package model;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.geom.AffineTransform;
-import java.awt.image.AffineTransformOp;
+import java.awt.RenderingHints;
+import java.awt.image.BufferedImage;
+
+import map.Tile;
 
 public abstract class Projectile extends EntityImpl implements Drawable,
 		Hitboxable {
@@ -39,14 +41,16 @@ public abstract class Projectile extends EntityImpl implements Drawable,
 
 	public void draw(Graphics g) {
 		Graphics2D g2d = (Graphics2D) g;
-		g.setColor(Color.GREEN);
+		BufferedImage sprite = getSprite ();
+		int imgsize = Math.max(sprite.getHeight() * 2, sprite.getWidth() * 2);
+		
+	    BufferedImage dimg = new BufferedImage(imgsize, imgsize, BufferedImage.TYPE_INT_ARGB);
+	    Graphics2D gimg = dimg.createGraphics();
+	    gimg.rotate(angle, imgsize/2, imgsize/2);
+	    gimg.drawImage(getSprite(), imgsize/4, imgsize/4, null);
+	    gimg.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-		AffineTransform tx = AffineTransform.getRotateInstance(angle, location.x, location.y);
-		AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
-		g2d.drawImage(op.filter(getSprite(), null), location.x, location.y,	null);
-
-		//g.fillRect(location.x, location.y, 30, 30);
-		//g.drawImage(getSprite(), location.x, location.y, null);
+	    g2d.drawImage(dimg, null, location.x - imgsize/2, location.y - imgsize/2);
 	}
 
 	@Override
@@ -70,7 +74,7 @@ public abstract class Projectile extends EntityImpl implements Drawable,
 	 * another maths helper.
 	 */
 	protected final void setHitbox(int width, int length) {
-		hitbox = new Hitbox(-1, -1, 1, 1);
+		hitbox = new Hitbox(this, location.x, location.y, 10, 10);
 	}
 
 	public abstract void update();

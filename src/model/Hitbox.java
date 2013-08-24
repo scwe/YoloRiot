@@ -1,7 +1,9 @@
 package model;
 
-import java.awt.*;
-import map.Map;
+import java.awt.Graphics;
+import java.awt.Polygon;
+import java.awt.Rectangle;
+import java.awt.geom.Rectangle2D;
 
 /**
  * hitboxes are centered on the object, so the 'middle' of the object
@@ -10,25 +12,33 @@ import map.Map;
  * @author Tony
  */
 public class Hitbox{
+	public enum Type {RECT, POLY};
+	
+	public final Type hitboxtype;
+	public final Entity owner;
+	
 	private Polygon polygon;
 	private Rectangle rect;
 	
-	public Hitbox (Polygon poly) {
+	public Hitbox (Entity owner, Polygon poly) {
+		this.owner = owner;
 		this.polygon = poly;
+		hitboxtype = Type.POLY;
 	}
 	
-	public Hitbox(Rectangle r){
-		int[] xPoints = {r.x, r.x+ r.width, r.x + r.width, r.x};
-		int[] yPoints = {r.y, r.y, r.y + r.height, r.y + r.height};
-		polygon = new Polygon(xPoints, yPoints, xPoints.length);
+	public Hitbox(Entity owner, Rectangle r){
+		this.owner = owner;
 		this.rect = r;
+		hitboxtype = Type.RECT;
 	}
 	
-	public Hitbox(int x, int y, int width, int height){
-		int[] xPoints = {x, x+ width, x + width, x};
-		int[] yPoints = {y, y, y + height, y + height};
-		polygon = new Polygon(xPoints, yPoints, xPoints.length);
+	public Hitbox(Entity owner, int x, int y, int width, int height){
+		//int[] xPoints = {x, x+ width, x + width, x};
+		//int[] yPoints = {y, y, y + height, y + height};
+		//polygon = new Polygon(xPoints, yPoints, xPoints.length);
+		this.owner = owner;
 		rect = new Rectangle (x, y, width, height);		
+		hitboxtype = Type.RECT;
 	}
 	
 	public Polygon getPoly () {
@@ -39,12 +49,31 @@ public class Hitbox{
 		return rect;
 	}
 	
-	public boolean intersects (Hitbox other) {
-		Rectangle otherR = other.getRect();
-		return rect.intersects(otherR);		
+	public void translate (int x, int y) {
+		if (hitboxtype == Type.POLY) {
+			polygon.translate(x,y);
+		} else {
+			rect.translate(x, y);
+		}
 	}
 	
-	public boolean intersectsOld (Hitbox other) {
+	public boolean intersects (Hitbox other) {
+		if (other.hitboxtype == Type.RECT && hitboxtype == Type.RECT) {
+			boolean ret = rect.intersects(other.rect);
+			return ret;
+		} else if (other.hitboxtype == Type.POLY && hitboxtype == Type.RECT) {
+			boolean ret = other.polygon.intersects((Rectangle2D) rect);
+			return ret;
+		} else if (other.hitboxtype == Type.RECT && hitboxtype == Type.POLY) {
+			boolean ret = polygon.intersects((Rectangle2D) other.rect);
+			return ret;
+		} else {
+			boolean ret = intersectsPoly (other);
+			return ret;
+		}
+	}
+	
+	public boolean intersectsPoly (Hitbox other) {
 		Polygon otherP = other.getPoly ();
 		
 		for (int i=0; i < polygon.xpoints.length - 1; i++) {
@@ -76,11 +105,13 @@ public class Hitbox{
 	}
 	
 	public void moveHitbox(int x, int y){
-		polygon.translate(x, y);
+		if (hitboxtype == Type.POLY) polygon.translate(x, y);
+		else rect.translate(x, y);
 	}
 	
 	
 	public void draw(Graphics g){
-		g.drawPolygon(polygon);
+		if (hitboxtype == Type.RECT) g.drawRect(rect.x, rect.y, rect.width, rect.height); 
+		else g.drawPolygon(polygon);
 	}
 }
