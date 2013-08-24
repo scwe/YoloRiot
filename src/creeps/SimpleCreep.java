@@ -15,10 +15,8 @@ import model.Model;
 import ais.SimpleCreepAI;
 
 public class SimpleCreep extends Creep {
-
 	private final Interaction attack = new SimpleDamage (5);
-	BufferedImage image;
-	
+
 	public SimpleCreep(Location location, Model model) {
 		super(location, model);
 	}
