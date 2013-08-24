@@ -169,4 +169,8 @@ public class Model {
 		structures.add(s);
 	}
 
+	public void addProjectile(Projectile p) {
+		projectiles.add(p);
+	}
+
 }
