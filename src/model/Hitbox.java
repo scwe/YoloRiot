@@ -1,6 +1,6 @@
 package model;
 
-import java.awt.Polygon;
+import java.awt.*;
 
 /**
  * hitboxes are centered on the object, so the 'middle' of the object
@@ -13,6 +13,18 @@ public class Hitbox{
 	
 	public Hitbox (Polygon poly) {
 		this.polygon = poly;
+	}
+	
+	public Hitbox(Rectangle r){
+		int[] xPoints = {r.x, r.x+ r.width, r.x + r.width, r.x};
+		int[] yPoints = {r.y, r.y, r.y + r.height, r.y + r.height};
+		polygon = new Polygon(xPoints, yPoints, xPoints.length);
+	}
+	
+	public Hitbox(int x, int y, int width, int height){
+		int[] xPoints = {x, x+ width, x + width, x};
+		int[] yPoints = {y, y, y + height, y + height};
+		polygon = new Polygon(xPoints, yPoints, xPoints.length);
 	}
 	
 	public Polygon getPoly () {
@@ -48,5 +60,10 @@ public class Hitbox{
 		
 		t = (q − p) × s / (r × s)
 				u = (q − p) × r / (r × s)	*/	
+	}
+	
+	
+	public void draw(Graphics g){
+		
 	}
 }
