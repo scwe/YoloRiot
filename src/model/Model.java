@@ -1,8 +1,6 @@
 package model;
 
-import java.awt.AlphaComposite;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -21,6 +19,7 @@ public class Model {
 	private List<Creep> creeps;
 	private List<Structure> structures;
 	private List<Projectile> projectiles;
+	private Yolostone[] yolostones;
 	
 	private Player player;
 	
@@ -34,6 +33,10 @@ public class Model {
 		creeps = new ArrayList<Creep> ();
 		structures = new ArrayList<Structure> ();
 		projectiles = new ArrayList<Projectile>();
+		yolostones = new Yolostone[Map.MAP_HEIGHT];
+		for (int i=0; i < Map.MAP_HEIGHT; i++) {
+			yolostones[i] = new Yolostone ();
+		}
 	}
 	
 	// update the data 
