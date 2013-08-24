@@ -35,13 +35,17 @@ public class YoloRiot extends JFrame implements ActionListener{
     	setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
     	model = new Model();
     	map = new Map("images/TILESET1.png");
+    	
+    	startScreen = new StartScreen();
+        add(startScreen);
+        startScreen.setVisible(true);
+    	
         screen = new ScreenPanel(model, map);
+        screen.setVisible(false);
         add(screen);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         
-        startScreen = new StartScreen();
-        startScreen.setVisible(true);
-        add(startScreen);
+       
 
         mouse = new YoloMouse();
         key = new YoloKeyboard(model.getPlayer());
@@ -62,14 +66,13 @@ public class YoloRiot extends JFrame implements ActionListener{
     }
     
     public void gameLoop() {
-    		if (startS){
-    			screen.repaint();
-    		}
-    		else{
-	    		model.tick ();
-	    		screen.repaint();
-	    		key.update();
-    		}
+    	if (startS){
+    		startScreen.repaint();
+    	}
+    	model.tick();
+    	key.update();
+    	repaint();
+    	
     }
 
     public static void main(String[] args){
@@ -78,12 +81,14 @@ public class YoloRiot extends JFrame implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent event) {
-		if (event.getSource() == startTimer){
+		if (event.getSource() == startTimer && startS){
+			System.out.println("true");
 			startScreen.setVisible(false);
+			screen.setVisible(true);
 			startS = false;
 			startTimer.stop();
 			t.start();
-			return;
+			revalidate();
 		}
 		gameLoop();
 	}
