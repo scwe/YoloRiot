@@ -1,4 +1,5 @@
 package gui;
+import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -6,10 +7,13 @@ import model.Model;
 
 
 public class YoloMouse extends MouseAdapter{
-	Model model;
+	private Model model;
+	private MapPanel map;
 	
-    public YoloMouse(Model model){
+    public YoloMouse(Model model, MapPanel m){
     	this.model = model;
+    	this.map = m;
+    	
     }
 
     public void mouseMoved(MouseEvent m){
@@ -20,8 +24,13 @@ public class YoloMouse extends MouseAdapter{
     }
 
     public void mousePressed(MouseEvent m){
-    	int x = m.getX();
-    	int y = m.getY();
+    	YoloRiot yolo = (YoloRiot)m.getSource();
+    	
+    	int diffX = map.getLocationOnScreen().x - yolo.getLocationOnScreen().x;
+    	int diffY = map.getLocationOnScreen().y - yolo.getLocationOnScreen().y;
+    	
+    	int x = m.getX() - diffX;
+    	int y = m.getY() - diffY;
     	model.shoot(x, y);
     	model.addTest(x, y);
     }

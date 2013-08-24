@@ -25,6 +25,7 @@ public class YoloRiot extends JFrame implements ActionListener{
     private Map map;
 
 	private ScreenPanel mainScreen;
+	private MapPanel mapPanel;
 	private ItemPanel itemPanel;
 	private StartScreen startScreen;
 	
@@ -49,7 +50,10 @@ public class YoloRiot extends JFrame implements ActionListener{
         startScreen.setVisible(true);
     	
         itemPanel = new ItemPanel();
+        mapPanel = new MapPanel(model, map);
         screen = new ScreenPanel(model, map);
+        screen.add(mapPanel);
+        
         screen.setVisible(false);
         itemPanel.setVisible(false);
         add(itemPanel, BorderLayout.WEST);
@@ -60,7 +64,7 @@ public class YoloRiot extends JFrame implements ActionListener{
         screen.setVisible(false);
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        mouse = new YoloMouse(model);
+        mouse = new YoloMouse(model, mapPanel);
         key = new YoloKeyboard(model.getPlayer());
         sounds = new SoundFactory();
         

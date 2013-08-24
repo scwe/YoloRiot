@@ -15,6 +15,7 @@ public class MapPanel extends JPanel{
 		this.map = m;
 		this.model = model;
 		setFocusable(true);
+		
 	}
 	
 	public void paintComponent(Graphics g){
@@ -28,5 +29,11 @@ public class MapPanel extends JPanel{
 		model.draw(buffer);
 		
 		g2d.drawImage(offscreen, 0, 0, this);
+		
+		Point p = super.getLocationOnScreen();
+		Point a = super.getTopLevelAncestor().getLocationOnScreen();
+		
+		//System.out.println((p.x - a.x)+ " "+(p.y-a.y));
+
 	}
 }
