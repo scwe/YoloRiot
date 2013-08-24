@@ -49,7 +49,7 @@ public abstract class Projectile extends EntityImpl implements Drawable,
 	    gimg.rotate(angle, imgsize/2, imgsize/2);
 	    gimg.drawImage(getSprite(), imgsize/4, imgsize/4, null);
 	    gimg.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-
+	    
 	    g2d.drawImage(dimg, null, location.x - imgsize/2, location.y - imgsize/2);
 	}
 
@@ -57,6 +57,8 @@ public abstract class Projectile extends EntityImpl implements Drawable,
 	public void interact(Interaction i) {
 		// not needed for projectiles, as they only interact with others.
 	}
+	
+	//FIXME hitboxes for projs are small.
 
 	/**
 	 * helper function that calculates and applies unit movement ratios so we
@@ -68,6 +70,8 @@ public abstract class Projectile extends EntityImpl implements Drawable,
 
 		location.x += xunit * magnitude;
 		location.y += yunit * magnitude;
+		
+		hitbox.translate((int)(xunit*magnitude), (int)(yunit*magnitude));
 	}
 
 	/**

@@ -18,6 +18,7 @@ public abstract class EntityImpl implements Entity {
 		location.x += x;
 		location.y += y;
 		hitbox.translate(x, y);
+		if (this instanceof Creep) System.out.println ("CR: " + location.x + " " + location.y);
 	}
 	
 	public abstract void interact(Interaction i);
