@@ -11,6 +11,7 @@ import model.AI;
 import model.Action;
 import model.Creep;
 import model.Entity;
+import model.Hitbox;
 import model.Interaction;
 import model.Location;
 import model.Model;
@@ -52,4 +53,5 @@ public class SimpleCreep extends Creep {
 		g.fillRect(0, 0, 32, 32);
 		return i;
 	}
+
 }

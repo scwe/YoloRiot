@@ -47,5 +47,9 @@ public abstract class Creep extends EntityImpl implements Entity, Hitboxable, Dr
 	public Hitbox getHitbox() {
 		return hitbox;
 	}
+	
+	public void setHitbox(Hitbox h){
+		this.hitbox = h;
+	}
 
 }
