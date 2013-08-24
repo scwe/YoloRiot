@@ -46,14 +46,14 @@ public class YoloMouse extends MouseAdapter {
 
 		int diffX = map.getLocationOnScreen().x - yolo.getLocationOnScreen().x;
 		int diffY = map.getLocationOnScreen().y - yolo.getLocationOnScreen().y;
-
+		
+		
 		mouseX = m.getX() - diffX;
 		mouseY = m.getY() - diffY;
 
 		if (ItemPanel.currentButton == null) {
 			model.playerShoot(mouseX, mouseY);
 		} else {
-			System.out.println(mouseX / Tile.TILE_WIDTH + " " + mouseY / Tile.TILE_HEIGHT);
 
 			int left = (mouseX / Tile.TILE_WIDTH) * Tile.TILE_WIDTH;
 			int top = (mouseY / Tile.TILE_HEIGHT) * Tile.TILE_HEIGHT;
@@ -66,6 +66,7 @@ public class YoloMouse extends MouseAdapter {
 			if(ItemPanel.currentButton.equals("Button.png")){
 				model.addStructure(new Location(left, top), 0);
 				System.out.println("Structure added");
+				System.out.println("added at left: "+left+" "+top+" mxy "+mouseX+" "+mouseY);
 				ItemPanel.currentButton = null;
 			}
 

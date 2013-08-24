@@ -22,7 +22,6 @@ public class RandomCreepAI implements AI {
 		if (ran < randomness){
 
 			double ranDir = Math.random();
-			System.out.println(ranDir);
 			if (ranDir < 0.6){
 				e.move(-10, 0);
 				return;

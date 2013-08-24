@@ -49,16 +49,8 @@ public class MapPanel extends JPanel{
 		model.draw(buffer);
 
 		if (ItemPanel.currentButton != null) {
-			YoloRiot yolo = (YoloRiot) super.getTopLevelAncestor();
-
-			int diffX = getLocationOnScreen().x - yolo.getLocationOnScreen().x;
-			int diffY = getLocationOnScreen().y - yolo.getLocationOnScreen().y;
-
-			int x = YoloMouse.mouseX - diffX;
-			int y = YoloMouse.mouseY - diffY;
-
-			int left = (x / Tile.TILE_WIDTH) * Tile.TILE_WIDTH;
-			int top = (y / Tile.TILE_HEIGHT) * Tile.TILE_HEIGHT;
+			int left = (YoloMouse.mouseX / Tile.TILE_WIDTH) * Tile.TILE_WIDTH;
+			int top = (YoloMouse.mouseY / Tile.TILE_HEIGHT) * Tile.TILE_HEIGHT;
 			
 			buffer.drawImage(new ImageLoader().getImage(ItemPanel.currentButton).getScaledInstance(64, 64, Image.SCALE_FAST), left, top, 64, 64, null);
 			Cursor cursor = Toolkit.getDefaultToolkit().createCustomCursor(new BufferedImage(10, 10, BufferedImage.TYPE_INT_ARGB), new Point(0, 0),
