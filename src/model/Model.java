@@ -38,6 +38,7 @@ public class Model {
 	private int destroyed = 0;
 	
 	public double yolospeed = 1.0;
+	public boolean yolomode = false;
 	
 	public Player player;
 	
@@ -45,7 +46,6 @@ public class Model {
 	private int waveTick = 200;
 	private int tick = 0;
 	private int waveTickSpeed = 20;
-	boolean flag = false;
 	
 	public Model () {
 		model = this;
@@ -156,6 +156,30 @@ public class Model {
 		return intersects;
 	}
 	
+	public Set<Structure> inersectsStructures (Hitbox hitbox) {
+		Set<Structure> intersects = new HashSet<Structure> ();
+		
+		for (Structure s : structures) {
+			if (hitbox.intersects(s.getHitbox())) intersects.add(s);
+		}
+
+		return intersects;		
+	}
+	
+	public Set<Creep> intersectsCreeps (Hitbox hitbox) {
+		Set<Creep> intersects = new HashSet<Creep> ();
+		
+		for (Creep c : creeps) {
+			if (hitbox.intersects(c.getHitbox())) intersects.add(c);
+		}
+
+		return intersects;		
+	}
+	
+	public boolean intersectsPlayer (Hitbox hitbox) {
+		return player.hitbox.intersects(hitbox);
+	}
+	
 	private void playerShoot (int endX, int endY) {
 		int startX = -1;
 		int startY = -1;
@@ -218,6 +242,12 @@ public class Model {
 
 	public void mousePressed(boolean mousePressed) {
 		this.mousePressed = mousePressed;
+	}
+
+	public void FULLYOL0() {
+		yolomode  = true;
+		yolospeed = 0.5;
+		player.speed *= 2;
 	}
 
 }

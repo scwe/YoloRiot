@@ -14,7 +14,7 @@ public class Player extends EntityImpl {
 	public static final int CHARACTER_HEIGHT = 64;
 	private SpriteSheet sprites;
 	public Direction curDirection;
-	private int speed;
+	public int speed;
 	
 	public Ability curAbility;
 	
@@ -26,8 +26,7 @@ public class Player extends EntityImpl {
 	}
 	
 	public void changeAbility (int change) {
-		System.out.println (change % Model.abilities.length);
-	//	curAbility = abilities[change % abilities.length];
+		curAbility = Model.abilities[change % Model.abilities.length];
 		// TODO
 	}
     
