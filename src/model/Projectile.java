@@ -5,12 +5,13 @@ public abstract class Projectile extends EntityImpl implements Drawable, Hitboxa
 
 	protected Location location;
 	protected Hitbox hitbox;
+	protected Model model;
 	
-	public Projectile (Location location) {
+	public Projectile (Location location, Model model) {
 		this.location = location;
+		this.model = model;
 	}
-	
-	
+		
 	@Override
 	public Hitbox getHitbox() {
 		return hitbox;
@@ -26,11 +27,8 @@ public abstract class Projectile extends EntityImpl implements Drawable, Hitboxa
 
 	@Override
 	public void interact(Interaction i) {
-		
+		// not needed for projectiles, as they only interact with others.
 	}
-
-	@Override
-	public void update() {
-		
-	}
+	
+	public abstract void update ();
 }

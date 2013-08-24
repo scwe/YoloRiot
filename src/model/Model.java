@@ -2,13 +2,13 @@ package model;
 
 import java.awt.Graphics;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import creeps.SimpleCreep;
 
 public class Model {
-	
-	private static final int LANES = 10;
 	
 	private List<Creep> creeps;
 	private List<Structure> structures;
@@ -58,12 +58,25 @@ public class Model {
 		player.draw(g);
 	}
 	
+	public Set<Entity> intersects(Hitbox hitbox) {
+		Set<Entity> intersects = new HashSet<Entity> ();
+		
+		for (Creep c : creeps) {
+			if (c.getHitbox().intersects(hitbox)) intersects.add(c);
+		}
+		
+		for (Structure s : structures) {
+			if (s.getHitbox().intersects(hitbox)) intersects.add(s);
+		}
+		
+		return intersects;		
+	}
+	
 	public Player getPlayer(){
 		return player;
 	}
 	
 	public void setPlayer(Player p){
 		this.player = p;
-	}
-	
+	}	
 }
