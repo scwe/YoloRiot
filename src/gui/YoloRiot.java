@@ -47,6 +47,7 @@ public class YoloRiot extends JFrame{
     	while(true){
     		model.tick ();
     		screen.repaint();
+    		key.update();
     	}
     }
 
