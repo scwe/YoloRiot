@@ -76,7 +76,8 @@ public class Model {
 	}
 	
 	public void draw (Graphics g) {
-
+		
+		
 		for (Creep c : creeps) {
 			c.draw (g);	
 		}
@@ -152,8 +153,10 @@ public class Model {
 		}
 	}	
 	
+
 	private boolean outOfBounds (Entity e) {
 		Location l = e.getLocation();
 		return !(l.x >= 0 && l.y >= 0 && l.x <= FIELD_WIDTH && l.y <= FIELD_HEIGHT);
 	}
+
 }
