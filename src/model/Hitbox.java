@@ -25,6 +25,7 @@ public class Hitbox{
 		int[] xPoints = {x, x+ width, x + width, x};
 		int[] yPoints = {y, y, y + height, y + height};
 		polygon = new Polygon(xPoints, yPoints, xPoints.length);
+		
 	}
 	
 	public Polygon getPoly () {
@@ -62,8 +63,13 @@ public class Hitbox{
 		return t >= 0 && u >= 0 && t <= 1 && u <= 1;
 	}
 	
+	public void moveHitbox(int x, int y){
+		polygon.translate(x, y);
+	}
+	
 	
 	public void draw(Graphics g){
-		
+		g.setColor(Color.red);
+		g.drawPolygon(polygon);
 	}
 }
