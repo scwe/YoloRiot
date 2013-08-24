@@ -50,8 +50,10 @@ public class Model {
 		for (int i=0; i < projectiles.size(); i++) {
 			p = projectiles.get(i);
 			p.update();
-			if (outOfBounds(p)) killEntity(p);
-			i--;
+			if (outOfBounds(p)) {
+				killEntity(p);
+				i--;
+			}
 		}
 		
 		makeCreeps ();
@@ -134,7 +136,7 @@ public class Model {
 	
 	private boolean outOfBounds (Entity e) {
 		Location l = e.getLocation();
-		System.out.println (FIELD_HEIGHT + " " + FIELD_WIDTH);
-		return !(l.x >= 0 && l.y >= 0 && l.x <= FIELD_WIDTH && l.y >= FIELD_HEIGHT);
+		System.out.println( !(l.x >= 0 && l.y >= 0 && l.x <= FIELD_WIDTH && l.y <= FIELD_HEIGHT));
+		return !(l.x >= 0 && l.y >= 0 && l.x <= FIELD_WIDTH && l.y <= FIELD_HEIGHT);
 	}
 }
