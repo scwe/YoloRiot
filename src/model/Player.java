@@ -43,7 +43,6 @@ public class Player extends EntityImpl {
 	}
 	
 	public void reduceHealth (int amount) {
-		health --;
 	}
 	
 	public void changeAbility (int change) {
