@@ -43,7 +43,7 @@ public class SimpleCreepAI implements CreepAI {
 			if (ranDir < 0.6) {
 				c.move(-10, 0);
 				return;
-			} else if (ranDir < 0.7) {
+			} else if (ranDir < 0.8) {
 				c.move(0, -10);
 				return;
 			} else {

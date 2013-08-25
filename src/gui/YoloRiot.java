@@ -42,7 +42,7 @@ public class YoloRiot extends JFrame implements ActionListener {
 	private YoloKeyboard key;
 
 	private boolean startS = true, mainS = false;
-	public boolean lost = false;
+	public static boolean lost = false;
 	public boolean won = false;
 
 	Timer t = new Timer(1000, this);
@@ -58,8 +58,11 @@ public class YoloRiot extends JFrame implements ActionListener {
 		winScreen = new WinScreen ();
 		loseScreen = new LoseScreen ();
 		add(startScreen);
+		add(loseScreen);
+		add(winScreen);
 		startScreen.setVisible(true);
-		
+		loseScreen.setVisible(false);
+		winScreen.setVisible(false);
 		
 		GridBagConstraints gc = new GridBagConstraints();
 		
@@ -126,8 +129,6 @@ public class YoloRiot extends JFrame implements ActionListener {
 		map = new Map(startLevel);
 		setFocusable(true);
 		setVisible(true);
-
-		
 	}
 	
 	private void startNewGame () {
@@ -142,8 +143,11 @@ public class YoloRiot extends JFrame implements ActionListener {
 		if (startS) {
 			startScreen.repaint();
 		} else if (lost) {
+			loseScreen.setVisible(true);
 			loseScreen.repaint();
+			//startTimer.stop();
 		} else if (won) {
+			loseScreen.setVisible(true);
 			winScreen.repaint ();
 			startTimer.stop();
 			try {
@@ -155,6 +159,7 @@ public class YoloRiot extends JFrame implements ActionListener {
 			model.tick();
 			key.update();
 			mapPanel.repaint();
+			itemPanel.repaint();
 		}
 	}
 
