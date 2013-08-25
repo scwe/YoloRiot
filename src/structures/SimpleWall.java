@@ -1,6 +1,7 @@
 package structures;
 
 import image.ImageLoader;
+import image.SpriteSheet;
 
 import java.awt.image.BufferedImage;
 
@@ -9,6 +10,8 @@ import structureAIs.NullAI;
 import structureAIs.StructureAI;
 
 public class SimpleWall extends Structure {
+	
+	private SpriteSheet image;
 	
 	public SimpleWall(Location l) {
 		super(l);
@@ -22,15 +25,16 @@ public class SimpleWall extends Structure {
 
 	@Override
 	public BufferedImage getSprite() {
-		if (image == null){
-			ImageLoader il = new ImageLoader();
-			image = il.getImage("wip yolo crystal.png");
-		
-		}
-		return image;
+		return image.getImage();
 	}
 
 	@Override
 	public void fire() {
+	}
+
+	@Override
+	public void initialiseSpriteSheet() {
+		image = new SpriteSheet(0,0,64, 128, "64_wall.png");
+		
 	}
 }

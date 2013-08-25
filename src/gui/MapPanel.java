@@ -51,10 +51,11 @@ public class MapPanel extends JPanel{
 		
 		
 		model.draw(buffer);
-		/*
-		for(Light l: lights){
-			l.draw(offscreen);
-		}*/
+
+		//for(Light l: lights){
+	//		l.draw(offscreen);
+	//	}
+
 
 		if (ItemPanel.currentButton != null) {
 			int left = (YoloMouse.mouseX / Tile.TILE_WIDTH) * Tile.TILE_WIDTH;

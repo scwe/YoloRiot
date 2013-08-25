@@ -71,6 +71,7 @@ public class YoloMouse extends MouseAdapter {
 				return;
 			}
 			
+			System.out.println("Structure added");
 			model.addStructure(new Location(left, top), ItemPanel.getButtonNum());
 			ItemPanel.currentButton = null;
 

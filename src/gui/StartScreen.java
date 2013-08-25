@@ -15,12 +15,10 @@ public class StartScreen extends JComponent implements SplashScreen{
 	public StartScreen(){
 		imLoad = new ImageLoader();
 		mainIm = imLoad.getImage("StartScreen.png");
-		if (mainIm == null)System.out.println("NULL");
 	}
 
 	@Override
     public void paintComponent(Graphics g){
-		g.drawImage(mainIm,  0, 0, null);
 	}
 
 	public void draw(Graphics g) {

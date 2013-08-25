@@ -1,19 +1,22 @@
 package structures;
 
 import image.ImageLoader;
+import image.SpriteSheet;
 
 import java.awt.image.BufferedImage;
 
 import model.Location;
 import model.Model;
-import projectiles.Projectile;
 import projectiles.PiercingProjectile;
+import projectiles.Projectile;
 import structureAIs.SimpleCannonAI;
 import structureAIs.StructureAI;
 
 public class SimpleCannon extends Structure {
 
 	Location direction;
+	
+	private SpriteSheet image;
 	
 	public SimpleCannon(Location location) {
 		super(location);
@@ -29,17 +32,20 @@ public class SimpleCannon extends Structure {
 
 	@Override
 	public BufferedImage getSprite() {
-		if (image == null){
-			ImageLoader il = new ImageLoader();
-			image = il.getImage("64_turret.png");
-		
-		}
-		return image;
+		return image.getImage();
 	}
 
 	@Override
 	public void fire() {
 		Projectile p = new PiercingProjectile(new Location(location.x, location.y), direction);
 		Model.model.addProjectile (p);
+	}
+
+	@Override
+	public void initialiseSpriteSheet() {
+		System.out.println("INitialiased sprite sheet for simple cannon");
+		image = new SpriteSheet(0, 0, 64, 64, "NEW_TURRET_ANIMATION.png");
+		image.setX(1);
+		
 	}
 }

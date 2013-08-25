@@ -54,9 +54,6 @@ public class AoEProjectile extends Projectile {
 		BufferedImage bf = new BufferedImage (Tile.TILE_WIDTH*2, Tile.TILE_HEIGHT*2, BufferedImage.TYPE_INT_ARGB);
 		Graphics2D g2d = (Graphics2D) bf.createGraphics();
 		g2d.fillRect(0, 0, Tile.TILE_WIDTH*2, Tile.TILE_HEIGHT*2);
-		if(image == null){
-			System.out.println("shit son, we up shit creek");
-		}
 		return image.getImage(0, 0, 128, 128);
 	}
 

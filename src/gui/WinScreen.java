@@ -14,7 +14,6 @@ public class WinScreen extends JPanel {
 	public WinScreen(){
 		imLoad = new ImageLoader();
 		mainIm = imLoad.getImage("StartScreen.png");
-		if (mainIm == null)System.out.println("NULL");
 	}
 
 	@Override

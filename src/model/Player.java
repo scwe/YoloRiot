@@ -83,7 +83,6 @@ public class Player extends EntityImpl {
 	}
 
 	public void move(Direction d){
-		//System.out.println("Moving the character "+d);
 		if(d == Direction.NORTH){
 			move(0, -speed);
 			curDirection = Direction.NORTH;
