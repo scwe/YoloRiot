@@ -46,12 +46,12 @@ public class SimpleCreep extends Creep {
 			walk[2] = spriteSheet.getImage(3);
 			walk[3] = spriteSheet.getImage(0);
 			attackingImage = walk[0];
-			
+			return walk[0];
 		}
-		else if (this.state == CreepState.ATTACKING)
+		else if (this.state == CreepState.ATTACKING){
 			return attackingImage;
+		}
 		else{
-			
 			if(tickCount < 50){
 				return walk[0];
 			}
@@ -61,19 +61,13 @@ public class SimpleCreep extends Creep {
 				return walk[2];
 			}
 			else if (tickCount < 200){
-				
 				return walk[3];
 			}
 			if (tickCount > 200){
 				tickCount = 0;
-				
 			}
-				
 			return walk[0];
 		}
-		return null;
-		
-
 	}
 
 

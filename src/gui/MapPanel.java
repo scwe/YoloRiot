@@ -17,11 +17,11 @@ import model.Model;
 public class MapPanel extends JPanel{
 	private Map map;
 	private Model model;
-	
+	private double tickCount = 0;
 	private ArrayList<Light> lights;
 	
 	public MapPanel(Model model, Map m){
-		setPreferredSize(new Dimension(Tile.TILE_WIDTH*Map.MAP_WIDTH, Tile.TILE_HEIGHT* Map.MAP_HEIGHT));
+		//setPreferredSize(new Dimension(Tile.TILE_WIDTH*Map.MAP_WIDTH, Tile.TILE_HEIGHT* Map.MAP_HEIGHT));
 		lights = new ArrayList<Light>();
 		//lights.add(new Light(new Location(300,300), "spotlight2.png", 150,150));
 		this.map = m;
@@ -44,6 +44,19 @@ public class MapPanel extends JPanel{
 		buffer.setColor(Color.black);
 		buffer.fillRect(0, 0, getWidth(), getHeight());
 		
+		
+		/*if(tickCount > 150){
+			tickCount = 0;
+			
+		}
+		else if (tickCount > 100){
+			buffer.rotate(0.1, this.getWidth()/2,this.getHeight()/2);
+		}
+		else if (tickCount > 50){
+			buffer.rotate(-0.1);
+		}
+		*/
+		tickCount++;
 		map.draw(buffer);
 		
 		

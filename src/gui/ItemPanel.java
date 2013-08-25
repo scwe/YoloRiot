@@ -1,5 +1,6 @@
 package gui;
 
+import image.ImageLoader;
 import image.SpriteSheet;
 
 import java.awt.BasicStroke;
@@ -21,20 +22,26 @@ public class ItemPanel extends JPanel{
 	
 	private static final int BUTTON_WIDTH = 64;
 	private static final int BUTTON_HEIGHT = 64;
-	
+	private BufferedImage background;
 	public static String currentButton;
 	
 	public ItemPanel(){
 		super.setBorder(new StrokeBorder(new BasicStroke(4, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND)));
 		setFocusable(false);
-		setPreferredSize(new Dimension(120, YoloRiot.SCREEN_HEIGHT));
-		add(newButton("NEW_TURRET_ANIMATION.png", 32, 0, 64, 64));
+		this.setLayout(null);
+		//setPreferredSize(new Dimension(120, YoloRiot.SCREEN_HEIGHT));
+		JButton but = newButton("NEW_TURRET_ANIMATION.png", 0, 0, 64, 64);
+		but.setBounds(60,270, 100, 100);
+		add(but);
 		add(newButton("Wall, side top bot.png", 0, 0, 32, 32));
+		ImageLoader il = new ImageLoader();
+		background = il.getImage("NEW_GUI.png");
 	}
 	
 	public void paintComponent(Graphics g){
 		g.setColor(Color.white);
 		g.fillRect(0,0,getWidth(), getHeight());
+		g.drawImage(background,0,0,this.getWidth(),this.getHeight(),null);
 	}
 	
 	public JButton newButton(String imageFile, int x, int y, int width, int height){

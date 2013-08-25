@@ -1,19 +1,18 @@
 package gui;
 
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.Timer;
 
 import map.LevelData;
 import map.LevelData.LevelName;
-
-import javax.swing.*;
-
-import java.awt.BorderLayout;
-import java.awt.event.*;
-
 import map.Map;
 import model.Model;
 
@@ -27,6 +26,7 @@ public class YoloRiot extends JFrame implements ActionListener {
 	private Model model;
 	private Map map;
 
+	private JPanel yoloPanel = new JPanel();
 	private ScreenPanel mainScreen;
 	private MapPanel mapPanel;
 	private ItemPanel itemPanel;
@@ -44,6 +44,8 @@ public class YoloRiot extends JFrame implements ActionListener {
 	Timer startTimer;
 
 	public YoloRiot() {
+		this.setPreferredSize(new Dimension(1200,1000));
+		this.setMinimumSize(new Dimension(1200,1000));
 		setTitle("Yolo Riot");
 		setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
 		model = new Model();
@@ -53,16 +55,45 @@ public class YoloRiot extends JFrame implements ActionListener {
 		startScreen = new StartScreen();
 		add(startScreen);
 		startScreen.setVisible(true);
+		
+		
+		
+		GridBagConstraints gc = new GridBagConstraints();
+		
+		gc.anchor = GridBagConstraints.WEST;
+		gc.fill = GridBagConstraints.NONE;
 
+		yoloPanel = new JPanel(new GridBagLayout());
+		
 		itemPanel = new ItemPanel();
+		itemPanel.setPreferredSize(new Dimension(260,815));
+		itemPanel.setMinimumSize(new Dimension(260,815));
+		
+		itemPanel.setVisible(false);
+	
+		gc.gridx = 0;
+		gc.gridy = 0;
+		gc.anchor = GridBagConstraints.NORTH;
+		yoloPanel.add(itemPanel);
+
+		
 		mapPanel = new MapPanel(model, map);
-		screen = new ScreenPanel(model, map, mapPanel);
-		//screen.add(mapPanel);
+		mapPanel.setPreferredSize(new Dimension(1000,700));
+		mapPanel.setMinimumSize(new Dimension(1000,700));
+		
+		screen = new ScreenPanel(model, map,mapPanel);
+		screen.setPreferredSize(new Dimension(1000,200));
+		screen.setMinimumSize(new Dimension(1000,200));
 		screen.setOpaque(false);
 		screen.setVisible(false);
-		itemPanel.setVisible(false);
-		add(itemPanel, BorderLayout.WEST);
-		add(screen, BorderLayout.EAST);
+		
+		gc.gridx = 1;
+		gc.gridy = 0;
+		yoloPanel.add(screen, gc);
+		gc.insets = new Insets(120,0,0,0);
+		
+		yoloPanel.add(mapPanel, gc);
+		
 
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 
@@ -78,13 +109,14 @@ public class YoloRiot extends JFrame implements ActionListener {
 		addMouseWheelListener(mouse);
 		addKeyListener(key);
 
-		//pack ();
 		setFocusable(true);
 		setVisible(true);
 
 		t = new Timer(TICK, this);
 		startTimer = new Timer(1000, this);
 		startTimer.start();
+		add(yoloPanel);
+		screen.repaint();
 	}
 
 	public void gameLoop() {
@@ -93,7 +125,7 @@ public class YoloRiot extends JFrame implements ActionListener {
 		} else {
 			model.tick();
 			key.update();
-			screen.repaint();
+			mapPanel.repaint();
 		}
 
 	}

@@ -2,15 +2,12 @@ package gui;
 
 import image.ImageLoader;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.Image;
-import java.awt.Insets;
-import java.awt.RenderingHints;
 
 import javax.swing.JPanel;
 
@@ -30,19 +27,15 @@ public class ScreenPanel extends JPanel {
 	public ScreenPanel(Model model, Map map, MapPanel m) {
 		setFocusable(true);
 		requestFocusInWindow();
-		
-		super.setLayout(new GridBagLayout());
+		this.setLayout(new BorderLayout());
 		
 
 		this.model = model;
 		this.m = m;
 		this.map = map;
+
 		
-		GridBagConstraints gc = new GridBagConstraints();
-		
-		gc.insets = new Insets(0, 0, 0, 0);
-		
-		add(this.m, gc);
+		//add(this.m, gc);
 	}
 
 	@Override
