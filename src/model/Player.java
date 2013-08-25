@@ -27,7 +27,7 @@ public class Player extends EntityImpl {
 	
 	public Player(){
 
-		super (new Location(50, 50));
+		super (new Location(128, 128));
 		speed = 8;
 		tickspeed = 10;
 		curAbility = Model.abilities[0];
