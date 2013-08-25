@@ -1,5 +1,6 @@
 package creeps;
 
+import gui.SoundFactory;
 import image.ImageLoader;
 import image.SpriteSheet;
 import interactions.Interaction;
@@ -39,6 +40,7 @@ public class SimpleCreep extends Creep {
 		i.apply(this);
 		if (health <= 0) {
 			Model.model.killEntity(this);
+			SoundFactory.playSound("audio/die.wav");
 		}
 	}
 

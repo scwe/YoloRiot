@@ -1,6 +1,7 @@
 
 package projectiles;
 
+import gui.SoundFactory;
 import image.ImageLoader;
 import image.SpriteSheet;
 import interactions.SimpleDamage;
@@ -18,6 +19,9 @@ public class WeakProjectile extends Projectile {
 		super (location, direction);
 		attack = new SimpleDamage (2);
 		tickspeed = 1;
+		
+		SoundFactory.playSound("audio/phasers3.wav");
+
 	}
 
 	@Override

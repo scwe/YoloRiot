@@ -1,5 +1,6 @@
 package projectiles;
 
+import gui.SoundFactory;
 import image.SpriteSheet;
 import interactions.SimpleDamage;
 
@@ -23,6 +24,7 @@ public class AoEProjectile extends Projectile {
 		
 		attack = new SimpleDamage (3);
 		tickspeed = 30;
+		SoundFactory.playSound("audio/lightning.wav");
 	}
 
 	@Override
