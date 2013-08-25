@@ -1,7 +1,6 @@
 package model;
 
 import gui.YoloMouse;
-import interactions.Interaction;
 
 import java.awt.Graphics;
 import java.util.ArrayList;
@@ -12,6 +11,7 @@ import java.util.Set;
 import map.Map;
 import map.Tile;
 import playerAbilities.Ability;
+import playerAbilities.InstantAoE;
 import playerAbilities.SimpleShoot;
 import projectiles.Projectile;
 import structures.SimpleCannon;
@@ -32,7 +32,7 @@ public class Model {
 	public List<Structure> structures;
 	public List<Projectile> projectiles;
 	
-	public static Ability[] abilities = {new SimpleShoot ()};
+	public static Ability[] abilities = {new SimpleShoot (), new InstantAoE ()};
 	private boolean mousePressed = false;
 	
 	private Yolostone[] yolostones;
@@ -93,7 +93,6 @@ public class Model {
 			a.cooldown();		
 		
 		if (mousePressed) {
-			System.out.println ("(" + YoloMouse.mouseX + ", " + YoloMouse.mouseY + ")");
 			playerShoot(YoloMouse.mouseX, YoloMouse.mouseY);
 		}
 		

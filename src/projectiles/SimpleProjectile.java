@@ -21,7 +21,6 @@ public class SimpleProjectile extends Projectile {
 	public SimpleProjectile(Location location, Location direction) {
 		super (location, direction);
 		attack = new SimpleDamage (10);
-		//System.out.println (angle);
 		tickspeed = 1;
 	}
 

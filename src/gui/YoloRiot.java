@@ -62,7 +62,7 @@ public class YoloRiot extends JFrame implements ActionListener {
 		screen.setVisible(false);
 		itemPanel.setVisible(false);
 		add(itemPanel, BorderLayout.WEST);
-		add(screen);
+		add(screen, BorderLayout.EAST);
 
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 
@@ -78,6 +78,7 @@ public class YoloRiot extends JFrame implements ActionListener {
 		addMouseWheelListener(mouse);
 		addKeyListener(key);
 
+		//pack ();
 		setFocusable(true);
 		setVisible(true);
 

@@ -40,7 +40,7 @@ public class ScreenPanel extends JPanel {
 		
 		GridBagConstraints gc = new GridBagConstraints();
 		
-		gc.insets = new Insets(50, 0, 0, 0);
+		gc.insets = new Insets(128, 0, 0, 0);
 		
 		add(this.m, gc);
 	}

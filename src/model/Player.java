@@ -17,17 +17,22 @@ public class Player extends EntityImpl {
 	public int speed;
 	
 	public Ability curAbility;
+	public int curAbilityIndex;
 	
 	public Player(){
 		super (new Location(50, 50));
 		speed = 4;
 		curAbility = Model.abilities[0];
+		curAbilityIndex = 0;
 		//sprites = new SpriteSheet(0, 0, CHARACTER_WIDTH, CHARACTER_HEIGHT, "character.png");  TODO, uncomment when we have a playe sprite
 	}
 	
 	public void changeAbility (int change) {
-		curAbility = Model.abilities[change % Model.abilities.length];
-		// TODO
+		curAbilityIndex = (curAbilityIndex + change) % Model.abilities.length;
+		if (curAbilityIndex < 0) {
+			curAbilityIndex += Model.abilities.length;
+		}
+		curAbility = Model.abilities[curAbilityIndex];
 	}
     
     public void draw(Graphics g){

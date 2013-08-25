@@ -25,7 +25,6 @@ public class ItemPanel extends JPanel{
 	public static String currentButton;
 	
 	public ItemPanel(){
-		
 		super.setBorder(new StrokeBorder(new BasicStroke(4, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND)));
 		setFocusable(false);
 		setPreferredSize(new Dimension(120, YoloRiot.SCREEN_HEIGHT));
@@ -50,6 +49,7 @@ public class ItemPanel extends JPanel{
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+				System.out.println(getWidth()+" "+ getHeight());
 				JButton b = (JButton)(arg0.getSource());
 				currentButton = b.getName();
 			}
