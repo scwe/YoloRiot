@@ -39,6 +39,12 @@ public abstract class Structure extends EntityImpl {
 		}
 	}
 
+	// FIXME
+	@Override
+	public void initialiseSpriteSheet() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	@Override
 	public void draw(Graphics g) {

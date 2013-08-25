@@ -16,5 +16,6 @@ public interface Entity {
 	
 	public Location getLocation();
 	public Image getSprite ();
+	public void initialiseSpriteSheet ();
 	public Hitbox getHitbox();
 }

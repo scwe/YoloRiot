@@ -50,7 +50,7 @@ public class SimpleCreep extends Creep {
 			walk[2] = spriteSheet.getImage(3);
 			walk[3] = spriteSheet.getImage(0);
 			attackingImage = walk[0];
-			
+			return walk[0];
 		}
 		else if (this.state == CreepState.ATTACKING)
 			return attackingImage;
@@ -75,8 +75,6 @@ public class SimpleCreep extends Creep {
 				
 			return walk[0];
 		}
-		return null;
-		
 
 	}
 }
