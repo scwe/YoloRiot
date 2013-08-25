@@ -6,9 +6,11 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.Image;
+import java.awt.Insets;
 import java.awt.RenderingHints;
-import java.io.IOException;
 
 import javax.swing.JPanel;
 
@@ -28,11 +30,19 @@ public class ScreenPanel extends JPanel {
 	public ScreenPanel(Model model, Map map, MapPanel m) {
 		setFocusable(true);
 		requestFocusInWindow();
+		
+		super.setLayout(new GridBagLayout());
+		
 
 		this.model = model;
 		this.m = m;
 		this.map = map;
-
+		
+		GridBagConstraints gc = new GridBagConstraints();
+		
+		gc.insets = new Insets(50, 0, 0, 0);
+		
+		add(this.m, gc);
 	}
 
 	@Override

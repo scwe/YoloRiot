@@ -57,7 +57,7 @@ public class YoloRiot extends JFrame implements ActionListener {
 		itemPanel = new ItemPanel();
 		mapPanel = new MapPanel(model, map);
 		screen = new ScreenPanel(model, map, mapPanel);
-		screen.add(mapPanel);
+		//screen.add(mapPanel);
 		screen.setOpaque(false);
 		screen.setVisible(false);
 		itemPanel.setVisible(false);

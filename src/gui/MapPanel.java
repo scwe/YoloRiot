@@ -30,7 +30,7 @@ public class MapPanel extends JPanel{
 	public MapPanel(Model model, Map m){
 		setPreferredSize(new Dimension(Tile.TILE_WIDTH*Map.MAP_WIDTH, Tile.TILE_HEIGHT* Map.MAP_HEIGHT));
 		lights = new ArrayList<Light>();
-		lights.add(new Light(new Location(300,300), "spotlight2.png", 150,150));
+		//lights.add(new Light(new Location(300,300), "spotlight2.png", 150,150));
 		this.map = m;
 		this.model = model;
 		setFocusable(true);
