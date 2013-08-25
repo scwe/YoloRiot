@@ -27,7 +27,7 @@ public class Player extends EntityImpl {
 	
 	public Player(){
 
-		super (new Location(50, 50));
+		super (new Location(128, 128));
 		speed = 8;
 		tickspeed = 10;
 		curAbility = Model.abilities[0];
@@ -83,6 +83,7 @@ public class Player extends EntityImpl {
 	}
 
 	public void move(Direction d){
+		System.out.println("Moving the character "+d);
 		if(d == Direction.NORTH){
 			move(0, -speed);
 			curDirection = Direction.NORTH;

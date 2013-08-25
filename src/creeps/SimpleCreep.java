@@ -34,7 +34,10 @@ public class SimpleCreep extends Creep {
 
 	@Override
 	public void interact(Interaction i) {
-		Model.model.killEntity(this);
+		i.apply(this);
+		if (health <= 0) {
+			Model.model.killEntity(this);
+		}
 	}
 
 	@Override
@@ -77,4 +80,13 @@ public class SimpleCreep extends Creep {
 		}
 
 	}
+
+	@Override
+	public void initialiseSpriteSheet() {
+		System.out.println("Created the sprite sheet for the creep");
+		spriteSheet = new SpriteSheet(0, 0, Tile.TILE_WIDTH, Tile.TILE_HEIGHT,"64_creep_1.png");
+		
+	}
+	
+	
 }
