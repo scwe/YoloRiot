@@ -20,7 +20,12 @@ public class Player extends EntityImpl {
 	public int speed;
 	public SpriteSheet spriteSheet;
 	public int tickCount;
-	private BufferedImage[] walk;
+	private BufferedImage[] northWalk;
+	private BufferedImage[] eastWalk;
+	private BufferedImage[] westWalk;
+	private BufferedImage[] southWalk;
+	private int baseTick = 10;
+	
 	
 	public static final int MAX_HEALTH = 5;
 	
@@ -50,37 +55,72 @@ public class Player extends EntityImpl {
 	}
     
     public void draw(Graphics g){
-    	g.drawImage(getSprite(), location.x, location.y,  64, getSprite().getHeight(), null);
+    	g.drawImage(getSprite(), location.x, location.y,  64, 64, null);
     }
     
     @Override
     public BufferedImage getSprite(){
 
     	tickCount+=4;
-    	if (walk == null || attackingImage == null){
-    		walk = new BufferedImage[4];
-    		spriteSheet = new SpriteSheet(0, 0, Tile.TILE_WIDTH, Tile.TILE_HEIGHT,"MAIN_character2.png");
-    		walk[0] = spriteSheet.getImage(0);
-    		walk[1] = spriteSheet.getImage(1);
-    		walk[2] = spriteSheet.getImage(2);
-    		walk[3] = spriteSheet.getImage(3);
-    		attackingImage = walk[0];
+    	if (northWalk == null){
+    		northWalk = new BufferedImage[4];
+    		spriteSheet = new SpriteSheet(0, 0, Tile.TILE_WIDTH/2, Tile.TILE_HEIGHT/2,"prog_walk_up.png");
+    		northWalk[0] = spriteSheet.getImage(0);
+    		northWalk[1] = spriteSheet.getImage(1);
+    		northWalk[2] = spriteSheet.getImage(2);
+    		northWalk[3] = spriteSheet.getImage(3);
+    		
+    		eastWalk = new BufferedImage[4];
+    		spriteSheet = new SpriteSheet(0, 0, Tile.TILE_WIDTH/2, Tile.TILE_HEIGHT/2,"prog_walk_right.png");
+    		eastWalk[0] = spriteSheet.getImage(0);
+    		eastWalk[1] = spriteSheet.getImage(1);
+    		eastWalk[2] = spriteSheet.getImage(2);
+    		eastWalk[3] = spriteSheet.getImage(3);
+    		
+    		westWalk = new BufferedImage[4];
+    		spriteSheet = new SpriteSheet(0, 0, Tile.TILE_WIDTH/2, Tile.TILE_HEIGHT/2,"prog_walk_left.png");
+    		westWalk[0] = spriteSheet.getImage(0);
+    		westWalk[1] = spriteSheet.getImage(1);
+    		westWalk[2] = spriteSheet.getImage(2);
+    		westWalk[3] = spriteSheet.getImage(3);
+    		
+    		southWalk = new BufferedImage[4];
+    		spriteSheet = new SpriteSheet(0, 0, Tile.TILE_WIDTH/2, Tile.TILE_HEIGHT/2,"prog_walk_down.png");
+    		southWalk[0] = spriteSheet.getImage(0);
+    		southWalk[1] = spriteSheet.getImage(1);
+    		southWalk[2] = spriteSheet.getImage(2);
+    		southWalk[3] = spriteSheet.getImage(3);
+    		return eastWalk[0];
     	}
+    	
     	else{
+    		
+    		int spriteVal = 0;
+        	if (tickCount > baseTick ){
+        		spriteVal = 0;
+    		}
+        	else if (tickCount > 2*baseTick)
+        		spriteVal = 1;
+        	else if (tickCount > 3*baseTick)
+        		spriteVal =2;
+        	else{
+        		spriteVal = 3;
+        	}
 	    	
 	    	if(curDirection == Direction.NORTH){
-	    		return walk[2];
+	    		return northWalk[spriteVal];
 	    	}
-	    	if(curDirection == Direction.EAST){
-	    		return walk[1];
+	    	else if(curDirection == Direction.EAST){
+	    		return eastWalk[spriteVal];
 	    	}
-	    	if(curDirection == Direction.WEST){
-	    		return walk[3];
+	    	else if(curDirection == Direction.WEST){
+	    		return westWalk[spriteVal];
 	    	}
-	    	return walk[0];
+	    	else {
+	    		return southWalk[0];
+	    	}
     	}
-    	return walk[0];
-    	
+
     }
 
 	@Override
