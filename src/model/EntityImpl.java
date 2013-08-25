@@ -35,11 +35,6 @@ public abstract class EntityImpl implements Entity {
 		initialiseSpriteSheet();
 		this.location = location;
 		hitbox = makeHitbox();
-		
-		
-		Image i = getSprite ();
-		width = i.getWidth(null);
-		height = i.getHeight(null);
 	}
 	
 	/**
