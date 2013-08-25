@@ -1,5 +1,6 @@
 package creeps;
 
+import gui.SoundFactory;
 import image.ImageLoader;
 import image.SpriteSheet;
 import interactions.Interaction;
@@ -39,6 +40,7 @@ public class SimpleCreep extends Creep {
 		i.apply(this);
 		if (health <= 0) {
 			Model.model.killEntity(this);
+			SoundFactory.playSound("audio/die.wav");
 		}
 	}
 
@@ -69,7 +71,6 @@ public class SimpleCreep extends Creep {
 			return walk[0];
 		}
 		else if (this.state.equals(CreepState.ATTACKING)){
-			System.out.println("in attacking state");
 			tickCount+=1;
 			if(tickCount < 5){
 				return attacking[0];

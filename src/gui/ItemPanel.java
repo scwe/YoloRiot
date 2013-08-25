@@ -36,14 +36,14 @@ public class ItemPanel extends JPanel implements MouseListener {
 	HashMap<String,BufferedImage> numbers = new HashMap<String,BufferedImage>();
 
 	
-	public static final int BUTTON1X = 66;   //FUYCK yeah
-	public static final int BUTTON1Y = 427;
-	public static final int BUTTON2X = 129;
-	public static final int BUTTON2Y = 427;
+	public static final int BUTTON1X = 60;   //FUYCK yeah
+	public static final int BUTTON1Y = 367;
+	public static final int BUTTON2X = 115;
+	public static final int BUTTON2Y = 367;
 	public static final int BUTTON3X = 66;
-	public static final int BUTTON3Y = 486;
-	public static final int BUTTON4X = 129;
-	public static final int BUTTON4Y = 486;
+	public static final int BUTTON3Y = 417;
+	public static final int BUTTON4X = 115;
+	public static final int BUTTON4Y = 420;
 	
 	public static final int BUTTONWIDTH = 64;
 	public static final int BUTTONHEIGHT = 64;
@@ -61,6 +61,10 @@ public class ItemPanel extends JPanel implements MouseListener {
 	public static final int POWERWIDTH = 32;
 	public static final int POWERHEIGHT = 32;	
 	
+	public static final int YOLOWIDTH = 100;
+	public static final int YOLOHEIGHT = 64;
+	public static final int YOLOX = 60;
+	public static final int YOLOY = 521;
 	public BufferedImage[] numbersA = new BufferedImage[10];
 	
 	public ItemPanel(Model m){
@@ -97,7 +101,6 @@ public class ItemPanel extends JPanel implements MouseListener {
 		}
 		
 		int lives = Model.model.player.health;
-		System.out.println (lives);
 		for (int i=0; i < lives; i++) {
 			g.drawImage(heart, LIFE1X + i*16, LIFE1Y, 16, 16, null);	
 		}
@@ -150,24 +153,27 @@ public class ItemPanel extends JPanel implements MouseListener {
 		int x = arg0.getX();
 		int y = arg0.getY();
 		
-		if (insideButton(x, y, BUTTON1X, BUTTON1Y)) {
+		if (insideButton(x, y, BUTTON1X, BUTTON1Y, BUTTONWIDTH, BUTTONHEIGHT)) {
 			System.out.println("Button 1 pressed");
 			currentButton = "NEW_TURRET_ANIMATION.png";
-		} else if (insideButton(x, y, BUTTON2X, BUTTON2Y)) {
+		} else if (insideButton(x, y, BUTTON2X, BUTTON2Y, BUTTONWIDTH, BUTTONHEIGHT)) {
 			
 			System.out.println("Button 2 pressed");
-		} else if (insideButton(x, y, BUTTON3X, BUTTON3Y)) {
+		} else if (insideButton(x, y, BUTTON3X, BUTTON3Y, BUTTONWIDTH, BUTTONHEIGHT)) {
 			System.out.println("Button 3 pressed");
 			currentButton = "Wall, side top bot.png";
 			
-		} else if (insideButton(x, y, BUTTON4X, BUTTON4Y)) {
+		} else if (insideButton(x, y, BUTTON4X, BUTTON4Y, BUTTONWIDTH, BUTTONHEIGHT)) {
 			System.out.println("Button 4 pressed");
 			
+		}else if(insideButton(x, y, YOLOX, YOLOY, YOLOWIDTH, YOLOHEIGHT)){
+			System.out.println("Yolo button");
+			Model.model.FULLYOL0();
 		}
 	}
 	
-	private boolean insideButton (int x, int y, int buttonx, int buttony) {
-		return (x > buttonx && x < buttonx + BUTTONWIDTH && y > buttony && y < buttony+BUTTONHEIGHT);
+	private boolean insideButton (int x, int y, int buttonx, int buttony, int width, int height) {
+		return (x > buttonx && x < buttonx + width && y > buttony && y < buttony+height);
 	}
 
 	@Override

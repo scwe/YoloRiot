@@ -39,7 +39,6 @@ public class SpriteSheet {
 		if(storedMove.containsKey(x)){
 			return storedMove.get(x);
 		}
-		
 		BufferedImage im =  image.getSubimage(x, y, width, height);
 		storedMove.put(x,im);
 		return im;

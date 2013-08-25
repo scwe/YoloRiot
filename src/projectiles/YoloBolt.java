@@ -8,9 +8,12 @@ import model.Location;
 
 public class YoloBolt extends Projectile {
 	
+	private Color randColor;
+	
 	public YoloBolt(Location start, Location direction) {
 		super(start, direction);
 		tickspeed = 1;
+		this.randColor = new Color((int)(255*Math.random()), (int)(255*Math.random()), (int)(255*Math.random()));
 	}
 
 	@Override
@@ -20,10 +23,10 @@ public class YoloBolt extends Projectile {
 
 	@Override
 	public BufferedImage getSprite() {
-		BufferedImage bf = new BufferedImage (32, 32, BufferedImage.TYPE_INT_ARGB);
+		BufferedImage bf = new BufferedImage (32, 64, BufferedImage.TYPE_INT_ARGB);
 		Graphics2D g2d = (Graphics2D) bf.createGraphics();
-		g2d.setColor(new Color((int)(255*Math.random()), (int)(255*Math.random()), (int)(255*Math.random())));
-		g2d.fillRect(0, 15, 32, 3);
+		g2d.setColor(randColor);
+		g2d.fillRect(0, 15, 64, 4);
 		return bf;
 	}
 
@@ -33,7 +36,7 @@ public class YoloBolt extends Projectile {
 		
 		if (ticks == tickspeed) {
 			ticks = 0;
-			unitMove(20);
+			unitMove(30);
 		}
 	}
 }

@@ -32,6 +32,7 @@ public class SimpleCannon extends Structure {
 
 	@Override
 	public BufferedImage getSprite() {
+		BufferedImage i = image.getImage(32,0,64,64);
 		return image.getImage(32, 0, 64, 64);
 	}
 

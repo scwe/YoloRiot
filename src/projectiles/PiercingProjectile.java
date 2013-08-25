@@ -1,5 +1,6 @@
 package projectiles;
 
+import gui.SoundFactory;
 import image.ImageLoader;
 import image.SpriteSheet;
 import interactions.SimpleDamage;
@@ -22,6 +23,7 @@ public class PiercingProjectile extends Projectile {
 		super (location, direction);
 		attack = new SimpleDamage (10);
 		tickspeed = 1;
+		SoundFactory.playSound("audio/phasers3.wav");
 	}
 	
 	@Override
