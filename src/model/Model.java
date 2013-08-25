@@ -41,7 +41,7 @@ public class Model {
 	
 	private int dropcount = 0;
 	private int nextDrop;
-	public int powerupcount = 0;
+	public static int powerupcount = 0;
 	
 	public static Model model;
 	
@@ -280,10 +280,8 @@ public class Model {
 			creeps.remove(e);
 			if (yolomode) yoloWaveLeft--;
 			else { // random chance of getting a yolo power
-				if (dropcount >= nextDrop) {
-					int x = (int) (Math.random() * Map.MAP_WIDTH * Tile.TILE_WIDTH);
-					int y = (int) (Math.random() * Map.MAP_HEIGHT * Tile.TILE_HEIGHT);
-					curPowerUp = new PowerUp (new Location(x, y));
+				if (dropcount >= nextDrop && powerupcount <= 3) {
+					curPowerUp = new PowerUp (new Location(e.getLocation().x, e.getLocation().y));
 					dropcount = 0;
 					nextDrop = DROP_AT_THIS + (int)(Math.random()*DROP_AT_THIS/4);
 				}

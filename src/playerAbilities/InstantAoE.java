@@ -9,7 +9,7 @@ public class InstantAoE extends Ability {
 	
 	public InstantAoE () {
 		maxCooldown = 50;
-		yoloMaxCooldown = 10;
+		yoloMaxCooldown = (4 - Model.model.powerupcount) * 5;
 	}
 	
 	@Override

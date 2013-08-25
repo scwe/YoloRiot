@@ -9,7 +9,7 @@ public class WeakFastFire extends Ability {
 	
 	public WeakFastFire () {
 		maxCooldown = 20;
-		yoloMaxCooldown = 10;
+		yoloMaxCooldown = (4 - Model.model.powerupcount) * 5;
 	}
 	
 	@Override

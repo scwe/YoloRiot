@@ -4,7 +4,7 @@ import model.Model;
 
 public abstract class Ability {	
 	protected int maxCooldown = 50;
-	protected int yoloMaxCooldown = 5;
+	protected int yoloMaxCooldown = (4 - Model.model.powerupcount) * 5;
 	
 	protected int cooldown = maxCooldown;
 	
