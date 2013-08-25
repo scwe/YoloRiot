@@ -22,7 +22,7 @@ public abstract class EntityImpl implements Entity {
 	protected BufferedImage image;
 	protected BufferedImage attackingImage;
 	
-	protected int tickspeed = 100; // number of ticks to get before update
+	protected int tickspeed = 40; // number of ticks to get before update
 	protected int ticks = 0;
 
 	protected int health;

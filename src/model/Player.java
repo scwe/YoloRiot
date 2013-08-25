@@ -26,8 +26,10 @@ public class Player extends EntityImpl {
 	public int curAbilityIndex;
 	
 	public Player(){
-		super (new Location(64, 64));
-		speed = 6;
+
+		super (new Location(50, 50));
+		speed = 8;
+		tickspeed = 10;
 		curAbility = Model.abilities[0];
 		curAbilityIndex = 0;
 		//sprites = new SpriteSheet(0, 0, CHARACTER_WIDTH, CHARACTER_HEIGHT, "character.png");  TODO, uncomment when we have a playe sprite

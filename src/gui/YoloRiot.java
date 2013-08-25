@@ -1,19 +1,19 @@
 package gui;
 
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.Timer;
 
 import map.LevelData;
 import map.LevelData.LevelName;
-
-import javax.swing.*;
-
-import java.awt.BorderLayout;
-import java.awt.event.*;
-
 import map.Map;
 import model.Model;
 
@@ -21,12 +21,13 @@ public class YoloRiot extends JFrame implements ActionListener {
 	public static final int SCREEN_WIDTH = 1200;
 	public static final int SCREEN_HEIGHT = 720;
 
-	private static final int TICK = 5;
+	private static final int TICK = 10;
 
 	private ScreenPanel screen;
 	private Model model;
 	private Map map;
 
+	private JPanel yoloPanel = new JPanel();
 	private ScreenPanel mainScreen;
 	private MapPanel mapPanel;
 	private ItemPanel itemPanel;
@@ -48,6 +49,8 @@ public class YoloRiot extends JFrame implements ActionListener {
 	Timer startTimer;
 
 	public YoloRiot() {
+		this.setPreferredSize(new Dimension(1200,1000));
+		this.setMinimumSize(new Dimension(1200,1000));
 		setTitle("Yolo Riot");
 		setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
 
@@ -58,11 +61,36 @@ public class YoloRiot extends JFrame implements ActionListener {
 		startScreen.setVisible(true);
 
 		
+		
+		
+		GridBagConstraints gc = new GridBagConstraints();
+		
+		gc.anchor = GridBagConstraints.WEST;
+		gc.fill = GridBagConstraints.NONE;
+
+		yoloPanel = new JPanel(new GridBagLayout());
+		
+	
+	
+
+		
+		screen = new ScreenPanel(model, map,mapPanel);
+		screen.setPreferredSize(new Dimension(1000,200));
+		screen.setMinimumSize(new Dimension(1000,200));
+		screen.setOpaque(false);
+		screen.setVisible(false);
+		
+		
+		
+
+
+		
 		makeNewGame ();
 		
 		screen.setOpaque(false);
 		screen.setVisible(false);
 		itemPanel.setVisible(false);
+
 
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 
@@ -75,6 +103,32 @@ public class YoloRiot extends JFrame implements ActionListener {
 		setVisible(true);
 		
 		startNewGame ();
+		
+		itemPanel = new ItemPanel(model);
+		itemPanel.setPreferredSize(new Dimension(260,815));
+		itemPanel.setMinimumSize(new Dimension(260,815));
+		
+		itemPanel.setVisible(false);
+		gc.gridx = 0;
+		gc.gridy = 0;
+		gc.anchor = GridBagConstraints.NORTH;
+		yoloPanel.add(itemPanel);
+		
+		
+		gc.gridx = 1;
+		gc.gridy = 0;
+		yoloPanel.add(screen, gc);
+		gc.insets = new Insets(120,0,0,0);
+		
+		
+		mapPanel = new MapPanel(model, map);
+		mapPanel.setPreferredSize(new Dimension(1000,700));
+		mapPanel.setMinimumSize(new Dimension(1000,700));
+		yoloPanel.add(mapPanel, gc);
+		
+
+		
+	
 	}
 	
 	private void makeNewGame () {
@@ -97,15 +151,19 @@ public class YoloRiot extends JFrame implements ActionListener {
 		addMouseMotionListener(mouse);
 		addMouseWheelListener(mouse);
 		addKeyListener(key);
+
+		setFocusable(true);
+		setVisible(true);
+
 		
-		add(itemPanel, BorderLayout.WEST);
-		add(screen, BorderLayout.EAST);	
 	}
 	
 	private void startNewGame () {
 		t = new Timer(TICK, this);
 		startTimer = new Timer(1000, this);
 		startTimer.start();
+		add(yoloPanel);
+		screen.repaint();
 	}
 
 	public void gameLoop() {
@@ -124,7 +182,7 @@ public class YoloRiot extends JFrame implements ActionListener {
 		} else {
 			model.tick();
 			key.update();
-			screen.repaint();
+			mapPanel.repaint();
 		}
 	}
 
