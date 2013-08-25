@@ -23,7 +23,6 @@ public class SpriteSheet {
 		image = imLoad.getImage(filename);
 	
 	}
-	
 
 	
 	public BufferedImage getImage(){

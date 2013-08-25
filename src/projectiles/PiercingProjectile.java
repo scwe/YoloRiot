@@ -49,8 +49,6 @@ public class PiercingProjectile extends Projectile {
 			}
 		}
 	}
-
-	@Override
 	public BufferedImage getSprite () {
 		
 		return image.getImage();
