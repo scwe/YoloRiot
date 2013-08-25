@@ -17,6 +17,8 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.border.StrokeBorder;
 
+import model.Model;
+
 @SuppressWarnings("serial")
 public class ItemPanel extends JPanel{
 	
@@ -24,18 +26,37 @@ public class ItemPanel extends JPanel{
 	private static final int BUTTON_HEIGHT = 64;
 	private BufferedImage background;
 	public static String currentButton;
+	private Model m;
+
 	
-	public ItemPanel(){
+	public ItemPanel(Model m){
+		this.m = m;
 		super.setBorder(new StrokeBorder(new BasicStroke(4, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND)));
 		setFocusable(false);
 		this.setLayout(null);
 		//setPreferredSize(new Dimension(120, YoloRiot.SCREEN_HEIGHT));
-		JButton but = newButton("NEW_TURRET_ANIMATION.png", 0, 0, 64, 64);
+		JButton but = newStructureButton("NEW_TURRET_ANIMATION.png", 0, 0, 64, 64);
 		but.setBounds(60,270, 100, 100);
 		add(but);
-		add(newButton("Wall, side top bot.png", 0, 0, 32, 32));
 		ImageLoader il = new ImageLoader();
 		background = il.getImage("NEW_GUI.png");
+		setPreferredSize(new Dimension(120, YoloRiot.SCREEN_HEIGHT));
+		add(newStructureButton("NEW_TURRET_ANIMATION.png", 32, 0, 64, 64));
+		add(newStructureButton("Wall, side top bot.png", 0, 0, 32, 32));
+		
+		JButton yoloButton = new JButton(new ImageIcon(new ImageLoader().getImage("64_yolo_button.png")));
+		yoloButton.setFocusable(false);
+		yoloButton.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				ItemPanel.this.m.FULLYOL0();
+			}
+			
+		});
+		yoloButton.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
+		yoloButton.setBackground(Color.white);
+		add(yoloButton);
+
 	}
 	
 	public void paintComponent(Graphics g){
@@ -44,12 +65,14 @@ public class ItemPanel extends JPanel{
 		g.drawImage(background,0,0,this.getWidth(),this.getHeight(),null);
 	}
 	
-	public JButton newButton(String imageFile, int x, int y, int width, int height){
+	public JButton newStructureButton(String imageFile, int x, int y, int width, int height){
 		SpriteSheet image = new SpriteSheet(0, 0, 64,64, imageFile);
+		
 		
 		JButton button = new JButton(new ImageIcon(image.getImage(x, y, width, height).getScaledInstance(64, 64, Image.SCALE_FAST)));
 		button.setFocusable(false);
 		button.setName(imageFile);
+		button.setBackground(Color.white);
 		button.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
 		
 		button.addActionListener(new ActionListener(){
@@ -65,6 +88,8 @@ public class ItemPanel extends JPanel{
 		
 		return button;
 	}
+	
+	
 	
 	public static int getButtonNum(){
 		if(currentButton.equals("NEW_TURRET_ANIMATION.png")){

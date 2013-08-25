@@ -34,7 +34,6 @@ public class HomingCreepAI implements CreepAI {
 			minDistance = distance;
 			dir = 3;
 		}
-		System.out.println("MOVING");
 		switch (dir){
 			
 			case 0:

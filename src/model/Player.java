@@ -26,6 +26,7 @@ public class Player extends EntityImpl {
 	public int curAbilityIndex;
 	
 	public Player(){
+
 		super (new Location(50, 50));
 		speed = 8;
 		tickspeed = 10;
@@ -118,5 +119,12 @@ public class Player extends EntityImpl {
 	@Override
 	protected Hitbox makeHitbox() {
 		return new Hitbox(location.x, location.y, CHARACTER_WIDTH, CHARACTER_HEIGHT);
+	}
+
+	// FIXME
+	@Override
+	public void initialiseSpriteSheet() {
+		// TODO Auto-generated method stub
+		
 	}
 }

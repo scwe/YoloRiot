@@ -33,23 +33,33 @@ public abstract class Creep extends EntityImpl {
     protected abstract CreepAI makeAI ();
 	public abstract void interact(Interaction i);
 	public abstract BufferedImage getSprite ();
+	public abstract int getYoloTickSpeed ();
 	
 	@Override
 	public void update() {
 		ticks ++;
 		
-		if (ticks >= (int) (tickspeed * Model.model.yolospeed)) {
+		int ticknum = Model.model.yolomode ? getYoloTickSpeed() : tickspeed;
+		
+		if (ticks >= ticknum) {
 			AI.next (this);
 			ticks = 0;
 		}
 	}
 
 	public Hitbox makeHitbox() {
-		return new Hitbox(location.x,  location.y, Tile.TILE_WIDTH, Tile.TILE_HEIGHT);
+		return new Hitbox(location.x,  location.y, width, height);
 	}
 	
 	public void setState(CreepState s){
 		this.state = s;
+	}
+	
+	// FIXME
+	@Override
+	public void initialiseSpriteSheet() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	public enum CreepState{

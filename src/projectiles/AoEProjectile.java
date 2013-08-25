@@ -1,5 +1,6 @@
 package projectiles;
 
+import image.SpriteSheet;
 import interactions.SimpleDamage;
 
 import java.awt.Graphics2D;
@@ -14,10 +15,16 @@ import model.Model;
 public class AoEProjectile extends Projectile {
 	private static final int UPDATES_TO_DEAD = 10;
 	private int deadCounter = 0;
+	private SpriteSheet image;
+	
+	{
+		image = new SpriteSheet(0,0,128,128, "storm_aoe.png");
+	}
 		
 	public AoEProjectile(Location start, Location direction) {
 		super(start, direction);
 		moveStep = 0;
+		
 		attack = new SimpleDamage (3);
 		tickspeed = 30;
 	}
@@ -51,6 +58,9 @@ public class AoEProjectile extends Projectile {
 		BufferedImage bf = new BufferedImage (Tile.TILE_WIDTH*2, Tile.TILE_HEIGHT*2, BufferedImage.TYPE_INT_ARGB);
 		Graphics2D g2d = (Graphics2D) bf.createGraphics();
 		g2d.fillRect(0, 0, Tile.TILE_WIDTH*2, Tile.TILE_HEIGHT*2);
-		return bf;
+		if(image == null){
+			System.out.println("shit son, we up shit creek");
+		}
+		return image.getImage(0, 0, 128, 128);
 	}
 }

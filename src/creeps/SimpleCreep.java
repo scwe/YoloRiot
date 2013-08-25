@@ -21,8 +21,10 @@ public class SimpleCreep extends Creep {
 	
 	public SimpleCreep(Location location) {
 		super(location);
+
 		tickspeed = 20;
-		
+
+
 	}
 
 	@Override
@@ -35,6 +37,11 @@ public class SimpleCreep extends Creep {
 		Model.model.killEntity(this);
 	}
 
+	@Override
+	public int getYoloTickSpeed() {
+		return (int)(tickspeed * 0.2  * Model.model.yolospeed);
+	}
+	
 	@Override
 	public BufferedImage getSprite() {
 		tickCount+=5;
@@ -68,7 +75,6 @@ public class SimpleCreep extends Creep {
 			}
 			return walk[0];
 		}
+
 	}
-
-
 }

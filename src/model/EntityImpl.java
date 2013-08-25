@@ -3,13 +3,21 @@ package model;
 import interactions.Interaction;
 
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 
+import map.Map;
 import map.Tile;
 
 public abstract class EntityImpl implements Entity {	
+	protected static final int RIGHT = Map.MAP_WIDTH * Tile.TILE_WIDTH;
+	protected static final int BOTTOM = Map.MAP_HEIGHT * Tile.TILE_HEIGHT;
+	
 	protected Hitbox hitbox;
 	protected Location location;
+	
+	protected int width;
+	protected int height;
 	
 	protected BufferedImage image;
 	protected BufferedImage attackingImage;
@@ -26,6 +34,11 @@ public abstract class EntityImpl implements Entity {
 	public EntityImpl (Location location) {
 		this.location = location;
 		hitbox = makeHitbox();
+		
+		initialiseSpriteSheet();
+		Image i = getSprite ();
+		width = i.getWidth(null);
+		height = i.getHeight(null);
 	}
 	
 	/**
@@ -44,6 +57,11 @@ public abstract class EntityImpl implements Entity {
 	}
 	
 	public void move (int x, int y) {
+		int toX = location.x + x;
+		int toY = location.y + y;
+		System.out.println(toX  < Tile.TILE_WIDTH || toY < 0 || toX + width + 128 >= RIGHT || toY + height >= BOTTOM);
+		if (toX  < Tile.TILE_WIDTH || toY < 0 || toX + width + 128 >= RIGHT || toY + height >= BOTTOM) return;		
+		
 		location.x += x;
 		location.y += y;
 		hitbox.move(x, y);

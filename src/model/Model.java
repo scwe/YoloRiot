@@ -1,6 +1,7 @@
 package model;
 
 import gui.YoloMouse;
+import gui.YoloRiot;
 
 import java.awt.Graphics;
 import java.util.ArrayList;
@@ -10,7 +11,10 @@ import java.util.Set;
 
 import map.Map;
 import map.Tile;
-import playerAbilities.*;
+import playerAbilities.Ability;
+import playerAbilities.InstantAoE;
+import playerAbilities.PiercingShot;
+import playerAbilities.WeakFastFire;
 import projectiles.Projectile;
 import structures.SimpleCannon;
 import structures.SimpleWall;
@@ -24,6 +28,12 @@ import creeps.SimpleCreep;
 public class Model {
 	private static final int FIELD_WIDTH = Map.MAP_WIDTH*Tile.TILE_WIDTH;
 	private static final int FIELD_HEIGHT = Map.MAP_HEIGHT*Tile.TILE_HEIGHT;
+	private static final int YOLO_TOTAL_SIZE = 300;
+	private static final int YOLO_TICKWAVE_SIZE = 40;
+	private static final int MONEY_INC = 10;
+	
+	private static final int CANNON_COST = 500;
+	private static final int WALL_COST = 100;
 	
 	public static Model model;
 	
@@ -34,10 +44,13 @@ public class Model {
 	public static Ability[] abilities = {new PiercingShot (), new InstantAoE (), new WeakFastFire()};
 	private boolean mousePressed = false;
 	
+	public int money = 200;
+	
 	private Yolostone yolostone;
 	
 	public double yolospeed = 1.0;
 	public boolean yolomode = false;
+	public int yoloWaveLeft = YOLO_TOTAL_SIZE;
 	
 	public Player player;
 	private int homingTick = 0;
@@ -46,9 +59,11 @@ public class Model {
 	private int tick = 0;
 	private int waveTickSpeed = 20;
 	
+	private YoloRiot riot;
 	public List<Pt> pts = new ArrayList<Pt> ();
 	
-	public Model () {
+	public Model (YoloRiot parent) {
+		this.riot = parent;
 		model = this;
 		player = new Player();
 		creeps = new ArrayList<Creep> ();
@@ -86,10 +101,16 @@ public class Model {
 		
 		
 		if (yolostone.health == 0) {
-			// FIXME Lose.
+			riot.lost = true;
 		}
+		
+		if (yoloWaveLeft <= 0 && creeps.size() == 0) {
+			riot.won = true;
+		}
+		
 		if (tick > waveTick){
-			makeCreeps ();
+			if (yolomode) yoloCreeps (); 
+			else makeCreeps ();
 			tick = 0;
 		}
 		tick++;
@@ -122,7 +143,6 @@ public class Model {
 		
 		int end = Map.MAP_WIDTH * Tile.TILE_WIDTH;
 		int laneHeight = Tile.TILE_HEIGHT;
-		int numLanes = Map.MAP_HEIGHT;
 		homingTick++;
 		for (int i = 0 ; i < creepNo; i++){
 			int laneLoc = (int)((Math.random())*10);
@@ -130,12 +150,26 @@ public class Model {
 			creeps.add(new RandomCreep (new Location(end, laneLoc+1 * laneHeight), 8));
 			if(homingTick > 1){
 				creeps.add(new HomingCreep (new Location(end, laneLoc * laneHeight)));
-				System.out.println("HOMING");
 				homingTick = 0;
 			}
 		}
 	}
 	
+	private void yoloCreeps () {		
+		int end = Map.MAP_WIDTH * Tile.TILE_WIDTH;
+		int laneHeight = Tile.TILE_HEIGHT;
+		if (yoloWaveLeft < 0) return;
+		homingTick++;
+		for (int i = 0 ; i < YOLO_TICKWAVE_SIZE; i++){
+			int laneLoc = (int)((Math.random())*10);
+			creeps.add(new SimpleCreep (new Location(end, laneLoc * laneHeight)));
+			creeps.add(new RandomCreep (new Location(end, laneLoc+1 * laneHeight), 8));
+			if(homingTick > 1){
+				creeps.add(new HomingCreep (new Location(end, laneLoc * laneHeight)));
+				homingTick = 0;
+			}
+		}
+	}
 	
 	public Set<Entity> intersects(Hitbox hitbox) {
 		Set<Entity> intersects = new HashSet<Entity> ();
@@ -160,6 +194,8 @@ public class Model {
 			if (hitbox.intersects(s.getHitbox())) intersects.add(s);
 		}
 
+		if (hitbox.intersects(yolostone.getHitbox())) intersects.add(yolostone);
+		
 		return intersects;		
 	}
 	
@@ -184,6 +220,8 @@ public class Model {
 		for (Structure s : structures) {
 			if (hitbox.intersects(s.getHitbox())) intersects.add(s);
 		}
+		
+		if (hitbox.intersects(yolostone.getHitbox())) intersects.add(yolostone);
 		
 		if (player.getHitbox().intersects(hitbox)) intersects.add(player);
 		
@@ -222,6 +260,8 @@ public class Model {
 	public void killEntity(Entity e) {
 		if (e instanceof Creep) {
 			creeps.remove(e);
+			if (yolomode) yoloWaveLeft--;
+			money += MONEY_INC;
 		} else if (e instanceof Structure) {
 			structures.remove(e);
 		} else if (e instanceof Projectile) {
@@ -230,10 +270,12 @@ public class Model {
 	}	
 	
 	public void addStructure (Location l, int buttonnum) {
-		if (buttonnum == 0) {
+		if (buttonnum == 0 && money > CANNON_COST) {
 			structures.add(new SimpleCannon(l));
-		} else if (buttonnum == 1) {
+			money -= CANNON_COST;
+		} else if (buttonnum == 1 && money > WALL_COST) {
 			structures.add(new SimpleWall(l));
+			money -= WALL_COST;
 		}
 	}
 
@@ -258,5 +300,6 @@ public class Model {
 		yolomode  = true;
 		yolospeed = 0.5;
 		player.speed *= 2;
+		waveTick = 50;
 	}
 }
