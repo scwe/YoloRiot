@@ -24,7 +24,7 @@ public class MapPanel extends JPanel{
 	
 	public MapPanel(Model model, Map m){
 		lights = new ArrayList<Light>();
-		//lights.add(new Light(new Location(300,300), "spotlight2.png", 150,150));
+		//lights.add(new Light(new Location(300,300), "light_color.png", 300,300));
 		this.map = m;
 		this.model = model;
 		setFocusable(true);
@@ -51,10 +51,10 @@ public class MapPanel extends JPanel{
 		
 		
 		model.draw(buffer);
-		
+		/*
 		for(Light l: lights){
 			l.draw(offscreen);
-		}
+		}*/
 
 		if (ItemPanel.currentButton != null) {
 			int left = (YoloMouse.mouseX / Tile.TILE_WIDTH) * Tile.TILE_WIDTH;
