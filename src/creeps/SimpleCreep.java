@@ -52,7 +52,7 @@ public class SimpleCreep extends Creep {
 	@Override
 	public BufferedImage getSprite() {
 		
-		if (this.state.equals(CreepState.MOVING) && (walk == null || attackingImage == null)){
+		if (this.state.equals(CreepState.MOVING) && (walk== null )){
 			walk = new BufferedImage[4];
 			spriteSheet = new SpriteSheet(0, 0, Tile.TILE_WIDTH, Tile.TILE_HEIGHT,"64_creep_1.png");
 			walk[0] = spriteSheet.getImage(1);
@@ -89,7 +89,7 @@ public class SimpleCreep extends Creep {
 			return attacking[0];
 		
 		}
-		else{
+	
 			tickCount+=5;
 			if(tickCount < 50){
 				return walk[0];
@@ -106,7 +106,7 @@ public class SimpleCreep extends Creep {
 				tickCount = 0;
 			}
 			return walk[0];
-		}
+		
 
 	}
 
