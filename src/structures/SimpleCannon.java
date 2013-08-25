@@ -7,7 +7,7 @@ import java.awt.image.BufferedImage;
 import model.Location;
 import model.Model;
 import projectiles.Projectile;
-import projectiles.SimpleProjectile;
+import projectiles.PiercingProjectile;
 import structureAIs.SimpleCannonAI;
 import structureAIs.StructureAI;
 
@@ -37,7 +37,7 @@ public class SimpleCannon extends Structure {
 
 	@Override
 	public void fire() {
-		Projectile p = new SimpleProjectile(new Location(location.x, location.y), direction);
+		Projectile p = new PiercingProjectile(new Location(location.x, location.y), direction);
 		Model.model.addProjectile (p);
 	}
 }

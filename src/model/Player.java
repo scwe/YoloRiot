@@ -7,7 +7,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
 import playerAbilities.Ability;
-import playerAbilities.SimpleShoot;
+import playerAbilities.PiercingShot;
 
 public class Player extends EntityImpl {
 	public static final int CHARACTER_WIDTH = 40;

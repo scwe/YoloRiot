@@ -12,7 +12,8 @@ import map.Map;
 import map.Tile;
 import playerAbilities.Ability;
 import playerAbilities.InstantAoE;
-import playerAbilities.SimpleShoot;
+import playerAbilities.PiercingShot;
+import playerAbilities.WeakFastFire;
 import projectiles.Projectile;
 import structures.SimpleCannon;
 import structures.SimpleWall;
@@ -32,7 +33,7 @@ public class Model {
 	public List<Structure> structures;
 	public List<Projectile> projectiles;
 	
-	public static Ability[] abilities = {new SimpleShoot (), new InstantAoE ()};
+	public static Ability[] abilities = {new PiercingShot (), new InstantAoE (), new WeakFastFire()};
 	private boolean mousePressed = false;
 	
 	private Yolostone[] yolostones;
