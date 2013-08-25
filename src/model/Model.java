@@ -16,6 +16,7 @@ import playerAbilities.InstantAoE;
 import playerAbilities.PiercingShot;
 import playerAbilities.WeakFastFire;
 import projectiles.Projectile;
+import structures.PowerUp;
 import structures.SimpleCannon;
 import structures.SimpleWall;
 import structures.Structure;
@@ -40,12 +41,14 @@ public class Model {
 	
 	private int dropcount = 0;
 	private int nextDrop;
+	public int powerupcount = 0;
 	
 	public static Model model;
 	
 	public List<Creep> creeps;
 	public List<Structure> structures;
 	public List<Projectile> projectiles;
+	public PowerUp curPowerUp;
 	
 	public static Ability[] abilities = {new PiercingShot (), new InstantAoE (), new WeakFastFire()};
 	private boolean mousePressed = false;
@@ -119,7 +122,14 @@ public class Model {
 			else makeCreeps ();
 			tick = 0;
 		}
+		
 		tick++;
+		
+		if (curPowerUp != null && player.getHitbox().intersects(curPowerUp.hitbox)) {
+			curPowerUp = null;
+			powerupcount++;
+		}
+		
 		player.update();
 	}
 	
@@ -140,6 +150,8 @@ public class Model {
 		
 		for (Pt pt : pts)
 			pt.draw(g);
+		
+		if (curPowerUp != null) curPowerUp.draw(g);
 		
 		player.draw(g);
 	}
@@ -269,7 +281,10 @@ public class Model {
 			if (yolomode) yoloWaveLeft--;
 			else { // random chance of getting a yolo power
 				if (dropcount >= nextDrop) {
-					
+					int x = (int) (Math.random() * Map.MAP_WIDTH * Tile.TILE_WIDTH);
+					int y = (int) (Math.random() * Map.MAP_HEIGHT * Tile.TILE_HEIGHT);
+					curPowerUp = new PowerUp (new Location(x, y));
+					dropcount = 0;
 					nextDrop = DROP_AT_THIS + (int)(Math.random()*DROP_AT_THIS/4);
 				}
 			}
