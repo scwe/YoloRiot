@@ -68,12 +68,8 @@ public class YoloRiot extends JFrame implements ActionListener {
 
 		yoloPanel = new JPanel(new GridBagLayout());
 		
-	
 		makeNewGame ();
-		
 
-
-		
 		screen = new ScreenPanel(model, map,mapPanel);
 		screen.setPreferredSize(new Dimension(1000,200));
 		screen.setMinimumSize(new Dimension(1000,200));
@@ -91,8 +87,8 @@ public class YoloRiot extends JFrame implements ActionListener {
 		startNewGame ();
 		
 		itemPanel = new ItemPanel(model);
-		itemPanel.setPreferredSize(new Dimension(260,815));
-		itemPanel.setMinimumSize(new Dimension(260,815));
+		itemPanel.setPreferredSize(new Dimension(256,728));
+		itemPanel.setMinimumSize(new Dimension(256,728));
 		itemPanel.setVisible(false);
 		
 		gc.gridx = 0;
