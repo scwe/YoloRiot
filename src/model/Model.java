@@ -55,7 +55,7 @@ public class Model {
 	public static Ability[] abilities = {new PiercingShot (), new InstantAoE (), new WeakFastFire()};
 	private boolean mousePressed = false;
 	
-	public int money = 200;
+	public int money = 200000;
 	
 	private Yolostone yolostone;
 	
