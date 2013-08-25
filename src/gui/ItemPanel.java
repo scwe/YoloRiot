@@ -105,11 +105,9 @@ public class ItemPanel extends JPanel implements MouseListener {
 		
 		ImageLoader im = new ImageLoader();
 		for (int i = 0; i < 10; i++){
-			numbers.put(i+"", im.getImage(i+".png"));
+			//numbers.put(i+"", im.getImage(i+".png"));
 			
 		}
-		
-		
 
 	}
 	
@@ -122,16 +120,19 @@ public class ItemPanel extends JPanel implements MouseListener {
 		String moneyS = new Integer(money).toString();
 		
 		for (int i=0; i < moneyS.length(); i++) {
-			//BufferedImage number = 
-			//g.drawImage(IMG, MONEYX, MONEYY + i*img.getWidth(), null);	
+			//BufferedImage number = numbers.get(moneyS.charAt(i)); 
+			//g.drawImage(number, MONEYX, MONEYY + i*number.getWidth(), null);	
 		}
 		
-		//int lives = Model.model.player;
+		int lives = Model.model.player.health;
+		for (int i=0; i < lives; i++) {
+			//g.drawImage(heart, LIFE1X, LIFE1Y + i*heart.getWidth(), null);	
+		}
 		
 		int powerups = Model.model.powerupcount;
 		
 		for (int i=0; i < powerups; i++) {
-			g.drawImage(IMG, POWER1X, POWER1Y + i*POWERHEIGHT, null);	
+			//g.drawImage(powerup, POWER1X, POWER1Y + i*POWERHEIGHT, null);	
 		}
 	}
 
