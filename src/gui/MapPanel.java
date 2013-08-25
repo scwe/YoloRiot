@@ -23,9 +23,8 @@ public class MapPanel extends JPanel{
 	private int yoloStage = 0;
 	
 	public MapPanel(Model model, Map m){
-		//setPreferredSize(new Dimension(Tile.TILE_WIDTH*Map.MAP_WIDTH, Tile.TILE_HEIGHT* Map.MAP_HEIGHT));
 		lights = new ArrayList<Light>();
-		lights.add(new Light(new Location(300,300), "spotlight2.png", 150,150));
+		//lights.add(new Light(new Location(300,300), "spotlight2.png", 150,150));
 		this.map = m;
 		this.model = model;
 		setFocusable(true);
@@ -46,18 +45,7 @@ public class MapPanel extends JPanel{
 		buffer.setColor(Color.black);
 		buffer.fillRect(0, 0, getWidth(), getHeight());
 		
-		
-		/*if(tickCount > 150){
-			tickCount = 0;
-			
-		}
-		else if (tickCount > 100){
-			buffer.rotate(0.1, this.getWidth()/2,this.getHeight()/2);
-		}
-		else if (tickCount > 50){
-			buffer.rotate(-0.1);
-		}
-		*/
+
 		tickCount++;
 		map.draw(buffer);
 		
@@ -83,7 +71,8 @@ public class MapPanel extends JPanel{
 		}
 		
 		if(Model.model.yolomode){
-			Light.drawFilter(offscreen, -50,-50,-50);
+			//TODO yolo drawing
+			//Light.drawFilter(offscreen, -50,-50,-50);
 		}
 		
 		g2d.drawImage(offscreen, 0, 0, this);
