@@ -49,6 +49,7 @@ public class ItemPanel extends JPanel{
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+				System.out.println(getWidth()+" "+ getHeight());
 				JButton b = (JButton)(arg0.getSource());
 				currentButton = b.getName();
 			}
@@ -61,7 +62,7 @@ public class ItemPanel extends JPanel{
 	public static int getButtonNum(){
 		if(currentButton.equals("NEW_TURRET_ANIMATION.png")){
 			return 0;
-		}else if(currentButton.equals(".png")){
+		}else if(currentButton.equals("Wall, side top bot.png")){
 			return 1;
 		}else{
 			return -1;

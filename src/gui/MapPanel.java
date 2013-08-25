@@ -3,15 +3,8 @@ package gui;
 import image.ImageLoader;
 import image.Light;
 
-import java.awt.Color;
-import java.awt.Cursor;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.Point;
-import java.awt.Toolkit;
-import java.awt.image.BufferedImage;
+import java.awt.*;
+import java.awt.image.*;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
@@ -29,7 +22,7 @@ public class MapPanel extends JPanel{
 	
 	public MapPanel(Model model, Map m){
 		setPreferredSize(new Dimension(Tile.TILE_WIDTH*Map.MAP_WIDTH, Tile.TILE_HEIGHT* Map.MAP_HEIGHT));
-		//lights = new ArrayList<Light>();
+		lights = new ArrayList<Light>();
 		//lights.add(new Light(new Location(300,300), "spotlight2.png", 150,150));
 		this.map = m;
 		this.model = model;
@@ -56,9 +49,9 @@ public class MapPanel extends JPanel{
 		
 		model.draw(buffer);
 		
-		//for(Light l: lights){
-		//	l.draw(offscreen);
-		//}
+		for(Light l: lights){
+			l.draw(offscreen);
+		}
 
 		if (ItemPanel.currentButton != null) {
 			int left = (YoloMouse.mouseX / Tile.TILE_WIDTH) * Tile.TILE_WIDTH;
