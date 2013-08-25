@@ -71,7 +71,6 @@ public class SimpleCreep extends Creep {
 			return walk[0];
 		}
 		else if (this.state.equals(CreepState.ATTACKING)){
-			System.out.println("in attacking state");
 			tickCount+=1;
 			if(tickCount < 5){
 				return attacking[0];

@@ -36,14 +36,14 @@ public class ItemPanel extends JPanel implements MouseListener {
 	HashMap<String,BufferedImage> numbers = new HashMap<String,BufferedImage>();
 
 	
-	public static final int BUTTON1X = 66;   //FUYCK yeah
-	public static final int BUTTON1Y = 427;
-	public static final int BUTTON2X = 129;
-	public static final int BUTTON2Y = 427;
+	public static final int BUTTON1X = 60;   //FUYCK yeah
+	public static final int BUTTON1Y = 367;
+	public static final int BUTTON2X = 115;
+	public static final int BUTTON2Y = 367;
 	public static final int BUTTON3X = 66;
-	public static final int BUTTON3Y = 486;
-	public static final int BUTTON4X = 129;
-	public static final int BUTTON4Y = 486;
+	public static final int BUTTON3Y = 417;
+	public static final int BUTTON4X = 115;
+	public static final int BUTTON4Y = 420;
 	
 	public static final int BUTTONWIDTH = 64;
 	public static final int BUTTONHEIGHT = 64;
@@ -64,7 +64,7 @@ public class ItemPanel extends JPanel implements MouseListener {
 	public static final int YOLOWIDTH = 100;
 	public static final int YOLOHEIGHT = 64;
 	public static final int YOLOX = 60;
-	public static final int YOLOY = 610;
+	public static final int YOLOY = 521;
 	public BufferedImage[] numbersA = new BufferedImage[10];
 	
 	public ItemPanel(Model m){
@@ -101,7 +101,6 @@ public class ItemPanel extends JPanel implements MouseListener {
 		}
 		
 		int lives = Model.model.player.health;
-		System.out.println (lives);
 		for (int i=0; i < lives; i++) {
 			g.drawImage(heart, LIFE1X + i*16, LIFE1Y, 16, 16, null);	
 		}
