@@ -1,5 +1,6 @@
 package structures;
 
+import image.ImageLoader;
 import image.SpriteSheet;
 
 import java.awt.Graphics2D;
@@ -24,10 +25,8 @@ public class PowerUp extends Structure {
 
 	@Override
 	public BufferedImage getSprite() {
-		BufferedImage bf = new BufferedImage (32, 32, BufferedImage.TYPE_INT_ARGB);
-		Graphics2D g2d = (Graphics2D) bf.createGraphics();
-		g2d.fillRect(0, 0, 32, 32);
-		return bf;
+		ImageLoader img = new ImageLoader ();
+		return img.getImage("crystal.png", 0);
 	}
 
 	@Override
@@ -37,7 +36,6 @@ public class PowerUp extends Structure {
 	@Override
 	public void initialiseSpriteSheet() {
 		//TODO, do something when there is a sprite of sprite sheet for this class
-		
 	}
 
 }
