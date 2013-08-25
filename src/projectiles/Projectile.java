@@ -17,7 +17,7 @@ import model.Location;
 import model.Model;
 
 public abstract class Projectile extends EntityImpl {
-	private static final int MOVE_STEP = 2;
+	private static final int MOVE_STEP = 15;
 	
 	protected int moveStep = MOVE_STEP;
 	
@@ -91,10 +91,8 @@ public abstract class Projectile extends EntityImpl {
 		double xunit = Math.cos(angle);
 		double yunit = Math.sin(angle);
 		
-		// FIXME bug in projectile motion
-		
-		location.x += xunit * magnitude;
-		location.y += yunit * magnitude;
+		location.x += (int) (xunit * magnitude);
+		location.y += (int) (yunit * magnitude);
 		
 		hitbox.move((int)(xunit*magnitude), (int)(yunit*magnitude));
 	}
