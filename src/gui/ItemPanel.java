@@ -35,13 +35,12 @@ public class ItemPanel extends JPanel{
 		setFocusable(false);
 		this.setLayout(null);
 		//setPreferredSize(new Dimension(120, YoloRiot.SCREEN_HEIGHT));
-		JButton but = newStructureButton("NEW_TURRET_ANIMATION.png", 0, 0, 64, 64);
+		JButton but = newStructureButton("NEW_TURRET_ANIMATION.png", 32, 0, 64, 64);
 		but.setBounds(60,270, 100, 100);
 		add(but);
 		ImageLoader il = new ImageLoader();
 		background = il.getImage("NEW_GUI.png");
 		setPreferredSize(new Dimension(120, YoloRiot.SCREEN_HEIGHT));
-		add(newStructureButton("NEW_TURRET_ANIMATION.png", 32, 0, 64, 64));
 		add(newStructureButton("Wall, side top bot.png", 0, 0, 32, 32));
 		
 		JButton yoloButton = new JButton(new ImageIcon(new ImageLoader().getImage("64_yolo_button.png")));

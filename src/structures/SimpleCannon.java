@@ -43,7 +43,9 @@ public class SimpleCannon extends Structure {
 
 	@Override
 	public void initialiseSpriteSheet() {
-		image = new SpriteSheet(0,0,64,64, "64_turret.png");
+		System.out.println("INitialiased sprite sheet for simple cannon");
+		image = new SpriteSheet(0, 0, 64, 64, "NEW_TURRET_ANIMATION.png");
+		image.setX(1);
 		
 	}
 }
