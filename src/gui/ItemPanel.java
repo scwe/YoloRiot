@@ -79,7 +79,6 @@ public class ItemPanel extends JPanel{
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				System.out.println(getWidth()+" "+ getHeight());
 				JButton b = (JButton)(arg0.getSource());
 				currentButton = b.getName();
 			}
