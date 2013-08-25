@@ -32,10 +32,11 @@ public abstract class EntityImpl implements Entity {
 	public abstract BufferedImage getSprite ();
 	
 	public EntityImpl (Location location) {
+		initialiseSpriteSheet();
 		this.location = location;
 		hitbox = makeHitbox();
 		
-		initialiseSpriteSheet();
+		
 		Image i = getSprite ();
 		width = i.getWidth(null);
 		height = i.getHeight(null);

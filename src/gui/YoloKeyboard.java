@@ -50,6 +50,7 @@ public class YoloKeyboard extends KeyAdapter{
     }
     
     public void update(){
+    	System.out.println("Update");
     	if(upPressed){
     		c.move(Direction.NORTH);
     	}
