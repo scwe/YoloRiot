@@ -10,15 +10,14 @@ import java.util.Set;
 
 import map.Map;
 import map.Tile;
-import playerAbilities.Ability;
-import playerAbilities.InstantAoE;
-import playerAbilities.SimpleShoot;
+import playerAbilities.*;
 import projectiles.Projectile;
 import structures.SimpleCannon;
 import structures.SimpleWall;
 import structures.Structure;
 import structures.Yolostone;
 import creeps.Creep;
+import creeps.HomingCreep;
 import creeps.RandomCreep;
 import creeps.SimpleCreep;
 
@@ -32,7 +31,7 @@ public class Model {
 	public List<Structure> structures;
 	public List<Projectile> projectiles;
 	
-	public static Ability[] abilities = {new SimpleShoot (), new InstantAoE ()};
+	public static Ability[] abilities = {new PiercingShot (), new InstantAoE (), new WeakFastFire()};
 	private boolean mousePressed = false;
 	
 	private Yolostone[] yolostones;
@@ -42,7 +41,7 @@ public class Model {
 	public boolean yolomode = false;
 	
 	public Player player;
-	
+	private int homingTick = 0;
 	private int waveDifficulty = 3;
 	private int waveTick = 200;
 	private int tick = 0;
@@ -133,15 +132,20 @@ public class Model {
 	
 	private void makeCreeps () {
 		double creepNo = Math.abs(Math.sin(tick)*20);
-
+		
 		int end = Map.MAP_WIDTH * Tile.TILE_WIDTH;
 		int laneHeight = Tile.TILE_HEIGHT;
 		int numLanes = Map.MAP_HEIGHT;
-
+		homingTick++;
 		for (int i = 0 ; i < creepNo; i++){
 			int laneLoc = (int)((Math.random())*10);
 			creeps.add(new SimpleCreep (new Location(end, laneLoc * laneHeight)));
-			creeps.add(new RandomCreep (new Location(end, laneLoc * laneHeight), 8));
+			creeps.add(new RandomCreep (new Location(end, laneLoc+1 * laneHeight), 8));
+			if(homingTick > 1){
+				creeps.add(new HomingCreep (new Location(end, laneLoc * laneHeight)));
+				System.out.println("HOMING");
+				homingTick = 0;
+			}
 		}
 	}
 	

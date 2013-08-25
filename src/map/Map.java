@@ -37,7 +37,8 @@ public class Map {
 	}
 
 	public void draw(Graphics g) {
-		if (buffer != null){
+		if (buffer != null) 
+		{
 			for (int h = 0; h < MAP_HEIGHT; h++) {
 				for (int w = 0; w < MAP_WIDTH; w++) {
 					g.drawImage(buffer[h][w],w
@@ -46,6 +47,7 @@ public class Map {
 				}
 			}
 		}
+
 		else{
 			buffer = new BufferedImage[MAP_HEIGHT][MAP_WIDTH];
 			ArrayList<BufferedImage> tileSet ;

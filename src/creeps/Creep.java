@@ -38,7 +38,7 @@ public abstract class Creep extends EntityImpl {
 	public void update() {
 		ticks ++;
 		
-		if (ticks == (int) (tickspeed * Model.model.yolospeed)) {
+		if (ticks >= (int) (tickspeed * Model.model.yolospeed)) {
 			AI.next (this);
 			ticks = 0;
 		}
