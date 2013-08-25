@@ -31,9 +31,15 @@ public class Model {
 	private static final int YOLO_TOTAL_SIZE = 300;
 	private static final int YOLO_TICKWAVE_SIZE = 40;
 	private static final int MONEY_INC = 10;
+	private static final int DROP_AT_THIS = 100;
 	
-	private static final int CANNON_COST = 500;
+	private static final int CANNON_COST = 300;
+	private static final int CANNON_TRI_COST = 500;
 	private static final int WALL_COST = 100;
+	private static final int WALL_SPIKE_COST = 200;
+	
+	private int dropcount = 0;
+	private int nextDrop;
 	
 	public static Model model;
 	
@@ -261,6 +267,12 @@ public class Model {
 		if (e instanceof Creep) {
 			creeps.remove(e);
 			if (yolomode) yoloWaveLeft--;
+			else { // random chance of getting a yolo power
+				if (dropcount >= nextDrop) {
+					
+					nextDrop = DROP_AT_THIS + (int)(Math.random()*DROP_AT_THIS/4);
+				}
+			}
 			money += MONEY_INC;
 		} else if (e instanceof Structure) {
 			structures.remove(e);

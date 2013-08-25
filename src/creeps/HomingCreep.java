@@ -16,6 +16,7 @@ public class HomingCreep extends SimpleCreep{
 	public HomingCreep(Location location) {
 		super(location);
 		this.tickspeed = 10;
+		health = 300;
 	}
 	
 	protected CreepAI makeAI() {
