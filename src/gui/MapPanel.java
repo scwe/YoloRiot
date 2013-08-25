@@ -48,7 +48,7 @@ public class MapPanel extends JPanel{
 		
 		BufferedImage offscreen = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_ARGB);
 		Graphics2D buffer = (Graphics2D) offscreen.getGraphics();
-		
+		/*
 		if (Model.model.yolomode){
 			
 			if (tickCount > 30){
@@ -69,7 +69,7 @@ public class MapPanel extends JPanel{
 				
 			}
 			
-		}
+		}*/
 		buffer.setColor(Color.black);
 		buffer.fillRect(0, 0, getWidth(), getHeight());
 		
