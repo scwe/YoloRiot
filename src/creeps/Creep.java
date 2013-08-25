@@ -48,11 +48,18 @@ public abstract class Creep extends EntityImpl {
 	}
 
 	public Hitbox makeHitbox() {
-		return new Hitbox(location.x,  location.y, Tile.TILE_WIDTH, Tile.TILE_HEIGHT);
+		return new Hitbox(location.x,  location.y, width, height);
 	}
 	
 	public void setState(CreepState s){
 		this.state = s;
+	}
+	
+	// FIXME
+	@Override
+	public void initialiseSpriteSheet() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	public enum CreepState{

@@ -31,7 +31,8 @@ public class SimpleWall extends Structure {
 	}
 
 	@Override
-	public void fire() {// no firing
+	public void fire() {
+		// TODO Auto-generated method stub
+		
 	}
-
 }
