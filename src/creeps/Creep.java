@@ -48,7 +48,7 @@ public abstract class Creep extends EntityImpl {
 	}
 
 	public Hitbox makeHitbox() {
-		return new Hitbox(location.x,  location.y, width, height);
+		return new Hitbox(location.x,  location.y, 64, 64);
 	}
 	
 	public void setState(CreepState s){

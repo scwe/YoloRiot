@@ -35,11 +35,6 @@ public abstract class EntityImpl implements Entity {
 		initialiseSpriteSheet();
 		this.location = location;
 		hitbox = makeHitbox();
-		
-		
-		Image i = getSprite ();
-		width = i.getWidth(null);
-		height = i.getHeight(null);
 	}
 	
 	/**
@@ -60,8 +55,6 @@ public abstract class EntityImpl implements Entity {
 	public void move (int x, int y) {
 		int toX = location.x + x;
 		int toY = location.y + y;
-		System.out.println (toX + " " + toY +" XXX");
-		System.out.println(toX  < Tile.TILE_WIDTH || toY < 0 || toX + width + 128 >= RIGHT || toY + height >= BOTTOM);
 		if (toX  < Tile.TILE_WIDTH || toY < 0 || toX + width + 128 >= RIGHT || toY + height >= BOTTOM) return;		
 		
 		location.x += x;
