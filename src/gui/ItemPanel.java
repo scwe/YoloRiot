@@ -49,15 +49,15 @@ public class ItemPanel extends JPanel implements MouseListener {
 	public static final int BUTTONHEIGHT = 64;
 
 	public static final int MONEYX = 65;
-	public static final int MONEYY = 110;
+	public static final int MONEYY = 90;
 	
 	public static final int LIFE1X = 65;
-	public static final int LIFE1Y = 70;
+	public static final int LIFE1Y = 60;
 	public static final int LIFEWIDTH = 32;
 	public static final int LIFEHEIGHT = 32;
 	
 	public static final int POWER1X = 65;
-	public static final int POWER1Y = 140;
+	public static final int POWER1Y = 120;
 	public static final int POWERWIDTH = 32;
 	public static final int POWERHEIGHT = 32;	
 	
@@ -101,6 +101,7 @@ public class ItemPanel extends JPanel implements MouseListener {
 		}
 		
 		int lives = Model.model.player.health;
+		System.out.println (lives);
 		for (int i=0; i < lives; i++) {
 			g.drawImage(heart, LIFE1X + i*16, LIFE1Y, 16, 16, null);	
 		}
@@ -108,7 +109,7 @@ public class ItemPanel extends JPanel implements MouseListener {
 		int powerups = Model.model.powerupcount;
 		
 		for (int i=0; i < powerups; i++) {
-			g.drawImage(crystal, POWER1X + i*POWERHEIGHT, POWER1Y, null);	
+			g.drawImage(crystal, POWER1X + i*12, POWER1Y, 32, 32, null);	
 		}
 	}
 	
