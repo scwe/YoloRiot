@@ -1,6 +1,7 @@
 package model;
 
 import gui.YoloMouse;
+import gui.YoloRiot;
 
 import java.awt.Graphics;
 import java.util.ArrayList;
@@ -10,7 +11,10 @@ import java.util.Set;
 
 import map.Map;
 import map.Tile;
-import playerAbilities.*;
+import playerAbilities.Ability;
+import playerAbilities.InstantAoE;
+import playerAbilities.PiercingShot;
+import playerAbilities.WeakFastFire;
 import projectiles.Projectile;
 import structures.SimpleCannon;
 import structures.SimpleWall;
@@ -46,9 +50,11 @@ public class Model {
 	private int tick = 0;
 	private int waveTickSpeed = 20;
 	
+	private YoloRiot riot;
 	public List<Pt> pts = new ArrayList<Pt> ();
 	
-	public Model () {
+	public Model (YoloRiot parent) {
+		this.riot = parent;
 		model = this;
 		player = new Player();
 		creeps = new ArrayList<Creep> ();
@@ -86,8 +92,9 @@ public class Model {
 		
 		
 		if (yolostone.health == 0) {
-			// FIXME Lose.
+			riot.lost = true;
 		}
+		
 		if (tick > waveTick){
 			makeCreeps ();
 			tick = 0;
@@ -160,6 +167,8 @@ public class Model {
 			if (hitbox.intersects(s.getHitbox())) intersects.add(s);
 		}
 
+		if (hitbox.intersects(yolostone.getHitbox())) intersects.add(yolostone);
+		
 		return intersects;		
 	}
 	
@@ -184,6 +193,8 @@ public class Model {
 		for (Structure s : structures) {
 			if (hitbox.intersects(s.getHitbox())) intersects.add(s);
 		}
+		
+		if (hitbox.intersects(yolostone.getHitbox())) intersects.add(yolostone);
 		
 		if (player.getHitbox().intersects(hitbox)) intersects.add(player);
 		

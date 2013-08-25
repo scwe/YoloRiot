@@ -31,6 +31,7 @@ public class YoloRiot extends JFrame implements ActionListener {
 	private MapPanel mapPanel;
 	private ItemPanel itemPanel;
 	private StartScreen startScreen;
+	private LoseScreen loseScreen;
 
 	private SoundFactory sounds; // use the sounds.playSound(filename) to play a
 									// sound
@@ -39,6 +40,7 @@ public class YoloRiot extends JFrame implements ActionListener {
 	private YoloKeyboard key;
 
 	private boolean startS = true, mainS = false;
+	public boolean lost = false;
 
 	Timer t = new Timer(1000, this);
 	Timer startTimer;
@@ -46,7 +48,7 @@ public class YoloRiot extends JFrame implements ActionListener {
 	public YoloRiot() {
 		setTitle("Yolo Riot");
 		setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
-		model = new Model();
+		model = new Model(this);
 		LevelData startLevel = new LevelData(LevelName.START);
 		map = new Map(startLevel);
 
@@ -90,6 +92,8 @@ public class YoloRiot extends JFrame implements ActionListener {
 	public void gameLoop() {
 		if (startS) {
 			startScreen.repaint();
+		} else if (lost) {
+			loseScreen.repaint();
 		} else {
 			model.tick();
 			key.update();
