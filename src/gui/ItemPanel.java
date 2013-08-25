@@ -28,6 +28,8 @@ public class ItemPanel extends JPanel implements MouseListener {
 	private static final int BUTTON_WIDTH = 64;
 	private static final int BUTTON_HEIGHT = 64;
 	private BufferedImage background;
+	private BufferedImage heart;
+	private BufferedImage crystal;
 	public static String currentButton;
 	private Model m;
 
@@ -86,9 +88,15 @@ public class ItemPanel extends JPanel implements MouseListener {
 		
 		ImageLoader im = new ImageLoader();
 		for (int i = 0; i < 10; i++){
-			//numbers.put(i+"", im.getImage(i+".png"));
+
+			numbers.put(i+"", im.getImage(i+".png"));
 			
 		}
+		heart = im.getImage("heart.png");
+		crystal = im.getImage("crystal.png");
+
+
+
 
 	}
 	

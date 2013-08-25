@@ -50,7 +50,7 @@ public class SimpleCreep extends Creep {
 	@Override
 	public BufferedImage getSprite() {
 		
-		if (walk == null || attackingImage == null){
+		if (this.state.equals(CreepState.MOVING) && (walk == null || attackingImage == null)){
 			walk = new BufferedImage[4];
 			spriteSheet = new SpriteSheet(0, 0, Tile.TILE_WIDTH, Tile.TILE_HEIGHT,"64_creep_1.png");
 			walk[0] = spriteSheet.getImage(1);
@@ -59,7 +59,7 @@ public class SimpleCreep extends Creep {
 			walk[3] = spriteSheet.getImage(0);
 			
 			attacking = new BufferedImage[5];
-			spriteSheetAttack = new SpriteSheet(0, 0, Tile.TILE_WIDTH/2, Tile.TILE_HEIGHT/2,"1creepattackred.png");
+			spriteSheetAttack = new SpriteSheet(0, 0, Tile.TILE_WIDTH, Tile.TILE_HEIGHT,"1creepattackblue2.png");
 			attacking[0] = spriteSheetAttack.getImage(0);
 			attacking[1] = spriteSheetAttack.getImage(1);
 			attacking[2] = spriteSheetAttack.getImage(2);
@@ -68,7 +68,7 @@ public class SimpleCreep extends Creep {
 			
 			return walk[0];
 		}
-		else if (this.state == CreepState.ATTACKING){
+		else if (this.state.equals(CreepState.ATTACKING)){
 			System.out.println("in attacking state");
 			tickCount+=1;
 			if(tickCount < 5){

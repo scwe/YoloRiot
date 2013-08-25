@@ -32,6 +32,7 @@ public class SimpleCreepAI implements CreepAI {
 				attackedPlayer.reduceHealth(8);
 				attacking = true;
 			}
+			if(attacking) return;
 		}
 		if (!attacking && !Model.model.yolomode) {
 			c.move(-10, 0);
