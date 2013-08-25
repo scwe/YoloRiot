@@ -16,6 +16,7 @@ import playerAbilities.InstantAoE;
 import playerAbilities.PiercingShot;
 import playerAbilities.WeakFastFire;
 import projectiles.Projectile;
+import projectiles.YoloBolt;
 import structures.PowerUp;
 import structures.SimpleCannon;
 import structures.SimpleWall;
@@ -128,6 +129,13 @@ public class Model {
 		if (curPowerUp != null && player.getHitbox().intersects(curPowerUp.hitbox)) {
 			curPowerUp = null;
 			powerupcount++;
+		}
+		
+		if (yolomode && Math.random() >= 0.2) {
+			int laneLoc = (int)((Math.random())*10);
+			Location l = new Location (0, laneLoc * Tile.TILE_HEIGHT);
+			Location l2 = new Location (10, laneLoc * Tile.TILE_HEIGHT);
+			projectiles.add(new YoloBolt(l, l2));
 		}
 		
 		player.update();
