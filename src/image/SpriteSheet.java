@@ -54,6 +54,12 @@ public class SpriteSheet {
 
 	}
 	
+	public BufferedImage getImage(int val){
+		
+		return image.getSubimage(val*spriteWidth, y*spriteHeight, spriteWidth, spriteHeight);
+
+	}
+	
 	public BufferedImage getRandomImage(){
 		Random r = new Random();
 		int choice = (int)(r.nextDouble()*getWidth());

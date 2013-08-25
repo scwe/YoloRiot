@@ -36,7 +36,7 @@ public abstract class EntityImpl implements Entity {
 	}
 	
 	public void draw (Graphics g) {
-		g.drawImage(getSprite(), location.x, location.y,  Tile.TILE_WIDTH, Tile.TILE_HEIGHT, null);
+		g.drawImage(getSprite(), location.x, location.y,  64, getSprite().getHeight(), null);
 	}
 	
 	public void interact(Interaction i) {

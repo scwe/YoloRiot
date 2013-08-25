@@ -19,5 +19,17 @@ public class ImageLoader {
 		
 		return img;
 	}
+	
+	public BufferedImage getImage(String name, int loc){
+		
+		BufferedImage img;
+		try{
+			img = ImageIO.read(ImageLoader.class.getResource("/images/"+name)); 
+		}catch (IOException e){ throw new Error(e); }
+
+	
+		return img;
+		
+	}
 
 }

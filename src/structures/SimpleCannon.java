@@ -24,13 +24,14 @@ public class SimpleCannon extends Structure {
 	@Override
 	protected StructureAI makeAI() {
 		return new SimpleCannonAI ();
+		
 	}
 
 	@Override
 	public BufferedImage getSprite() {
 		if (image == null){
 			ImageLoader il = new ImageLoader();
-			image = il.getImage("Button.png");
+			image = il.getImage("64_turret.png");
 		
 		}
 		return image;
