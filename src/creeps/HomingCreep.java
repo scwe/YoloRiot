@@ -62,4 +62,9 @@ public class HomingCreep extends SimpleCreep{
 
 	}
 	
+	@Override
+	public int getYoloTickSpeed() {
+		return tickspeed;
+	}
+	
 }
