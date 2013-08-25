@@ -10,12 +10,14 @@ import map.Tile;
 import model.Location;
 
 public class Yolostone extends Structure {
+	private static final int YOLOSTONE_INIT_HEALTH = 1000;	
 	
 	public boolean destroyed = false;
 	private int num;
 	
 	public Yolostone () {
 		super(new Location(0, 0));
+		health = YOLOSTONE_INIT_HEALTH;
 	}
 	
 	@Override
@@ -28,7 +30,8 @@ public class Yolostone extends Structure {
 		if (image == null){
 			ImageLoader il = new ImageLoader();
 			image = il.getImage("wip yolo crystal.png");
-		
+			double redshift = (YOLOSTONE_INIT_HEALTH * 1.0) / health;
+			// TODO
 		}
 		return image;
 	}
