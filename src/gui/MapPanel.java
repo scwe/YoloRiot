@@ -49,27 +49,7 @@ public class MapPanel extends JPanel{
 		BufferedImage offscreen = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_ARGB);
 		Graphics2D buffer = (Graphics2D) offscreen.getGraphics();
 		
-		if (Model.model.yolomode){
-			
-			if (tickCount > 30){
-				
-				buffer.rotate(10);
-				
-			}
-			else if(tickCount > 90){
-				
-				
-			}
-			else if(tickCount > 120){
-				buffer.rotate(-10);
-				
-			}
-			else if (tickCount > 150){
-				
-				
-			}
-			
-		}
+		
 		buffer.setColor(Color.black);
 		buffer.fillRect(0, 0, getWidth(), getHeight());
 		
@@ -80,9 +60,7 @@ public class MapPanel extends JPanel{
 		
 		model.draw(buffer);
 
-		//for(Light l: lights){
-	//		l.draw(offscreen);
-	//	}
+
 
 
 		if (ItemPanel.currentButton != null) {
