@@ -48,30 +48,16 @@ public class ItemPanel extends JPanel implements MouseListener {
 	public static final int BUTTONWIDTH = 64;
 	public static final int BUTTONHEIGHT = 64;
 
-	public static final int MONEYX = 0;
-	public static final int MONEYY = 0;
+	public static final int MONEYX = 65;
+	public static final int MONEYY = 110;
 	
-	public static final int LIFE1X = 0;
-	public static final int LIFE1Y = 0;
-	public static final int LIFE2X = 0;
-	public static final int LIFE2Y = 0;
-	public static final int LIFE3X = 0;
-	public static final int LIFE3Y = 0;
-	public static final int LIFE4X = 0;
-	public static final int LIFE4Y = 0;
-	public static final int LIFE5X = 0;
-	public static final int LIFE5Y = 0;
-	
+	public static final int LIFE1X = 65;
+	public static final int LIFE1Y = 70;
 	public static final int LIFEWIDTH = 32;
 	public static final int LIFEHEIGHT = 32;
 	
-	public static final int POWER1X = 0;
-	public static final int POWER1Y = 0;
-	public static final int POWER2X = 0;
-	public static final int POWER2Y = 0;
-	public static final int POWER3X = 0;
-	public static final int POWER3Y = 0;
-	
+	public static final int POWER1X = 65;
+	public static final int POWER1Y = 140;
 	public static final int POWERWIDTH = 32;
 	public static final int POWERHEIGHT = 32;	
 	
@@ -79,6 +65,7 @@ public class ItemPanel extends JPanel implements MouseListener {
 	public static final int YOLOHEIGHT = 64;
 	public static final int YOLOX = 60;
 	public static final int YOLOY = 610;
+	public BufferedImage[] numbersA = new BufferedImage[10];
 	
 	public ItemPanel(Model m){
 		this.m = m;
@@ -93,16 +80,11 @@ public class ItemPanel extends JPanel implements MouseListener {
 		
 		ImageLoader im = new ImageLoader();
 		for (int i = 0; i < 10; i++){
-
 			numbers.put(i+"", im.getImage(i+".png"));
-			
+			numbersA[i] = im.getImage(i+".png");
 		}
 		heart = im.getImage("heart.png");
 		crystal = im.getImage("crystal.png");
-
-
-
-
 	}
 	
 	public void paintComponent(Graphics g){
@@ -114,19 +96,19 @@ public class ItemPanel extends JPanel implements MouseListener {
 		String moneyS = new Integer(money).toString();
 		
 		for (int i=0; i < moneyS.length(); i++) {
-			//BufferedImage number = numbers.get(moneyS.charAt(i)); 
-			//g.drawImage(number, MONEYX, MONEYY + i*number.getWidth(), null);	
+			BufferedImage number = numbersA[moneyS.charAt(i) - '0']; 
+			g.drawImage(number, MONEYX+i*12, MONEYY, 12, 12, null);	
 		}
 		
 		int lives = Model.model.player.health;
 		for (int i=0; i < lives; i++) {
-			//g.drawImage(heart, LIFE1X, LIFE1Y + i*heart.getWidth(), null);	
+			g.drawImage(heart, LIFE1X + i*16, LIFE1Y, 16, 16, null);	
 		}
 		
 		int powerups = Model.model.powerupcount;
 		
 		for (int i=0; i < powerups; i++) {
-			//g.drawImage(powerup, POWER1X, POWER1Y + i*POWERHEIGHT, null);	
+			g.drawImage(crystal, POWER1X + i*POWERHEIGHT, POWER1Y, null);	
 		}
 	}
 	

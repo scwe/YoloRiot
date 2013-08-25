@@ -32,7 +32,7 @@ public class Model {
 	private static final int FIELD_WIDTH = Map.MAP_WIDTH*Tile.TILE_WIDTH;
 	private static final int FIELD_HEIGHT = Map.MAP_HEIGHT*Tile.TILE_HEIGHT;
 	private static final int YOLO_TOTAL_SIZE = 300;
-	private static final int YOLO_TICKWAVE_SIZE = 40;
+	private static final int YOLO_TICKWAVE_SIZE = 10;
 	private static final int MONEY_INC = 10;
 	private static final int DROP_AT_THIS = 100;
 	
@@ -111,7 +111,7 @@ public class Model {
 		}
 		
 		
-		if (yolostone.health == 0) {
+		if (yolostone.health == 0 || player.health == 0) {
 			riot.lost = true;
 		}
 		
