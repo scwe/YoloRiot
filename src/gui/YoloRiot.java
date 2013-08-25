@@ -50,23 +50,20 @@ public class YoloRiot extends JFrame implements ActionListener {
 	public YoloRiot() {
 		setTitle("Yolo Riot");
 		setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
-		model = new Model(this);
-		LevelData startLevel = new LevelData(LevelName.START);
-		map = new Map(startLevel);
 
 		startScreen = new StartScreen();
 		add(startScreen);
 		startScreen.setVisible(true);
-
+		
 		itemPanel = new ItemPanel();
-		mapPanel = new MapPanel(model, map);
-		screen = new ScreenPanel(model, map, mapPanel);
+		
+		makeNewGame ();
+		
 		//screen.add(mapPanel);
 		screen.setOpaque(false);
 		screen.setVisible(false);
 		itemPanel.setVisible(false);
-		add(itemPanel, BorderLayout.WEST);
-		add(screen, BorderLayout.EAST);
+
 
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 
@@ -85,7 +82,26 @@ public class YoloRiot extends JFrame implements ActionListener {
 		//pack ();
 		setFocusable(true);
 		setVisible(true);
-
+		
+		startNewGame ();
+	}
+	
+	private void makeNewGame () {
+		if (itemPanel != null) remove(itemPanel);
+		if (screen != null) remove(screen);
+		
+		model = new Model(this);	
+		LevelData startLevel = new LevelData(LevelName.START);
+		map = new Map(startLevel);
+		
+		mapPanel = new MapPanel(model, map);
+		screen = new ScreenPanel(model, map, mapPanel);
+		
+		add(itemPanel, BorderLayout.WEST);
+		add(screen, BorderLayout.EAST);	
+	}
+	
+	private void startNewGame () {
 		t = new Timer(TICK, this);
 		startTimer = new Timer(1000, this);
 		startTimer.start();
@@ -98,6 +114,12 @@ public class YoloRiot extends JFrame implements ActionListener {
 			loseScreen.repaint();
 		} else if (won) {
 			winScreen.repaint ();
+			startTimer.stop();
+			try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {}
+			makeNewGame ();
+			startNewGame ();
 		} else {
 			model.tick();
 			key.update();
@@ -111,6 +133,10 @@ public class YoloRiot extends JFrame implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent event) {
+		if (won == true) {
+			
+		}
+		
 		if (event.getSource() == startTimer && startS) {
 			startScreen.setVisible(false);
 			screen.setVisible(true);
