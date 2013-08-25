@@ -17,7 +17,7 @@ public class RandomCreep extends SimpleCreep{
 		super(location);
 		this.tickspeed = 10;
 		this.randomness= randomness;
-		health = 300;
+		health = 3;
 	}
 	
 	protected CreepAI makeAI() {
