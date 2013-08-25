@@ -30,14 +30,14 @@ public class ItemPanel extends JPanel implements MouseListener {
 	public static String currentButton;
 	private Model m;
 	
-	public static final int BUTTON1X = 0;
-	public static final int BUTTON1Y = 0;
-	public static final int BUTTON2X = 0;
-	public static final int BUTTON2Y = 0;
-	public static final int BUTTON3X = 0;
-	public static final int BUTTON3Y = 0;
-	public static final int BUTTON4X = 0;
-	public static final int BUTTON4Y = 0;
+	public static final int BUTTON1X = 66;   //FUYCK yeah
+	public static final int BUTTON1Y = 427;
+	public static final int BUTTON2X = 129;
+	public static final int BUTTON2Y = 427;
+	public static final int BUTTON3X = 66;
+	public static final int BUTTON3Y = 486;
+	public static final int BUTTON4X = 129;
+	public static final int BUTTON4Y = 486;
 	
 	public static final int BUTTONWIDTH = 64;
 	public static final int BUTTONHEIGHT = 64;
@@ -47,30 +47,11 @@ public class ItemPanel extends JPanel implements MouseListener {
 		this.m = m;
 		super.setBorder(new StrokeBorder(new BasicStroke(4, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND)));
 		setFocusable(false);
-		this.setLayout(null);
-		//setPreferredSize(new Dimension(120, YoloRiot.SCREEN_HEIGHT));
-		JButton but = newStructureButton("NEW_TURRET_ANIMATION.png", 32, 0, 64, 64);
-		but.setBounds(60,270, 100, 100);
-		add(but);
 		ImageLoader il = new ImageLoader();
 		background = il.getImage("NEW_GUI.png");
 		setPreferredSize(new Dimension(120, YoloRiot.SCREEN_HEIGHT));
-		add(newStructureButton("Wall, side top bot.png", 0, 0, 32, 32));
 		
 		addMouseListener (this);
-		
-		JButton yoloButton = new JButton(new ImageIcon(new ImageLoader().getImage("64_yolo_button.png")));
-		yoloButton.setFocusable(false);
-		yoloButton.addActionListener(new ActionListener(){
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				ItemPanel.this.m.FULLYOL0();
-			}
-			
-		});
-		yoloButton.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
-		yoloButton.setBackground(Color.white);
-		add(yoloButton);
 
 	}
 	
@@ -78,28 +59,6 @@ public class ItemPanel extends JPanel implements MouseListener {
 		g.setColor(Color.white);
 		g.fillRect(0,0,getWidth(), getHeight());
 		g.drawImage(background,0,0,this.getWidth(),this.getHeight(),null);
-	}
-
-	public JButton newStructureButton(String imageFile, int x, int y, int width, int height){
-		SpriteSheet image = new SpriteSheet(0, 0, 64,64, imageFile);
-		
-		JButton button = new JButton(new ImageIcon(image.getImage(x, y, width, height).getScaledInstance(64, 64, Image.SCALE_FAST)));
-		button.setFocusable(false);
-		button.setName(imageFile);
-		button.setBackground(Color.white);
-		button.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
-		
-		button.addActionListener(new ActionListener(){
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				JButton b = (JButton)(arg0.getSource());
-				currentButton = b.getName();
-			}
-			
-		});
-		
-		return button;
 	}
 	
 	
@@ -117,7 +76,7 @@ public class ItemPanel extends JPanel implements MouseListener {
 		if(currentButton.equals("NEW_TURRET_ANIMATION.png")){
 			return new SpriteSheet(0, 0, 64, 64, "NEW_TURRET_ANIMATION.png").getImage(32, 0, 64, 64).getScaledInstance(64, 64, Image.SCALE_FAST);
 		}else if(currentButton.equals("Wall, side top bot.png")){
-			return new SpriteSheet(0, 0, 64, 64, "Wall, side top bot.png").getImage(0, 0, 32, 32).getScaledInstance(64, 64, Image.SCALE_FAST);
+			return new SpriteSheet(0,0,64, 128, "64_wall.png").getImage(0, 0, 64, 128).getScaledInstance(64, 64, Image.SCALE_FAST);
 		}else{
 			return null;
 		}
@@ -128,7 +87,8 @@ public class ItemPanel extends JPanel implements MouseListener {
 	}
 
 	@Override
-	public void mouseClicked(MouseEvent arg0) {}
+	public void mouseClicked(MouseEvent arg0) {
+	}
 
 	@Override
 	public void mouseEntered(MouseEvent arg0) {}
@@ -138,25 +98,28 @@ public class ItemPanel extends JPanel implements MouseListener {
 
 	@Override
 	public void mousePressed(MouseEvent arg0) {
+		System.out.println("Mouse pressed and "+arg0.getX()+" "+arg0.getY());
 		int x = arg0.getX();
 		int y = arg0.getY();
 		
 		if (insideButton(x, y, BUTTON1X, BUTTON1Y)) {
-						
+			System.out.println("Button 1 pressed");
+			currentButton = "NEW_TURRET_ANIMATION.png";
 		} else if (insideButton(x, y, BUTTON2X, BUTTON2Y)) {
 			
-			
+			System.out.println("Button 2 pressed");
 		} else if (insideButton(x, y, BUTTON3X, BUTTON3Y)) {
-			
+			System.out.println("Button 3 pressed");
+			currentButton = "Wall, side top bot.png";
 			
 		} else if (insideButton(x, y, BUTTON4X, BUTTON4Y)) {
-			
+			System.out.println("Button 4 pressed");
 			
 		}
 	}
 	
 	private boolean insideButton (int x, int y, int buttonx, int buttony) {
-		return (x > buttonx && x < buttonx + BUTTONWIDTH && y > buttony && y <BUTTONHEIGHT);
+		return (x > buttonx && x < buttonx + BUTTONWIDTH && y > buttony && y < buttony+BUTTONHEIGHT);
 	}
 
 	@Override
