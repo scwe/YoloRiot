@@ -56,7 +56,7 @@ public abstract class EntityImpl implements Entity {
 	public void move (int x, int y) {
 		int toX = location.x + x;
 		int toY = location.y + y;
-		if (toX  < Tile.TILE_WIDTH || toY < 0 || toX + width >= RIGHT || toY + height >= BOTTOM) return;		
+		if (toX  < Tile.TILE_WIDTH || toY < 0 || toX + width >= RIGHT || toY + height >= BOTTOM - 64) return;		
 		
 		location.x += x;
 		location.y += y;
