@@ -1,5 +1,6 @@
 package model;
 
+import gui.SoundFactory;
 import gui.YoloMouse;
 import gui.YoloRiot;
 
@@ -131,10 +132,15 @@ public class Model {
 			powerupcount++;
 		}
 		
-		if (yolomode && Math.random() >= 0.2) {
+		if (yolomode && Math.random() >= 0.1) {
 			int laneLoc = (int)((Math.random())*10);
 			Location l = new Location (0, laneLoc * Tile.TILE_HEIGHT);
 			Location l2 = new Location (10, laneLoc * Tile.TILE_HEIGHT);
+			projectiles.add(new YoloBolt(l, l2));
+			
+			laneLoc = (int)((Math.random())*10);
+			l = new Location (0, laneLoc * Tile.TILE_HEIGHT);
+			l2 = new Location (10, laneLoc * Tile.TILE_HEIGHT);
 			projectiles.add(new YoloBolt(l, l2));
 		}
 		
@@ -306,6 +312,7 @@ public class Model {
 	}	
 	
 	public void addStructure (Location l, int buttonnum) {
+		SoundFactory.playSound("audio/coin2.wav");
 		if (buttonnum == 0 && money > CANNON_COST) {
 			structures.add(new SimpleCannon(l));
 			money -= CANNON_COST;
