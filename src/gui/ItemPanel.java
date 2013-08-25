@@ -68,7 +68,7 @@ public class ItemPanel extends JPanel implements MouseListener {
 		super.setBorder(new StrokeBorder(new BasicStroke(4, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND)));
 		setFocusable(false);
 		ImageLoader il = new ImageLoader();
-		background = il.getImage("NEW_GUI_NEWER.png");
+		background = il.getImage("newGoo.png");
 		setPreferredSize(new Dimension(120, YoloRiot.SCREEN_HEIGHT));
 		
 		addMouseListener (this);
