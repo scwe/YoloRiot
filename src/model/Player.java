@@ -1,79 +1,94 @@
 package model;
+import image.SpriteSheet;
+import interactions.Interaction;
+
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Image;
+import java.awt.image.BufferedImage;
 
-import image.SpriteSheet;
+import map.Tile;
+import creeps.Creep.CreepState;
 
-public class Player implements Drawable, Entity, Hitboxable{
+import playerAbilities.Ability;
+import playerAbilities.SimpleShoot;
+
+public class Player extends EntityImpl {
 	public static final int CHARACTER_WIDTH = 40;
 	public static final int CHARACTER_HEIGHT = 64;
 	private SpriteSheet sprites;
 	public Direction curDirection;
-	private Location location;
-	private Hitbox hitbox;
-	private int speed;
-
-
+	public int speed;
+	public SpriteSheet spriteSheet;
+	public int tickCount;
+	private BufferedImage[] walk;
+	
+	public Ability curAbility;
+	
 	public Player(){
-		speed = 4;
-		location = new Location(50,50);
-
+		super (new Location(50, 50));
+		speed = 6;
+		curAbility = Model.abilities[0];
 		//sprites = new SpriteSheet(0, 0, CHARACTER_WIDTH, CHARACTER_HEIGHT, "character.png");  TODO, uncomment when we have a playe sprite
-
-		hitbox = new Hitbox(this, location.x, location.y, CHARACTER_WIDTH, CHARACTER_HEIGHT);
+	}
+	
+	public void changeAbility (int change) {
+		curAbility = Model.abilities[change % Model.abilities.length];
+		// TODO
 	}
     
-
-    
     public void draw(Graphics g){
-    	g.setColor(Color.blue);
-    	hitbox.draw(g);
+    	g.drawImage(getSprite(), location.x, location.y,  64, getSprite().getHeight(), null);
+    }
+    
+    @Override
+    public BufferedImage getSprite(){
+
+    	tickCount+=4;
+    	if (walk == null || attackingImage == null){
+    		walk = new BufferedImage[4];
+    		spriteSheet = new SpriteSheet(0, 0, Tile.TILE_WIDTH, Tile.TILE_HEIGHT,"MAIN_character2.png");
+    		walk[0] = spriteSheet.getImage(0);
+    		walk[1] = spriteSheet.getImage(1);
+    		walk[2] = spriteSheet.getImage(2);
+    		walk[3] = spriteSheet.getImage(3);
+    		attackingImage = walk[0];
+    	}
+    	else{
+	    	
+	    	if(curDirection == Direction.NORTH){
+	    		return walk[2];
+	    	}
+	    	if(curDirection == Direction.EAST){
+	    		return walk[1];
+	    	}
+	    	if(curDirection == Direction.WEST){
+	    		return walk[3];
+	    	}
+	    	return walk[0];
+    	}
+    	return walk[0];
+    	
     }
 
 	@Override
 	public void interact(Interaction i) {
-		// TODO Auto-generated method stub
-		
+		i.apply(this);
 	}
-
 
 	public void move(Direction d){
 		if(d == Direction.NORTH){
-			location.y -= speed;
-			hitbox.moveHitbox(0, -speed);
+			move(0, -speed);
 			curDirection = Direction.NORTH;
 		}else if(d == Direction.EAST){
-			location.x += speed;
-			hitbox.moveHitbox(speed, 0);
+			move(speed, 0);
 			curDirection = Direction.EAST;
 		}else if(d == Direction.SOUTH){
-			location.y += speed;
-			hitbox.moveHitbox(0, speed);
+			move(0, speed);
 			curDirection = Direction.SOUTH;
 		}else if(d == Direction.WEST){
-			location.x -= speed;
-			hitbox.moveHitbox(-speed, 0);
+			move(-speed, 0);
 			curDirection = Direction.WEST;
 		}
-	}
-
-	@Override
-	public void update() {
-		
-	}
-
-
-	@Override
-	public Hitbox getHitbox() {
-		return hitbox;
-	}
-
-
-	@Override
-	public void setHitbox(Hitbox h) {
-		this.hitbox = h;
-		
 	}
 	
 	public int getSpeed() {
@@ -89,35 +104,13 @@ public class Player implements Drawable, Entity, Hitboxable{
 		return location;
 	}
 
+	@Override
+	public void update() {} // not needed, player controlled.
+	
 
 
 	@Override
-	public Image getSprite() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-
-	@Override
-	public void move(int x, int y) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-
-	@Override
-	public void reduceHealth(int amount) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-
-	@Override
-	public Hitbox getHitBox() {
-		// TODO Auto-generated method stub
-		return null;
+	protected Hitbox makeHitbox() {
+		return new Hitbox(location.x, location.y, CHARACTER_WIDTH, CHARACTER_HEIGHT);
 	}
 }

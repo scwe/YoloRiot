@@ -1,29 +1,36 @@
-package model;
+package projectiles;
+
+import interactions.Interaction;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Polygon;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
+import java.util.Set;
 
-public abstract class Projectile extends EntityImpl implements Drawable,
-		Hitboxable {
+import creeps.Creep;
+import model.Entity;
+import model.EntityImpl;
+import model.Hitbox;
+import model.Location;
+import model.Model;
 
+public abstract class Projectile extends EntityImpl {
+	private static final int MOVE_STEP = 15;
+	
+	protected int moveStep = MOVE_STEP;
+	
 	protected Location vector;
 	protected double angle;
 	protected double movelength = 10;
+	
+	public boolean friendly = true;
+	
+	protected Interaction attack;
 
-	protected Hitbox hitbox;
-	protected Model model;
-
-	public Projectile(Location location, Model model) {
-		this.location = location;
-		this.model = model;
-	}
-
-	public Projectile(Location start, Location direction, Model model) {
-		this.model = model;
-		location = start;
+	public Projectile(Location start, Location direction) {
+		super(start);
 		vector = direction;
 		angle = Math.atan2(vector.y - location.y, vector.x - location.x);
 	}
@@ -49,9 +56,28 @@ public abstract class Projectile extends EntityImpl implements Drawable,
 	    gimg.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
 	    g2d.drawImage(dimg, null, location.x - imgsize/2, location.y - imgsize/2);
-
 	}
 
+	@Override
+	public void update() {
+		ticks++;
+		
+		if (ticks == tickspeed) {
+			ticks = 0;
+			
+			Set<? extends Entity> es;
+			if (friendly) es = Model.model.intersectsCreeps(hitbox);
+			else es = Model.model.intersectsFriendly(hitbox);
+			
+			unitMove(moveStep);
+			
+			for (Entity e : es) {
+				e.interact(attack);
+				Model.model.killEntity(this);
+			}
+		}
+	}
+	
 	@Override
 	public void interact(Interaction i) {
 		// not needed for projectiles, as they only interact with others.
@@ -64,28 +90,20 @@ public abstract class Projectile extends EntityImpl implements Drawable,
 	protected final void unitMove(int magnitude) {
 		double xunit = Math.cos(angle);
 		double yunit = Math.sin(angle);
-
+		
+		// FIXME bug in projectile motion
+		
 		location.x += xunit * magnitude;
 		location.y += yunit * magnitude;
 		
-		hitbox.translate((int)(xunit*magnitude), (int)(yunit*magnitude));
+		hitbox.move((int)(xunit*magnitude), (int)(yunit*magnitude));
 	}
 
-	/**
-	 * another maths helper.
-	 */
-	protected final void setHitbox(int width, int length) {
-		/*BufferedImage sprite = getSprite ();
-		int imgW = sprite.getWidth();
-		int imgH = sprite.getHeight();
-	
-		int[] xpts = {location.x, location.x + imgW, location.x + imgW, location.x};
-		int[] ypts = {location.y, location.y, location.y + imgH, location.y + imgH};
-		Polygon poly = new Polygon(xpts, ypts, xpts.length);
-		*/
-		hitbox = new Hitbox (this, location.x, location.y, 10, 10);
-		//poly.
+	@Override
+	protected Hitbox makeHitbox() {
+		BufferedImage sprite = getSprite ();
+		Hitbox h = new Hitbox (location.x, location.y, sprite.getWidth(), sprite.getHeight());
+		h.rotate(angle);
+		return h;
 	}
-
-	public abstract void update();
 }

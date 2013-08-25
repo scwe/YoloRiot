@@ -1,7 +1,10 @@
 package gui;
-import java.awt.event.*;
-import model.Player;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+
 import model.Direction;
+import model.Model;
+import model.Player;
 
 public class YoloKeyboard extends KeyAdapter{
 	private Player c;
@@ -41,6 +44,8 @@ public class YoloKeyboard extends KeyAdapter{
     		downPressed = false;
     	}else if(k.getKeyCode() == KeyEvent.VK_D){
     		rightPressed = false;
+    	} else if (k.getKeyChar() == '?') {
+    		Model.model.FULLYOL0 ();
     	}
     }
     

@@ -4,24 +4,21 @@ import image.ImageLoader;
 
 import java.awt.image.BufferedImage;
 
-import ais.RandomCreepAI;
-import ais.SimpleCreepAI;
-import model.AI;
-import model.Creep;
 import model.Location;
-import model.Model;
+import creepAIs.CreepAI;
+import creepAIs.RandomCreepAI;
 
 public class RandomCreep extends SimpleCreep{
 	
 	private int randomness;
 	
-	public RandomCreep(Location location, Model model, int randomness) {
-		super(location,model);
+	public RandomCreep(Location location, int randomness) {
+		super(location);
 		this.tickspeed = 10;
 		this.randomness= randomness;
 	}
 	
-	protected AI makeAI() {
+	protected CreepAI makeAI() {
 		return new RandomCreepAI(randomness);
 	}
 	
@@ -32,7 +29,6 @@ public class RandomCreep extends SimpleCreep{
 		
 		}
 		return image;
-
 	}
 	
 }

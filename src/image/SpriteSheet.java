@@ -28,7 +28,7 @@ public class SpriteSheet {
 	
 	}
 	
-	public Image getImage(){
+	public BufferedImage getImage(){
 		return image.getSubimage(x*spriteWidth, y*spriteHeight, spriteWidth, spriteHeight);
 	}
 	
@@ -47,6 +47,12 @@ public class SpriteSheet {
 			xVal = 2;
 		}
 		return image.getSubimage(xVal*spriteWidth, y*spriteHeight, spriteWidth, spriteHeight);
+
+	}
+	
+	public BufferedImage getImage(int val){
+		
+		return image.getSubimage(val*spriteWidth, y*spriteHeight, spriteWidth, spriteHeight);
 
 	}
 	

@@ -1,24 +1,26 @@
-package ais;
+package creepAIs;
 
 import java.util.Set;
 
-import model.AI;
-import model.Creep.CreepState;
+import structures.Structure;
 import model.Entity;
 import model.Model;
-import model.Player;
-import model.Structure;
-import creeps.SimpleCreep;
 
-public class SimpleCreepAI implements AI {
+import model.Player;
+
+import creeps.Creep;
+import creeps.SimpleCreep;
+import creeps.Creep.CreepState;
+
+public class SimpleCreepAI implements CreepAI {
 	State last;
 	
 	@Override
-	public void next(Entity e) {
+	public void next(Creep c) {
 		
-		Set<Entity> intersected = Model.model.intersects(e.getHitBox());
+		Set<Entity> intersected = Model.model.intersectsFriendly(c.getHitbox());
 		boolean attacking = false;
-		SimpleCreep sc = (SimpleCreep)e;
+		SimpleCreep sc = (SimpleCreep)c;
 		for (Entity ent : intersected){
 			
 			if (ent instanceof Structure){
@@ -36,7 +38,7 @@ public class SimpleCreepAI implements AI {
 			}
 		}
 		if(!attacking){
-			e.move(-10,0);
+			c.move(-10,0);
 			sc.setState(CreepState.MOVING);
 		}
 	}

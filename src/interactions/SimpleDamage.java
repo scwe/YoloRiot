@@ -1,7 +1,6 @@
 package interactions;
 
 import model.Entity;
-import model.Interaction;
 
 public class SimpleDamage extends Interaction {
 	public final int amount;

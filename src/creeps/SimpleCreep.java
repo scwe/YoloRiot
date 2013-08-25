@@ -1,58 +1,78 @@
 package creeps;
 
 import image.ImageLoader;
+import image.SpriteSheet;
+import interactions.Interaction;
 import interactions.SimpleDamage;
 
-import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
-import model.AI;
-import model.Creep;
-import model.Interaction;
+import map.Tile;
 import model.Location;
 import model.Model;
-import ais.SimpleCreepAI;
+import creepAIs.CreepAI;
+import creepAIs.SimpleCreepAI;
 
 public class SimpleCreep extends Creep {
 	private final Interaction attack = new SimpleDamage (5);
+	private int tickCount =0;
+	SpriteSheet spriteSheet;
+	BufferedImage[] walk;
 	
-	public SimpleCreep(Location location, Model model) {
-		super(location, model);
-		tickspeed = 25;
+	public SimpleCreep(Location location) {
+		super(location);
+		tickspeed = 40;
+		
 	}
 
 	@Override
-	protected AI makeAI() {
+	protected CreepAI makeAI() {
 		return new SimpleCreepAI ();
 	}
 
 	@Override
 	public void interact(Interaction i) {
-		model.killEntity(this);
+		Model.model.killEntity(this);
 	}
-	
-	/*public void update() {
-		Action a = ai.getNext (this);
-		if (a.state == Action.State.ATTACK) {
-			Entity attacking = a.interacting;
-			attacking.interact(attack);
-		} else if (a.state == Action.State.MOVE) {
-			location.moveLeft (1);
-		}
-	}*/
 
 	@Override
 	public BufferedImage getSprite() {
-		if (image == null || attackingImage == null){
-			ImageLoader il = new ImageLoader();
-			image = il.getImage("CREEP1.png");
-			attackingImage = il.getImage("CREEP1_ATTACKING.png");
-			return image;
+		tickCount+=4;
+		if (walk == null || attackingImage == null){
+			walk = new BufferedImage[4];
+			spriteSheet = new SpriteSheet(0, 0, Tile.TILE_WIDTH, Tile.TILE_HEIGHT,"64_creep_1.png");
+			walk[0] = spriteSheet.getImage(1);
+			walk[1] = spriteSheet.getImage(2);
+			walk[2] = spriteSheet.getImage(3);
+			walk[3] = spriteSheet.getImage(0);
+			attackingImage = walk[0];
+			
 		}
-		if (this.state == CreepState.ATTACKING)
+		else if (this.state == CreepState.ATTACKING)
 			return attackingImage;
-		return image;
+		else{
+			
+			if(tickCount < 50){
+				return walk[0];
+			}
+			else if (tickCount < 100)
+				return walk[1];
+			else if (tickCount < 150){
+				return walk[2];
+			}
+			else if (tickCount < 200){
+				
+				return walk[3];
+			}
+			if (tickCount > 200){
+				tickCount = 0;
+				
+			}
+				
+			return walk[0];
+		}
+		return null;
+		
 
 	}
 
