@@ -42,6 +42,32 @@ public class ItemPanel extends JPanel implements MouseListener {
 	public static final int BUTTONWIDTH = 64;
 	public static final int BUTTONHEIGHT = 64;
 
+	public static final int MONEYX = 0;
+	public static final int MONEYY = 0;
+	
+	public static final int LIFE1X = 0;
+	public static final int LIFE1Y = 0;
+	public static final int LIFE2X = 0;
+	public static final int LIFE2Y = 0;
+	public static final int LIFE3X = 0;
+	public static final int LIFE3Y = 0;
+	public static final int LIFE4X = 0;
+	public static final int LIFE4Y = 0;
+	public static final int LIFE5X = 0;
+	public static final int LIFE5Y = 0;
+	
+	public static final int LIFEWIDTH = 32;
+	public static final int LIFEHEIGHT = 32;
+	
+	public static final int POWER1X = 0;
+	public static final int POWER1Y = 0;
+	public static final int POWER2X = 0;
+	public static final int POWER2Y = 0;
+	public static final int POWER3X = 0;
+	public static final int POWER3Y = 0;
+	
+	public static final int POWERWIDTH = 32;
+	public static final int POWERHEIGHT = 32;	
 	
 	public ItemPanel(Model m){
 		this.m = m;
@@ -71,7 +97,6 @@ public class ItemPanel extends JPanel implements MouseListener {
 		yoloButton.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
 		yoloButton.setBackground(Color.white);
 		add(yoloButton);
-
 	}
 	
 	public void paintComponent(Graphics g){
