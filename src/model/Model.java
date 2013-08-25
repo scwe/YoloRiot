@@ -30,6 +30,10 @@ public class Model {
 	private static final int FIELD_HEIGHT = Map.MAP_HEIGHT*Tile.TILE_HEIGHT;
 	private static final int YOLO_TOTAL_SIZE = 300;
 	private static final int YOLO_TICKWAVE_SIZE = 40;
+	private static final int MONEY_INC = 10;
+	
+	private static final int CANNON_COST = 500;
+	private static final int WALL_COST = 100;
 	
 	public static Model model;
 	
@@ -39,6 +43,8 @@ public class Model {
 	
 	public static Ability[] abilities = {new PiercingShot (), new InstantAoE (), new WeakFastFire()};
 	private boolean mousePressed = false;
+	
+	public int money = 200;
 	
 	private Yolostone yolostone;
 	
@@ -255,6 +261,7 @@ public class Model {
 		if (e instanceof Creep) {
 			creeps.remove(e);
 			if (yolomode) yoloWaveLeft--;
+			money += MONEY_INC;
 		} else if (e instanceof Structure) {
 			structures.remove(e);
 		} else if (e instanceof Projectile) {
@@ -263,10 +270,12 @@ public class Model {
 	}	
 	
 	public void addStructure (Location l, int buttonnum) {
-		if (buttonnum == 0) {
+		if (buttonnum == 0 && money > CANNON_COST) {
 			structures.add(new SimpleCannon(l));
-		} else if (buttonnum == 1) {
+			money -= CANNON_COST;
+		} else if (buttonnum == 1 && money > WALL_COST) {
 			structures.add(new SimpleWall(l));
+			money -= WALL_COST;
 		}
 	}
 

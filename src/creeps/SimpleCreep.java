@@ -21,7 +21,10 @@ public class SimpleCreep extends Creep {
 	
 	public SimpleCreep(Location location) {
 		super(location);
-		tickspeed = 40;
+
+		tickspeed = 20;
+
+
 	}
 
 	@Override
@@ -41,7 +44,7 @@ public class SimpleCreep extends Creep {
 	
 	@Override
 	public BufferedImage getSprite() {
-		tickCount+=4;
+		tickCount+=5;
 		if (walk == null || attackingImage == null){
 			walk = new BufferedImage[4];
 			spriteSheet = new SpriteSheet(0, 0, Tile.TILE_WIDTH, Tile.TILE_HEIGHT,"64_creep_1.png");
@@ -52,10 +55,10 @@ public class SimpleCreep extends Creep {
 			attackingImage = walk[0];
 			return walk[0];
 		}
-		else if (this.state == CreepState.ATTACKING)
+		else if (this.state == CreepState.ATTACKING){
 			return attackingImage;
+		}
 		else{
-			
 			if(tickCount < 50){
 				return walk[0];
 			}
@@ -65,14 +68,11 @@ public class SimpleCreep extends Creep {
 				return walk[2];
 			}
 			else if (tickCount < 200){
-				
 				return walk[3];
 			}
 			if (tickCount > 200){
 				tickCount = 0;
-				
 			}
-				
 			return walk[0];
 		}
 

@@ -7,10 +7,10 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.GridBagConstraints;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -24,15 +24,22 @@ public class ItemPanel extends JPanel{
 	
 	private static final int BUTTON_WIDTH = 64;
 	private static final int BUTTON_HEIGHT = 64;
-	
+	private BufferedImage background;
 	public static String currentButton;
 	private Model m;
+
 	
 	public ItemPanel(Model m){
 		this.m = m;
-		GridBagConstraints gc = new GridBagConstraints();
 		super.setBorder(new StrokeBorder(new BasicStroke(4, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND)));
 		setFocusable(false);
+		this.setLayout(null);
+		//setPreferredSize(new Dimension(120, YoloRiot.SCREEN_HEIGHT));
+		JButton but = newStructureButton("NEW_TURRET_ANIMATION.png", 0, 0, 64, 64);
+		but.setBounds(60,270, 100, 100);
+		add(but);
+		ImageLoader il = new ImageLoader();
+		background = il.getImage("NEW_GUI.png");
 		setPreferredSize(new Dimension(120, YoloRiot.SCREEN_HEIGHT));
 		add(newStructureButton("NEW_TURRET_ANIMATION.png", 32, 0, 64, 64));
 		add(newStructureButton("Wall, side top bot.png", 0, 0, 32, 32));
@@ -49,11 +56,13 @@ public class ItemPanel extends JPanel{
 		yoloButton.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
 		yoloButton.setBackground(Color.white);
 		add(yoloButton);
+
 	}
 	
 	public void paintComponent(Graphics g){
 		g.setColor(Color.white);
 		g.fillRect(0,0,getWidth(), getHeight());
+		g.drawImage(background,0,0,this.getWidth(),this.getHeight(),null);
 	}
 	
 	public JButton newStructureButton(String imageFile, int x, int y, int width, int height){
