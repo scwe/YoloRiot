@@ -155,6 +155,7 @@ public class YoloRiot extends JFrame implements ActionListener {
 			model.tick();
 			key.update();
 			mapPanel.repaint();
+			itemPanel.repaint();
 		}
 	}
 
