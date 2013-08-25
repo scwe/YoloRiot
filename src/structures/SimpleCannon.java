@@ -21,7 +21,7 @@ public class SimpleCannon extends Structure {
 	public SimpleCannon(Location location) {
 		super(location);
 		health = 100;
-		direction = new Location(location.x + 10, location.y);
+		direction = new Location(location.x + 10+40, location.y+36);
 	}
 
 	@Override
@@ -32,20 +32,18 @@ public class SimpleCannon extends Structure {
 
 	@Override
 	public BufferedImage getSprite() {
-		return image.getImage();
+		return image.getImage(32, 0, 64, 64);
 	}
 
 	@Override
 	public void fire() {
-		Projectile p = new PiercingProjectile(new Location(location.x, location.y), direction);
+		Projectile p = new PiercingProjectile(new Location(location.x+40, location.y+36), direction);
 		Model.model.addProjectile (p);
 	}
 
 	@Override
 	public void initialiseSpriteSheet() {
-		System.out.println("INitialiased sprite sheet for simple cannon");
 		image = new SpriteSheet(0, 0, 64, 64, "NEW_TURRET_ANIMATION.png");
-		image.setX(1);
 		
 	}
 }
