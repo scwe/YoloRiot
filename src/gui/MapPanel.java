@@ -45,8 +45,31 @@ public class MapPanel extends JPanel{
 			g2d.drawImage( new ImageLoader().getImage("StartScreen.png"), 0, 0, 400, 400, null);
 		}
 		
+		
 		BufferedImage offscreen = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_ARGB);
 		Graphics2D buffer = (Graphics2D) offscreen.getGraphics();
+		
+		if (Model.model.yolomode){
+			
+			if (tickCount > 30){
+				
+				buffer.rotate(10);
+				
+			}
+			else if(tickCount > 90){
+				
+				
+			}
+			else if(tickCount > 120){
+				buffer.rotate(-10);
+				
+			}
+			else if (tickCount > 150){
+				
+				
+			}
+			
+		}
 		buffer.setColor(Color.black);
 		buffer.fillRect(0, 0, getWidth(), getHeight());
 		
