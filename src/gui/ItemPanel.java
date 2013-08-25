@@ -75,6 +75,11 @@ public class ItemPanel extends JPanel implements MouseListener {
 	public static final int POWERWIDTH = 32;
 	public static final int POWERHEIGHT = 32;	
 	
+	public static final int YOLOWIDTH = 100;
+	public static final int YOLOHEIGHT = 64;
+	public static final int YOLOX = 60;
+	public static final int YOLOY = 610;
+	
 	public ItemPanel(Model m){
 		this.m = m;
 		super.setBorder(new StrokeBorder(new BasicStroke(4, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND)));
@@ -166,24 +171,26 @@ public class ItemPanel extends JPanel implements MouseListener {
 		int x = arg0.getX();
 		int y = arg0.getY();
 		
-		if (insideButton(x, y, BUTTON1X, BUTTON1Y)) {
+		if (insideButton(x, y, BUTTON1X, BUTTON1Y, BUTTONWIDTH, BUTTONHEIGHT)) {
 			System.out.println("Button 1 pressed");
 			currentButton = "NEW_TURRET_ANIMATION.png";
-		} else if (insideButton(x, y, BUTTON2X, BUTTON2Y)) {
+		} else if (insideButton(x, y, BUTTON2X, BUTTON2Y, BUTTONWIDTH, BUTTONHEIGHT)) {
 			
 			System.out.println("Button 2 pressed");
-		} else if (insideButton(x, y, BUTTON3X, BUTTON3Y)) {
+		} else if (insideButton(x, y, BUTTON3X, BUTTON3Y, BUTTONWIDTH, BUTTONHEIGHT)) {
 			System.out.println("Button 3 pressed");
 			currentButton = "Wall, side top bot.png";
 			
-		} else if (insideButton(x, y, BUTTON4X, BUTTON4Y)) {
+		} else if (insideButton(x, y, BUTTON4X, BUTTON4Y, BUTTONWIDTH, BUTTONHEIGHT)) {
 			System.out.println("Button 4 pressed");
 			
+		}else if(insideButton(x, y, YOLOX, YOLOY, YOLOWIDTH, YOLOHEIGHT)){
+			Model.model.FULLYOL0();
 		}
 	}
 	
-	private boolean insideButton (int x, int y, int buttonx, int buttony) {
-		return (x > buttonx && x < buttonx + BUTTONWIDTH && y > buttony && y < buttony+BUTTONHEIGHT);
+	private boolean insideButton (int x, int y, int buttonx, int buttony, int width, int height) {
+		return (x > buttonx && x < buttonx + width && y > buttony && y < buttony+height);
 	}
 
 	@Override
