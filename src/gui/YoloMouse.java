@@ -1,9 +1,7 @@
 package gui;
 
 import java.awt.IllegalComponentStateException;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseWheelEvent;
+import java.awt.event.*;
 
 import map.Map;
 import map.Tile;
@@ -73,10 +71,9 @@ public class YoloMouse extends MouseAdapter {
 				return;
 			}
 			
-			if(ItemPanel.currentButton.equals("Button.png")){
-				model.addStructure(new Location(left, top), 0);
-				ItemPanel.currentButton = null;
-			}
+			model.addStructure(new Location(left, top), ItemPanel.getButtonNum());
+			ItemPanel.currentButton = null;
+
 
 		}
 	}

@@ -36,8 +36,8 @@ public class MapPanel extends JPanel{
 		setFocusable(true);
 
 		Cursor cursor = Toolkit.getDefaultToolkit().createCustomCursor(new ImageLoader().getImage("cursor.png"), new Point(0, 0), "crosshair");
-
 		super.setCursor(cursor);
+		
 	}
 	
 	public Map getMap(){
@@ -64,7 +64,7 @@ public class MapPanel extends JPanel{
 			int left = (YoloMouse.mouseX / Tile.TILE_WIDTH) * Tile.TILE_WIDTH;
 			int top = (YoloMouse.mouseY / Tile.TILE_HEIGHT) * Tile.TILE_HEIGHT;
 			
-			buffer.drawImage(new ImageLoader().getImage(ItemPanel.currentButton).getScaledInstance(64, 64, Image.SCALE_FAST), left, top, 64, 64, null);
+			buffer.drawImage(ItemPanel.getImage(), left, top, 64, 64, null);
 			Cursor cursor = Toolkit.getDefaultToolkit().createCustomCursor(new BufferedImage(10, 10, BufferedImage.TYPE_INT_ARGB), new Point(0, 0),
 					ItemPanel.currentButton);
 			super.setCursor(cursor);

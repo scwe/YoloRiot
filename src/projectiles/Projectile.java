@@ -74,6 +74,7 @@ public abstract class Projectile extends EntityImpl {
 			for (Entity e : es) {
 				e.interact(attack);
 				Model.model.killEntity(this);
+				break;
 			}
 		}
 	}
@@ -91,10 +92,8 @@ public abstract class Projectile extends EntityImpl {
 		double xunit = Math.cos(angle);
 		double yunit = Math.sin(angle);
 		
-		// FIXME bug in projectile motion
-		
-		location.x += xunit * magnitude;
-		location.y += yunit * magnitude;
+		location.x += (int) (xunit * magnitude);
+		location.y += (int) (yunit * magnitude);
 		
 		hitbox.move((int)(xunit*magnitude), (int)(yunit*magnitude));
 	}

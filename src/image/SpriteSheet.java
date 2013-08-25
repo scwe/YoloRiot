@@ -32,6 +32,10 @@ public class SpriteSheet {
 		return image.getSubimage(x*spriteWidth, y*spriteHeight, spriteWidth, spriteHeight);
 	}
 	
+	public BufferedImage getImage(int x, int y, int width, int height){
+		return image.getSubimage(x, y, width, height);
+	}
+	
 	public BufferedImage getImage(String val){
 		int xVal = 0;
 		if (val.equals("RIGHT")){

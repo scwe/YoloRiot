@@ -7,15 +7,12 @@ import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.Point;
 import java.awt.RenderingHints;
-import java.awt.Toolkit;
-import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 import javax.swing.JPanel;
 
 import map.Map;
-import map.Tile;
 import model.Model;
 
 public class ScreenPanel extends JPanel {
@@ -48,10 +45,10 @@ public class ScreenPanel extends JPanel {
 
 		buffer = (Graphics2D) offscreen.getGraphics();
 		buffer.setColor(Color.white);
-		buffer.fillRect(0, 0, getWidth(), getHeight());
-		buffer.setRenderingHints(rh);
 
-		// TODO drawing of any background shit should go here
+		buffer.drawImage(new ImageLoader().getImage("BG_cliffs.png"), 0, 0, getWidth(), 768, null);
+
+		buffer.setRenderingHints(rh);
 
 		g2d.drawImage(offscreen, 0, 0, this);
 	}
