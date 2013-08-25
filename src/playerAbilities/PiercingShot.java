@@ -9,7 +9,7 @@ public class PiercingShot extends Ability {
 
 	public PiercingShot () {
 		maxCooldown = 50;
-		yoloMaxCooldown = 10;
+		yoloMaxCooldown = (4 - Model.model.powerupcount) * 5;
 	}
 	
 	@Override
