@@ -137,7 +137,6 @@ public class Model {
 			creeps.add(new RandomCreep (new Location(end, laneLoc+1 * laneHeight), 8));
 			if(homingTick > 1){
 				creeps.add(new HomingCreep (new Location(end, laneLoc * laneHeight)));
-				System.out.println("HOMING");
 				homingTick = 0;
 			}
 		}
