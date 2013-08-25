@@ -167,6 +167,7 @@ public class ItemPanel extends JPanel implements MouseListener {
 			System.out.println("Button 4 pressed");
 			
 		}else if(insideButton(x, y, YOLOX, YOLOY, YOLOWIDTH, YOLOHEIGHT)){
+			System.out.println("Yolo button");
 			Model.model.FULLYOL0();
 		}
 	}

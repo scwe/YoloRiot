@@ -2,7 +2,6 @@
 package projectiles;
 
 import gui.SoundFactory;
-import image.ImageLoader;
 import image.SpriteSheet;
 import interactions.SimpleDamage;
 
