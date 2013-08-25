@@ -22,17 +22,23 @@ public class Player extends EntityImpl {
 	public int tickCount;
 	private BufferedImage[] walk;
 	
+	public static final int MAX_HEALTH = 5;
+	
 	public Ability curAbility;
 	public int curAbilityIndex;
 	
 	public Player(){
-
 		super (new Location(128, 128));
+		health = MAX_HEALTH;
 		speed = 8;
 		tickspeed = 10;
 		curAbility = Model.abilities[0];
 		curAbilityIndex = 0;
 		//sprites = new SpriteSheet(0, 0, CHARACTER_WIDTH, CHARACTER_HEIGHT, "character.png");  TODO, uncomment when we have a playe sprite
+	}
+	
+	public void reduceHealth (int amount) {
+		health --;
 	}
 	
 	public void changeAbility (int change) {

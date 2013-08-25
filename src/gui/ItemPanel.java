@@ -13,6 +13,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
+import java.util.HashMap;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -29,6 +30,9 @@ public class ItemPanel extends JPanel implements MouseListener {
 	private BufferedImage background;
 	public static String currentButton;
 	private Model m;
+
+	HashMap<String,BufferedImage> numbers = new HashMap<String,BufferedImage>();
+
 	
 	public static final int BUTTON1X = 66;   //FUYCK yeah
 	public static final int BUTTON1Y = 427;
@@ -42,16 +46,49 @@ public class ItemPanel extends JPanel implements MouseListener {
 	public static final int BUTTONWIDTH = 64;
 	public static final int BUTTONHEIGHT = 64;
 
+	public static final int MONEYX = 0;
+	public static final int MONEYY = 0;
+	
+	public static final int LIFE1X = 0;
+	public static final int LIFE1Y = 0;
+	public static final int LIFE2X = 0;
+	public static final int LIFE2Y = 0;
+	public static final int LIFE3X = 0;
+	public static final int LIFE3Y = 0;
+	public static final int LIFE4X = 0;
+	public static final int LIFE4Y = 0;
+	public static final int LIFE5X = 0;
+	public static final int LIFE5Y = 0;
+	
+	public static final int LIFEWIDTH = 32;
+	public static final int LIFEHEIGHT = 32;
+	
+	public static final int POWER1X = 0;
+	public static final int POWER1Y = 0;
+	public static final int POWER2X = 0;
+	public static final int POWER2Y = 0;
+	public static final int POWER3X = 0;
+	public static final int POWER3Y = 0;
+	
+	public static final int POWERWIDTH = 32;
+	public static final int POWERHEIGHT = 32;	
 	
 	public ItemPanel(Model m){
 		this.m = m;
 		super.setBorder(new StrokeBorder(new BasicStroke(4, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND)));
 		setFocusable(false);
 		ImageLoader il = new ImageLoader();
-		background = il.getImage("NEW_GUI.png");
+		background = il.getImage("NEW_GUI_NEWER.png");
 		setPreferredSize(new Dimension(120, YoloRiot.SCREEN_HEIGHT));
 		
 		addMouseListener (this);
+
+		
+		ImageLoader im = new ImageLoader();
+		for (int i = 0; i < 10; i++){
+			//numbers.put(i+"", im.getImage(i+".png"));
+			
+		}
 
 	}
 	
@@ -59,6 +96,25 @@ public class ItemPanel extends JPanel implements MouseListener {
 		g.setColor(Color.white);
 		g.fillRect(0,0,getWidth(), getHeight());
 		g.drawImage(background,0,0,this.getWidth(),this.getHeight(),null);
+		
+		int money = Model.model.money;
+		String moneyS = new Integer(money).toString();
+		
+		for (int i=0; i < moneyS.length(); i++) {
+			//BufferedImage number = numbers.get(moneyS.charAt(i)); 
+			//g.drawImage(number, MONEYX, MONEYY + i*number.getWidth(), null);	
+		}
+		
+		int lives = Model.model.player.health;
+		for (int i=0; i < lives; i++) {
+			//g.drawImage(heart, LIFE1X, LIFE1Y + i*heart.getWidth(), null);	
+		}
+		
+		int powerups = Model.model.powerupcount;
+		
+		for (int i=0; i < powerups; i++) {
+			//g.drawImage(powerup, POWER1X, POWER1Y + i*POWERHEIGHT, null);	
+		}
 	}
 	
 	

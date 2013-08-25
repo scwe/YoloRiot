@@ -174,7 +174,6 @@ public class Model {
 			int laneLoc = (int)((Math.random())*10);
 			creeps.add(new SimpleCreep (new Location(end, laneLoc * laneHeight)));
 			laneLoc = (int)((Math.random())*10);
-			creeps.add(new RandomCreep (new Location(end, laneLoc * laneHeight), 8));
 			laneLoc = (int)((Math.random())*10);
 			if(homingTick > 1){
 				creeps.add(new HomingCreep (new Location(end, laneLoc * laneHeight)));
@@ -307,7 +306,6 @@ public class Model {
 	}	
 	
 	public void addStructure (Location l, int buttonnum) {
-		System.out.println(buttonnum);
 		if (buttonnum == 0 && money > CANNON_COST) {
 			structures.add(new SimpleCannon(l));
 			money -= CANNON_COST;
