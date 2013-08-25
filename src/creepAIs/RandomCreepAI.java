@@ -26,7 +26,7 @@ public class RandomCreepAI implements CreepAI {
 				c.move(-10, 0);
 				return;
 			}
-			else if (ranDir < 0.7){
+			else if (ranDir < 0.8){
 				c.move(0, -10);
 				return;
 			}
