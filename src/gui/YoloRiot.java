@@ -21,7 +21,7 @@ public class YoloRiot extends JFrame implements ActionListener {
 	public static final int SCREEN_WIDTH = 1200;
 	public static final int SCREEN_HEIGHT = 720;
 
-	private static final int TICK = 5;
+	private static final int TICK = 10;
 
 	private ScreenPanel screen;
 	private Model model;
