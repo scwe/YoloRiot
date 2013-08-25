@@ -39,7 +39,7 @@ public class ScreenPanel extends JPanel {
 	public void paintComponent(Graphics g) {
 
 		Graphics2D g2d = (Graphics2D) g;
-		RenderingHints rh = new RenderingHints(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+	//	RenderingHints rh = new RenderingHints(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
 		Image offscreen = createImage(getWidth(), getHeight());
 
@@ -48,7 +48,7 @@ public class ScreenPanel extends JPanel {
 
 		buffer.drawImage(new ImageLoader().getImage("BG_cliffs.png"), 0, 0, getWidth(), 768, null);
 
-		buffer.setRenderingHints(rh);
+	//	buffer.setRenderingHints(rh);
 
 		g2d.drawImage(offscreen, 0, 0, this);
 	}

@@ -21,7 +21,7 @@ public class SimpleCreep extends Creep {
 	
 	public SimpleCreep(Location location) {
 		super(location);
-		tickspeed = 40;
+		tickspeed = 20;
 		
 	}
 
@@ -37,7 +37,7 @@ public class SimpleCreep extends Creep {
 
 	@Override
 	public BufferedImage getSprite() {
-		tickCount+=4;
+		tickCount+=5;
 		if (walk == null || attackingImage == null){
 			walk = new BufferedImage[4];
 			spriteSheet = new SpriteSheet(0, 0, Tile.TILE_WIDTH, Tile.TILE_HEIGHT,"64_creep_1.png");
