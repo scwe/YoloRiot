@@ -28,6 +28,7 @@ import creeps.SimpleCreep;
 public class Model {
 	private static final int FIELD_WIDTH = Map.MAP_WIDTH*Tile.TILE_WIDTH;
 	private static final int FIELD_HEIGHT = Map.MAP_HEIGHT*Tile.TILE_HEIGHT;
+	private static final int YOLO_WAVE_SIZE = 3000;
 	
 	public static Model model;
 	
@@ -42,6 +43,7 @@ public class Model {
 	
 	public double yolospeed = 1.0;
 	public boolean yolomode = false;
+	public int yoloWaveLeft = YOLO_WAVE_SIZE;
 	
 	public Player player;
 	private int homingTick = 0;
@@ -95,8 +97,13 @@ public class Model {
 			riot.lost = true;
 		}
 		
+		if (yoloWaveLeft <= 0) {
+			riot.won = true;
+		}
+		
 		if (tick > waveTick){
-			makeCreeps ();
+			if (yolomode) yoloCreeps (); 
+			else makeCreeps ();
 			tick = 0;
 		}
 		tick++;
@@ -142,6 +149,23 @@ public class Model {
 		}
 	}
 	
+	private void yoloCreeps () {
+		double creepNo = Math.abs(Math.sin(tick)*20);
+		
+		int end = Map.MAP_WIDTH * Tile.TILE_WIDTH;
+		int laneHeight = Tile.TILE_HEIGHT;
+		int numLanes = Map.MAP_HEIGHT;
+		homingTick++;
+		for (int i = 0 ; i < creepNo; i++){
+			int laneLoc = (int)((Math.random())*10);
+			creeps.add(new SimpleCreep (new Location(end, laneLoc * laneHeight)));
+			creeps.add(new RandomCreep (new Location(end, laneLoc+1 * laneHeight), 8));
+			if(homingTick > 1){
+				creeps.add(new HomingCreep (new Location(end, laneLoc * laneHeight)));
+				homingTick = 0;
+			}
+		}			
+	}
 	
 	public Set<Entity> intersects(Hitbox hitbox) {
 		Set<Entity> intersects = new HashSet<Entity> ();

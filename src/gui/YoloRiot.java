@@ -32,6 +32,7 @@ public class YoloRiot extends JFrame implements ActionListener {
 	private ItemPanel itemPanel;
 	private StartScreen startScreen;
 	private LoseScreen loseScreen;
+	private WinScreen winScreen;
 
 	private SoundFactory sounds; // use the sounds.playSound(filename) to play a
 									// sound
@@ -41,6 +42,7 @@ public class YoloRiot extends JFrame implements ActionListener {
 
 	private boolean startS = true, mainS = false;
 	public boolean lost = false;
+	public boolean won = false;
 
 	Timer t = new Timer(1000, this);
 	Timer startTimer;
@@ -94,12 +96,13 @@ public class YoloRiot extends JFrame implements ActionListener {
 			startScreen.repaint();
 		} else if (lost) {
 			loseScreen.repaint();
+		} else if (won) {
+			winScreen.repaint ();
 		} else {
 			model.tick();
 			key.update();
 			screen.repaint();
 		}
-
 	}
 
 	public static void main(String[] args) {
