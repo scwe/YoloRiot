@@ -14,9 +14,8 @@ public class Yolostone extends Structure {
 	public boolean destroyed = false;
 	private int num;
 	
-	public Yolostone (int num) {
-		super(new Location(0, Tile.TILE_HEIGHT*num));
-		this.num = num;
+	public Yolostone () {
+		super(new Location(0, 0));
 	}
 	
 	@Override

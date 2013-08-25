@@ -17,6 +17,7 @@ public class SimpleCannon extends Structure {
 	
 	public SimpleCannon(Location location) {
 		super(location);
+		health = 100;
 		direction = new Location(location.x + 10, location.y);
 	}
 

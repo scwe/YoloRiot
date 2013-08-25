@@ -37,8 +37,7 @@ public class Model {
 	public static Ability[] abilities = {new PiercingShot (), new InstantAoE (), new WeakFastFire()};
 	private boolean mousePressed = false;
 	
-	private Yolostone[] yolostones;
-	private int destroyed = 0;
+	private Yolostone yolostone;
 	
 	public double yolospeed = 1.0;
 	public boolean yolomode = false;
@@ -58,10 +57,7 @@ public class Model {
 		creeps = new ArrayList<Creep> ();
 		structures = new ArrayList<Structure> ();
 		projectiles = new ArrayList<Projectile>();
-		yolostones = new Yolostone[Map.MAP_HEIGHT];
-		for (int i=0; i < Map.MAP_HEIGHT; i++) {
-			yolostones[i] = new Yolostone (i);
-		}
+		yolostone = new Yolostone ();
 	}
 	
 	// update the data 
@@ -84,13 +80,6 @@ public class Model {
 			}
 		}
 		
-		for (Yolostone y : yolostones) {
-			if (y.health < 10) {
-				y.destroyed = true;
-				destroyed++;
-			}
-		}
-		
 		for (Ability a : abilities) 
 			a.cooldown();		
 		
@@ -99,7 +88,7 @@ public class Model {
 		}
 		
 		
-		if (destroyed == Map.MAP_HEIGHT) {
+		if (yolostone.health == 0) {
 			// FIXME Lose.
 		}
 		if (tick > waveTick){
@@ -123,9 +112,7 @@ public class Model {
 			p.draw (g);
 		}
 		
-		for (Yolostone y : yolostones) {
-			y.draw(g);
-		}
+		yolostone.draw(g);
 		
 		for (Pt pt : pts)
 			pt.draw(g);
