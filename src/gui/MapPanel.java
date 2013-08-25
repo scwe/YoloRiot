@@ -40,6 +40,11 @@ public class MapPanel extends JPanel{
 	
 	public void paintComponent(Graphics g){
 		Graphics2D g2d = (Graphics2D) g;
+		
+		if (YoloRiot.lost) {
+			g2d.drawImage( new ImageLoader().getImage("StartScreen.png"), 0, 0, 400, 400, null);
+		}
+		
 		BufferedImage offscreen = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_ARGB);
 		Graphics2D buffer = (Graphics2D) offscreen.getGraphics();
 		buffer.setColor(Color.black);
