@@ -58,7 +58,7 @@ public class Map {
 					tileSet = getTileSet(type);
 					BufferedImage curImage = null;
 					if(type.equals("CORNER")){
-						curImage = tileSet.get(2);
+						curImage = tileSet.get(0);
 					}
 					else if(type.equals("MIDDLE")){
 						curImage = tileSet.get(0);

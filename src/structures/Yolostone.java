@@ -3,6 +3,7 @@ package structures;
 import image.ImageLoader;
 import image.SpriteSheet;
 
+import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
 import model.Location;
@@ -12,7 +13,7 @@ public class Yolostone extends Structure {
 	private static final int YOLOSTONE_INIT_HEALTH = 1000;	
 	
 	public boolean destroyed = false;
-	private SpriteSheet image;
+	private BufferedImage image;
 	private int num;
 	
 	public Yolostone () {
@@ -24,10 +25,15 @@ public class Yolostone extends Structure {
 	public void update() {
 		// no update needed, static.
 	}
-
+	
+	@Override
+	public void draw(Graphics g) {
+		g.drawImage(getSprite(), location.x, location.y,  image.getWidth(), image.getHeight()+260, null);
+	}
+	
 	@Override
 	public BufferedImage getSprite() {
-		return image.getImage();
+		return image;
 	}
 
 	@Override
@@ -41,7 +47,8 @@ public class Yolostone extends Structure {
 
 	@Override
 	public void initialiseSpriteSheet() {
-		image = new SpriteSheet(0,0,64, 64, "64 yolo crystal.png");
+		ImageLoader il = new ImageLoader();
+		image = il.getImage("crystals.png");
 		
 	}
 }

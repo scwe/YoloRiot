@@ -37,7 +37,8 @@ public class SimpleCreepAI implements CreepAI {
 		if (!attacking && !Model.model.yolomode) {
 			c.move(-10, 0);
 			sc.setState(CreepState.MOVING);
-		} else if (!attacking) {
+		} else {
+			sc.setState(CreepState.MOVING);
 			double ranDir = Math.random();
 			if (ranDir < 0.6) {
 				c.move(-10, 0);
@@ -48,7 +49,7 @@ public class SimpleCreepAI implements CreepAI {
 			} else {
 				c.move(0, 10);
 			}
-			sc.setState(CreepState.MOVING);
+			
 		}
 	}
 }
