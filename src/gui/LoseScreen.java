@@ -14,7 +14,6 @@ public class LoseScreen extends JPanel {
 	public LoseScreen(){
 		imLoad = new ImageLoader();
 		mainIm = imLoad.getImage("StartScreen.png");
-		if (mainIm == null)System.out.println("NULL");
 	}
 
 	@Override

@@ -1,5 +1,6 @@
 package playerAbilities;
 
+import gui.SoundFactory;
 import model.Model;
 
 public abstract class Ability {	
@@ -12,6 +13,14 @@ public abstract class Ability {
 		if (cooldown == 0) {
 			cooldown = Model.model.yolomode ? yoloMaxCooldown : maxCooldown;
 			activate (fromX, fromY, targetX, targetY);
+			int rand = (int)(Math.random()*3);
+			if(rand < 1){
+				SoundFactory.playSound("audio/phasers3.wav");
+			}else if(rand < 2){
+				SoundFactory.playSound("audio/you_suck.wav");
+			}else{
+				SoundFactory.playSound("audio/bird.wav");
+			}
 		}
 	}
 	

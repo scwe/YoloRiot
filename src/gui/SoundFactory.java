@@ -5,9 +5,9 @@ import javax.sound.sampled.*;
 import java.io.File;
 
 public class SoundFactory {
-	private SourceDataLine speakerBox;
+	private static SourceDataLine speakerBox;
 
-	public void playSound(String filename) {
+	public static void playSound(String filename) {
 		AudioFormat format = null;
 
 		AudioInputStream soundStream = null;
@@ -19,13 +19,14 @@ public class SoundFactory {
 
 			speakerBox = (SourceDataLine) AudioSystem.getLine(dataline);
 		} catch (Exception e) {
+			e.printStackTrace();
 			System.out.println("Something went wrong loading the sound "+filename);
 		}
 
 		new AudioThread(soundStream, format).start();
 	}
 
-	private class AudioThread extends Thread {
+	private static class AudioThread extends Thread {
 		byte tempBuffer[] = new byte[10000];
 		public AudioInputStream stream;
 		public AudioFormat format;

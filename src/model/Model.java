@@ -297,6 +297,7 @@ public class Model {
 	}	
 	
 	public void addStructure (Location l, int buttonnum) {
+		System.out.println(buttonnum);
 		if (buttonnum == 0 && money > CANNON_COST) {
 			structures.add(new SimpleCannon(l));
 			money -= CANNON_COST;

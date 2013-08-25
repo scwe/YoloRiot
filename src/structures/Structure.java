@@ -39,12 +39,6 @@ public abstract class Structure extends EntityImpl {
 		}
 	}
 
-	// FIXME
-	@Override
-	public void initialiseSpriteSheet() {
-		// TODO Auto-generated method stub
-	}
-	
 	@Override
 	public void draw(Graphics g) {
 		g.drawImage(getSprite(), location.x, location.y,  Tile.TILE_WIDTH, Tile.TILE_HEIGHT, null);
