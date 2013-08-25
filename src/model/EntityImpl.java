@@ -42,6 +42,7 @@ public abstract class EntityImpl implements Entity {
 	 */
 	public void reduceHealth (int amount) {
 		health -= amount;
+		if (health <= 0) Model.model.killEntity(this);
 	}
 	
 	public void draw (Graphics g) {

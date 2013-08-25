@@ -1,11 +1,7 @@
 package image;
-import java.awt.Image;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
-
-import map.Map.TileType;
-import map.Tile;
 
 public class SpriteSheet {
 
@@ -14,7 +10,7 @@ public class SpriteSheet {
 	private int spriteWidth;
 	private int spriteHeight;
 	private BufferedImage image;
-	
+	private HashMap<Integer, BufferedImage> storedMove = new HashMap<Integer,BufferedImage>();
 	
 	public SpriteSheet(int x, int y, int spriteWidth, int spriteHeight, String filename){
 		this.x = x;
@@ -28,12 +24,27 @@ public class SpriteSheet {
 	
 	}
 	
+
+	
 	public BufferedImage getImage(){
-		return image.getSubimage(x*spriteWidth, y*spriteHeight, spriteWidth, spriteHeight);
+		if(storedMove.containsKey(x)){
+			return storedMove.get(x);
+		}
+		
+		BufferedImage im =  image.getSubimage(x*spriteWidth, y*spriteHeight, spriteWidth, spriteHeight);
+		storedMove.put(x,im);
+		return im;
 	}
 	
 	public BufferedImage getImage(int x, int y, int width, int height){
-		return image.getSubimage(x, y, width, height);
+		if(storedMove.containsKey(x)){
+			return storedMove.get(x);
+		}
+		
+		BufferedImage im =  image.getSubimage(x, y, width, height);
+		storedMove.put(x,im);
+		return im;
+
 	}
 	
 	public BufferedImage getImage(String val){

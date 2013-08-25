@@ -70,10 +70,7 @@ public class YoloRiot extends JFrame implements ActionListener {
 		
 	
 		makeNewGame ();
-		
 
-
-		
 		screen = new ScreenPanel(model, map,mapPanel);
 		screen.setPreferredSize(new Dimension(1000,200));
 		screen.setMinimumSize(new Dimension(1000,200));

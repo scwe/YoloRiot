@@ -25,7 +25,7 @@ public abstract class Creep extends EntityImpl {
     public Creep(Location location){
     	super (location);
     	this.AI = makeAI ();
-    	this.health = 100;
+    	this.health = 10;
     	lane = (location.y)/Tile.TILE_HEIGHT;  //this should work for finding the lane based on a y position
     	makeHitbox ();
     }

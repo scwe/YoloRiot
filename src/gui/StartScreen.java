@@ -19,7 +19,6 @@ public class StartScreen extends JComponent implements SplashScreen{
 
 	@Override
     public void paintComponent(Graphics g){
-		g.drawImage(mainIm,  0, 0, null);
 	}
 
 	public void draw(Graphics g) {

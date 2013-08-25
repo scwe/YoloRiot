@@ -16,6 +16,7 @@ import playerAbilities.InstantAoE;
 import playerAbilities.PiercingShot;
 import playerAbilities.WeakFastFire;
 import projectiles.Projectile;
+import projectiles.YoloBolt;
 import structures.PowerUp;
 import structures.SimpleCannon;
 import structures.SimpleWall;
@@ -41,7 +42,7 @@ public class Model {
 	
 	private int dropcount = 0;
 	private int nextDrop;
-	public int powerupcount = 0;
+	public static int powerupcount = 0;
 	
 	public static Model model;
 	
@@ -130,6 +131,13 @@ public class Model {
 			powerupcount++;
 		}
 		
+		if (yolomode && Math.random() >= 0.2) {
+			int laneLoc = (int)((Math.random())*10);
+			Location l = new Location (0, laneLoc * Tile.TILE_HEIGHT);
+			Location l2 = new Location (10, laneLoc * Tile.TILE_HEIGHT);
+			projectiles.add(new YoloBolt(l, l2));
+		}
+		
 		player.update();
 	}
 	
@@ -165,7 +173,9 @@ public class Model {
 		for (int i = 0 ; i < creepNo; i++){
 			int laneLoc = (int)((Math.random())*10);
 			creeps.add(new SimpleCreep (new Location(end, laneLoc * laneHeight)));
-			creeps.add(new RandomCreep (new Location(end, laneLoc+1 * laneHeight), 8));
+			laneLoc = (int)((Math.random())*10);
+			creeps.add(new RandomCreep (new Location(end, laneLoc * laneHeight), 8));
+			laneLoc = (int)((Math.random())*10);
 			if(homingTick > 1){
 				creeps.add(new HomingCreep (new Location(end, laneLoc * laneHeight)));
 				homingTick = 0;
@@ -181,8 +191,10 @@ public class Model {
 		for (int i = 0 ; i < YOLO_TICKWAVE_SIZE; i++){
 			int laneLoc = (int)((Math.random())*10);
 			creeps.add(new SimpleCreep (new Location(end, laneLoc * laneHeight)));
+			laneLoc = (int)((Math.random())*10);
 			creeps.add(new RandomCreep (new Location(end, laneLoc+1 * laneHeight), 8));
 			if(homingTick > 1){
+				laneLoc = (int)((Math.random())*10);
 				creeps.add(new HomingCreep (new Location(end, laneLoc * laneHeight)));
 				homingTick = 0;
 			}
@@ -280,10 +292,8 @@ public class Model {
 			creeps.remove(e);
 			if (yolomode) yoloWaveLeft--;
 			else { // random chance of getting a yolo power
-				if (dropcount >= nextDrop) {
-					int x = (int) (Math.random() * Map.MAP_WIDTH * Tile.TILE_WIDTH);
-					int y = (int) (Math.random() * Map.MAP_HEIGHT * Tile.TILE_HEIGHT);
-					curPowerUp = new PowerUp (new Location(x, y));
+				if (dropcount >= nextDrop && powerupcount <= 3) {
+					curPowerUp = new PowerUp (new Location(e.getLocation().x, e.getLocation().y));
 					dropcount = 0;
 					nextDrop = DROP_AT_THIS + (int)(Math.random()*DROP_AT_THIS/4);
 				}

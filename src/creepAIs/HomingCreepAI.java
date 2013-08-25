@@ -48,10 +48,7 @@ public class HomingCreepAI implements CreepAI {
 			case 3:
 				c.move(0,(int)(MOVEMENT*10));
 				return;
-			
 		}
-
-		
 	}
 	
 	
