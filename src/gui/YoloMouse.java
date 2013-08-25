@@ -71,10 +71,9 @@ public class YoloMouse extends MouseAdapter {
 				return;
 			}
 			
-			if(ItemPanel.currentButton.equals("Button.png")){
-				model.addStructure(new Location(left, top), 0);
-				ItemPanel.currentButton = null;
-			}
+			model.addStructure(new Location(left, top), ItemPanel.getButtonNum());
+			ItemPanel.currentButton = null;
+
 
 		}
 	}
