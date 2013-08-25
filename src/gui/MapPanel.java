@@ -36,8 +36,8 @@ public class MapPanel extends JPanel{
 		setFocusable(true);
 
 		Cursor cursor = Toolkit.getDefaultToolkit().createCustomCursor(new ImageLoader().getImage("cursor.png"), new Point(0, 0), "crosshair");
-
 		super.setCursor(cursor);
+		
 	}
 	
 	public Map getMap(){

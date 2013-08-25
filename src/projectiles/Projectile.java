@@ -74,6 +74,7 @@ public abstract class Projectile extends EntityImpl {
 			for (Entity e : es) {
 				e.interact(attack);
 				Model.model.killEntity(this);
+				break;
 			}
 		}
 	}
