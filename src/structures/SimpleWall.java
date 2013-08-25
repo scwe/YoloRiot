@@ -4,9 +4,9 @@ import image.ImageLoader;
 
 import java.awt.image.BufferedImage;
 
-import structureAIs.StructureAI;
 import model.Location;
-import model.Model;
+import structureAIs.NullAI;
+import structureAIs.StructureAI;
 
 public class SimpleWall extends Structure {
 	
@@ -17,7 +17,7 @@ public class SimpleWall extends Structure {
 
 	@Override
 	protected StructureAI makeAI() { // no AI
-		return null;
+		return new NullAI ();
 	}
 
 	@Override
@@ -32,7 +32,5 @@ public class SimpleWall extends Structure {
 
 	@Override
 	public void fire() {
-		// TODO Auto-generated method stub
-		
 	}
 }
