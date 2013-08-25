@@ -5,6 +5,7 @@ import image.ImageLoader;
 import java.awt.image.BufferedImage;
 
 import model.Location;
+import model.Model;
 import creepAIs.CreepAI;
 import creepAIs.RandomCreepAI;
 
@@ -20,6 +21,11 @@ public class RandomCreep extends SimpleCreep{
 	
 	protected CreepAI makeAI() {
 		return new RandomCreepAI(randomness);
+	}
+	
+	@Override
+	public int getYoloTickSpeed() {
+		return (int)(tickspeed * Model.model.yolospeed * 0.8);
 	}
 	
 	public BufferedImage getSprite() {

@@ -8,7 +8,8 @@ import projectiles.WeakProjectile;
 public class WeakFastFire extends Ability {
 	
 	public WeakFastFire () {
-		cooldown = 3;
+		maxCooldown = 20;
+		yoloMaxCooldown = 10;
 	}
 	
 	@Override

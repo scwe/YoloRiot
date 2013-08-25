@@ -31,6 +31,8 @@ public class YoloRiot extends JFrame implements ActionListener {
 	private MapPanel mapPanel;
 	private ItemPanel itemPanel;
 	private StartScreen startScreen;
+	private LoseScreen loseScreen;
+	private WinScreen winScreen;
 
 	private SoundFactory sounds; // use the sounds.playSound(filename) to play a
 									// sound
@@ -39,6 +41,8 @@ public class YoloRiot extends JFrame implements ActionListener {
 	private YoloKeyboard key;
 
 	private boolean startS = true, mainS = false;
+	public boolean lost = false;
+	public boolean won = false;
 
 	Timer t = new Timer(1000, this);
 	Timer startTimer;
@@ -46,9 +50,6 @@ public class YoloRiot extends JFrame implements ActionListener {
 	public YoloRiot() {
 		setTitle("Yolo Riot");
 		setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
-		model = new Model();
-		LevelData startLevel = new LevelData(LevelName.START);
-		map = new Map(startLevel);
 
 		startScreen = new StartScreen();
 		add(startScreen);
@@ -57,12 +58,13 @@ public class YoloRiot extends JFrame implements ActionListener {
 		itemPanel = new ItemPanel(model);
 		mapPanel = new MapPanel(model, map);
 		screen = new ScreenPanel(model, map, mapPanel);
+		
+		makeNewGame ();
 		//screen.add(mapPanel);
 		screen.setOpaque(false);
 		screen.setVisible(false);
 		itemPanel.setVisible(false);
-		add(itemPanel, BorderLayout.WEST);
-		add(screen, BorderLayout.EAST);
+
 
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 
@@ -81,7 +83,26 @@ public class YoloRiot extends JFrame implements ActionListener {
 		//pack ();
 		setFocusable(true);
 		setVisible(true);
-
+		
+		startNewGame ();
+	}
+	
+	private void makeNewGame () {
+		if (itemPanel != null) remove(itemPanel);
+		if (screen != null) remove(screen);
+		
+		model = new Model(this);	
+		LevelData startLevel = new LevelData(LevelName.START);
+		map = new Map(startLevel);
+		
+		mapPanel = new MapPanel(model, map);
+		screen = new ScreenPanel(model, map, mapPanel);
+		
+		add(itemPanel, BorderLayout.WEST);
+		add(screen, BorderLayout.EAST);	
+	}
+	
+	private void startNewGame () {
 		t = new Timer(TICK, this);
 		startTimer = new Timer(1000, this);
 		startTimer.start();
@@ -90,12 +111,21 @@ public class YoloRiot extends JFrame implements ActionListener {
 	public void gameLoop() {
 		if (startS) {
 			startScreen.repaint();
+		} else if (lost) {
+			loseScreen.repaint();
+		} else if (won) {
+			winScreen.repaint ();
+			startTimer.stop();
+			try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {}
+			makeNewGame ();
+			startNewGame ();
 		} else {
 			model.tick();
 			key.update();
 			screen.repaint();
 		}
-
 	}
 
 	public static void main(String[] args) {
@@ -104,6 +134,10 @@ public class YoloRiot extends JFrame implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent event) {
+		if (won == true) {
+			
+		}
+		
 		if (event.getSource() == startTimer && startS) {
 			startScreen.setVisible(false);
 			screen.setVisible(true);

@@ -1,12 +1,16 @@
 package playerAbilities;
 
-public abstract class Ability {
-	private static final int MAX_COOLDOWN = 50;
-	protected int cooldown = MAX_COOLDOWN;
+import model.Model;
+
+public abstract class Ability {	
+	protected int maxCooldown = 50;
+	protected int yoloMaxCooldown = 5;
+	
+	protected int cooldown = maxCooldown;
 	
 	public void use (int fromX, int fromY, int targetX, int targetY) {
 		if (cooldown == 0) {
-			cooldown = MAX_COOLDOWN;
+			cooldown = Model.model.yolomode ? yoloMaxCooldown : maxCooldown;
 			activate (fromX, fromY, targetX, targetY);
 		}
 	}
