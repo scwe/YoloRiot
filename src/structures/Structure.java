@@ -43,7 +43,6 @@ public abstract class Structure extends EntityImpl {
 	@Override
 	public void initialiseSpriteSheet() {
 		// TODO Auto-generated method stub
-		
 	}
 	
 	@Override
