@@ -16,10 +16,6 @@ public class AoEProjectile extends Projectile {
 	private static final int UPDATES_TO_DEAD = 10;
 	private int deadCounter = 0;
 	private SpriteSheet image;
-	
-	{
-		image = new SpriteSheet(0,0,128,128, "storm_aoe.png");
-	}
 		
 	public AoEProjectile(Location start, Location direction) {
 		super(start, direction);
@@ -62,5 +58,11 @@ public class AoEProjectile extends Projectile {
 			System.out.println("shit son, we up shit creek");
 		}
 		return image.getImage(0, 0, 128, 128);
+	}
+
+	@Override
+	public void initialiseSpriteSheet() {
+		image = new SpriteSheet(0,0,128,128, "storm_aoe.png");
+		
 	}
 }

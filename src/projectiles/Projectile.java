@@ -98,12 +98,6 @@ public abstract class Projectile extends EntityImpl {
 		hitbox.move((int)(xunit*magnitude), (int)(yunit*magnitude));
 	}
 
-	// FIXME
-	@Override
-	public void initialiseSpriteSheet() {
-		// TODO Auto-generated method stub
-		
-	}
 	
 	@Override
 	protected Hitbox makeHitbox() {

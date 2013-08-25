@@ -55,13 +55,6 @@ public abstract class Creep extends EntityImpl {
 		this.state = s;
 	}
 	
-	// FIXME
-	@Override
-	public void initialiseSpriteSheet() {
-		// TODO Auto-generated method stub
-		
-	}
-	
 	public enum CreepState{
 		MOVING,ATTACKING,SLEEPING,FULLYOLO;
 	}

@@ -1,15 +1,12 @@
 package projectiles;
 
 import image.ImageLoader;
-import interactions.Interaction;
+import image.SpriteSheet;
 import interactions.SimpleDamage;
 
-import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.Set;
 
-import creeps.Creep;
 import model.Entity;
 import model.Location;
 import model.Model;
@@ -18,8 +15,8 @@ public class PiercingProjectile extends Projectile {
 
 	private static final int MAX_PIERCES = 5;
 	
-	private BufferedImage image;
 	int numPierces = 0;
+	private SpriteSheet image;
 	
 	public PiercingProjectile(Location location, Location direction) {
 		super (location, direction);
@@ -53,11 +50,14 @@ public class PiercingProjectile extends Projectile {
 
 	@Override
 	public BufferedImage getSprite () {
-		if(image==null){
-			ImageLoader imload = new ImageLoader();
-			image = imload.getImage("FIREPOWER.png");
-		}
 		
-		return image;
+		return image.getImage();
 	}
+
+	@Override
+	public void initialiseSpriteSheet() {
+		image = new SpriteSheet(0,0, 40, 40, "FIREPOWER.png");
+		
+	}
+
 }
