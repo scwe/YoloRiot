@@ -103,6 +103,22 @@ public class ItemPanel extends JPanel implements MouseListener {
 		g.setColor(Color.white);
 		g.fillRect(0,0,getWidth(), getHeight());
 		g.drawImage(background,0,0,this.getWidth(),this.getHeight(),null);
+		
+		int money = Model.model.money;
+		String moneyS = new Integer(money).toString();
+		
+		for (int i=0; i < moneyS.length(); i++) {
+			//BufferedImage number = 
+			//g.drawImage(IMG, MONEYX, MONEYY + i*img.getWidth(), null);	
+		}
+		
+		//int lives = Model.model.player;
+		
+		int powerups = Model.model.powerupcount;
+		
+		for (int i=0; i < powerups; i++) {
+			g.drawImage(IMG, POWER1X, POWER1Y + i*POWERHEIGHT, null);	
+		}
 	}
 
 	public JButton newStructureButton(String imageFile, int x, int y, int width, int height){
