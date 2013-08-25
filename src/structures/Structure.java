@@ -41,7 +41,7 @@ public abstract class Structure extends EntityImpl {
 
 	@Override
 	public void draw(Graphics g) {
-		g.drawImage(getSprite(), location.x, location.y,  Tile.TILE_WIDTH, Tile.TILE_HEIGHT, null);
+		g.drawImage(getSprite(), location.x, location.y,  Tile.TILE_WIDTH/2, Tile.TILE_HEIGHT/2, null);
 	}
 	
 	@Override

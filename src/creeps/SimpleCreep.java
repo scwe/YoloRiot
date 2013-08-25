@@ -17,7 +17,9 @@ public class SimpleCreep extends Creep {
 	private final Interaction attack = new SimpleDamage (5);
 	private int tickCount =0;
 	SpriteSheet spriteSheet;
+	SpriteSheet spriteSheetAttack;
 	BufferedImage[] walk;
+	BufferedImage[] attacking;
 	
 	public SimpleCreep(Location location) {
 		super(location);
@@ -47,7 +49,7 @@ public class SimpleCreep extends Creep {
 	
 	@Override
 	public BufferedImage getSprite() {
-		tickCount+=5;
+		
 		if (walk == null || attackingImage == null){
 			walk = new BufferedImage[4];
 			spriteSheet = new SpriteSheet(0, 0, Tile.TILE_WIDTH, Tile.TILE_HEIGHT,"64_creep_1.png");
@@ -55,13 +57,39 @@ public class SimpleCreep extends Creep {
 			walk[1] = spriteSheet.getImage(2);
 			walk[2] = spriteSheet.getImage(3);
 			walk[3] = spriteSheet.getImage(0);
-			attackingImage = walk[0];
+			
+			attacking = new BufferedImage[5];
+			spriteSheetAttack = new SpriteSheet(0, 0, Tile.TILE_WIDTH/2, Tile.TILE_HEIGHT/2,"1creepattackred.png");
+			attacking[0] = spriteSheetAttack.getImage(0);
+			attacking[1] = spriteSheetAttack.getImage(1);
+			attacking[2] = spriteSheetAttack.getImage(2);
+			attacking[3] = spriteSheetAttack.getImage(3);
+			//attacking[4] = spriteSheetAttack.getImage(4);
+			
 			return walk[0];
 		}
 		else if (this.state == CreepState.ATTACKING){
-			return attackingImage;
+			System.out.println("in attacking state");
+			tickCount+=1;
+			if(tickCount < 5){
+				return attacking[0];
+			}
+			else if (tickCount < 10)
+				return attacking[1];
+			else if (tickCount < 20){
+				return attacking[2];
+			}
+			else if (tickCount < 30){
+				return attacking[3];
+			}
+			if (tickCount > 20){
+				tickCount = 0;
+			}
+			return attacking[0];
+		
 		}
 		else{
+			tickCount+=5;
 			if(tickCount < 50){
 				return walk[0];
 			}
