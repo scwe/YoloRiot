@@ -34,7 +34,10 @@ public class SimpleCreep extends Creep {
 
 	@Override
 	public void interact(Interaction i) {
-		Model.model.killEntity(this);
+		i.apply(this);
+		if (health <= 0) {
+			Model.model.killEntity(this);
+		}
 	}
 
 	@Override
