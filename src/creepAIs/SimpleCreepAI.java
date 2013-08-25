@@ -24,12 +24,12 @@ public class SimpleCreepAI implements CreepAI {
 			if (ent instanceof Structure) {
 				sc.setState(CreepState.ATTACKING);
 				Structure attackedStruct = (Structure) ent;
-				attackedStruct.reduceHealth(4);
+				attackedStruct.reduceHealth(8);
 				attacking = true;
 			} else if (ent instanceof Player) {
 				sc.setState(CreepState.ATTACKING);
 				Player attackedPlayer = (Player) ent;
-				attackedPlayer.reduceHealth(4);
+				attackedPlayer.reduceHealth(8);
 				attacking = true;
 			}
 		}

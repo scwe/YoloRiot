@@ -13,6 +13,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
+import java.util.HashMap;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -29,6 +30,9 @@ public class ItemPanel extends JPanel implements MouseListener {
 	private BufferedImage background;
 	public static String currentButton;
 	private Model m;
+
+	HashMap<String,BufferedImage> numbers = new HashMap<String,BufferedImage>();
+
 	
 	public static final int BUTTON1X = 0;
 	public static final int BUTTON1Y = 0;
@@ -79,7 +83,7 @@ public class ItemPanel extends JPanel implements MouseListener {
 		but.setBounds(60,270, 100, 100);
 		add(but);
 		ImageLoader il = new ImageLoader();
-		background = il.getImage("NEW_GUI.png");
+		background = il.getImage("NEW_GUI_NEWER.png");
 		setPreferredSize(new Dimension(120, YoloRiot.SCREEN_HEIGHT));
 		add(newStructureButton("Wall, side top bot.png", 0, 0, 32, 32));
 		
@@ -97,6 +101,16 @@ public class ItemPanel extends JPanel implements MouseListener {
 		yoloButton.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
 		yoloButton.setBackground(Color.white);
 		add(yoloButton);
+
+		
+		ImageLoader im = new ImageLoader();
+		for (int i = 0; i < 10; i++){
+			numbers.put(i+"", im.getImage(i+".png"));
+			
+		}
+		
+		
+
 	}
 	
 	public void paintComponent(Graphics g){
