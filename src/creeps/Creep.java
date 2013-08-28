@@ -16,16 +16,15 @@ import model.Model;
 
 public abstract class Creep extends EntityImpl {
 	protected boolean dead = false;
-	protected int health;
 	protected CreepState state = CreepState.MOVING;
 	protected int lane;
-	
+	public int speed;
 	protected CreepAI AI;
 	
     public Creep(Location location){
     	super (location);
     	this.AI = makeAI ();
-    	this.health = 10;
+    	health = 20;
     	lane = (location.y)/Tile.TILE_HEIGHT;  //this should work for finding the lane based on a y position
     	makeHitbox ();
     }

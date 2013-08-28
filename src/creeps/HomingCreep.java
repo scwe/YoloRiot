@@ -13,8 +13,8 @@ import creeps.Creep.CreepState;
 
 public class HomingCreep extends SimpleCreep{
 	int tickCount;
-	public HomingCreep(Location location) {
-		super(location);
+	public HomingCreep(Location location,int health, int speed) {
+		super(location,health,speed);
 		this.tickspeed = 10;
 	}
 	

@@ -22,9 +22,10 @@ public class SimpleCreep extends Creep {
 	BufferedImage[] walk;
 	BufferedImage[] attacking;
 	
-	public SimpleCreep(Location location) {
+	public SimpleCreep(Location location,int creepHealth, int creepSpeed) {
 		super(location);
-
+		health = creepHealth;
+		speed = creepSpeed;
 		tickspeed = 20;
 
 

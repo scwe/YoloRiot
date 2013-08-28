@@ -21,7 +21,7 @@ public class YoloRiot extends JFrame implements ActionListener {
 	public static final int SCREEN_WIDTH = 1200;
 	public static final int SCREEN_HEIGHT = 720;
 
-	private static final int TICK = 10;
+	private static final int TICK = 1;
 
 	private ScreenPanel screen;
 	private Model model;
@@ -55,11 +55,11 @@ public class YoloRiot extends JFrame implements ActionListener {
 		setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
 
 		startScreen = new StartScreen();
+		startScreen.setVisible(true);
+		
 		winScreen = new WinScreen ();
 		loseScreen = new LoseScreen ();
-		add(startScreen);
-		add(loseScreen);
-		add(winScreen);
+		
 		startScreen.setVisible(true);
 		loseScreen.setVisible(false);
 		winScreen.setVisible(false);
@@ -86,6 +86,11 @@ public class YoloRiot extends JFrame implements ActionListener {
 		
 		setFocusable(true);
 		setVisible(true);
+		
+		
+		yoloPanel.add(startScreen);
+		yoloPanel.add(loseScreen);
+		yoloPanel.add(winScreen);
 		
 		startNewGame ();
 		
@@ -118,6 +123,9 @@ public class YoloRiot extends JFrame implements ActionListener {
 		addMouseMotionListener(mouse);
 		addMouseWheelListener(mouse);
 		addKeyListener(key);
+		
+	
+		
 	}
 	
 	private void makeNewGame () {
@@ -136,13 +144,18 @@ public class YoloRiot extends JFrame implements ActionListener {
 		startTimer = new Timer(1000, this);
 		startTimer.start();
 		add(yoloPanel);
-		screen.repaint();
+		yoloPanel.repaint();
 	}
 
 	public void gameLoop() {
 		if (startS) {
+			
 			startScreen.repaint();
+			try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {}
 		} else if (lost) {
+			
 			loseScreen.setVisible(true);
 			loseScreen.repaint();
 			//startTimer.stop();
@@ -159,7 +172,7 @@ public class YoloRiot extends JFrame implements ActionListener {
 			model.tick();
 			key.update();
 			mapPanel.repaint();
-			itemPanel.repaint();
+			//itemPanel.repaint();
 		}
 	}
 

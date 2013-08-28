@@ -2,10 +2,13 @@ package map;
 
 import image.SpriteSheet;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Random;
+
+import model.Model;
 
 public class Map {
 	public static final int MAP_WIDTH = 15;
@@ -14,8 +17,10 @@ public class Map {
 	private Tile[][] tiles;
 	
 	ArrayList<SpriteSheet> spriteSheets;
-
-	
+	int red= 0;
+	int green =255;
+	int tick = 0;
+	boolean sub = false;
 	BufferedImage[][] buffer;
 	
 	private Random r;
@@ -37,14 +42,61 @@ public class Map {
 	}
 
 	public void draw(Graphics g) {
-		if (buffer != null) 
-		{
+		tick++;
+		if(buffer!= null && Model.model.yolomode){
+			Color col = new Color(red,0,0);
+			
+			g.setColor(col);
+			
+			
+			for (int h = 0; h < MAP_HEIGHT; h++) {
+				for (int w = 0; w < MAP_WIDTH; w++) {
+					
+					g.fillRect(w
+							* Tile.TILE_WIDTH, h * Tile.TILE_HEIGHT,
+							Tile.TILE_WIDTH, Tile.TILE_HEIGHT);
+				}
+
+				if(sub ){
+					if (red <= 10){
+						red += 1;
+						sub = false;
+					}
+					else{
+						red-=1;
+						green+=1;
+					}
+				}
+				else{
+					if(red >= 250){
+						sub = true;
+						red-= 10;
+					}
+					else{ 
+						red+=1;
+						green-=1;
+					}
+
+				}
+				col = new Color(red,0,0);
+
+				g.setColor(col);
+
+			}
+			if (tick > 500) tick = 0;
+			
+		}
+		else if (buffer != null) 
+		{	
+		
 			for (int h = 0; h < MAP_HEIGHT; h++) {
 				for (int w = 0; w < MAP_WIDTH; w++) {
 					g.drawImage(buffer[h][w],w
 							* Tile.TILE_WIDTH, h * Tile.TILE_HEIGHT,
 							Tile.TILE_WIDTH, Tile.TILE_HEIGHT, null);
 				}
+				
+				
 			}
 		}
 

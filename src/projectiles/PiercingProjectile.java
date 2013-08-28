@@ -1,10 +1,11 @@
 package projectiles;
 
 import gui.SoundFactory;
-import image.ImageLoader;
 import image.SpriteSheet;
 import interactions.SimpleDamage;
 
+import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.Set;
 
@@ -15,13 +16,13 @@ import model.Model;
 public class PiercingProjectile extends Projectile {
 
 	private static final int MAX_PIERCES = 5;
-	
-	int numPierces = 0;
+	int ticker = 15;
+	int numPierces = 5;
 	private SpriteSheet image;
 	
 	public PiercingProjectile(Location location, Location direction) {
 		super (location, direction);
-		attack = new SimpleDamage (10);
+		attack = new SimpleDamage (5);
 		tickspeed = 1;
 		SoundFactory.playSound("audio/phasers3.wav");
 	}
@@ -50,12 +51,20 @@ public class PiercingProjectile extends Projectile {
 		}
 	}
 	public BufferedImage getSprite () {
-		
+		/*ticker++;
+		double extra = Math.abs(Math.sin(ticker));
+		int val = (int)(Math.random()*50);
+		BufferedImage im = new BufferedImage(65+val, (int)(128*extra)+val, BufferedImage.TYPE_INT_ARGB);
+		Graphics g = im.createGraphics();
+		g.setColor(Color.MAGENTA);
+		val = (int)(Math.random()*10);
+		g.fillRect(0,0,16+val+25,(int)(128*extra)+val);
+		return im;*/
 		return image.getImage();
 	}
 
 	@Override
-	public void initialiseSpriteSheet() {
+	public void initialiseSpriteSheet() {	
 		image = new SpriteSheet(0,0, 40, 40, "FIREPOWER.png");
 		
 	}

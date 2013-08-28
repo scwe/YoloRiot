@@ -8,8 +8,9 @@ import projectiles.PiercingProjectile;
 public class PiercingShot extends Ability {
 
 	public PiercingShot () {
-		maxCooldown = 50;
-		yoloMaxCooldown = (4 - Model.model.powerupcount) * 3;
+		maxCooldown = 1;
+		//yoloMaxCooldown = (4 - Model.model.powerupcount) * 3;
+		yoloMaxCooldown = 1;
 	}
 	
 	@Override

@@ -27,7 +27,7 @@ public class Player extends EntityImpl {
 	private int baseTick = 10;
 	
 	
-	public static final int MAX_HEALTH = 5;
+	public static final int MAX_HEALTH = 35;
 	
 	public Ability curAbility;
 	public int curAbilityIndex;
@@ -43,6 +43,12 @@ public class Player extends EntityImpl {
 	}
 	
 	public void reduceHealth (int amount) {
+		this.health = health-amount;
+		
+		if (!Model.model.yolomode) Model.model.FULLYOL0();
+		else{
+		
+		}
 	}
 	
 	public void changeAbility (int change) {

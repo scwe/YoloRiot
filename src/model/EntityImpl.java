@@ -25,7 +25,7 @@ public abstract class EntityImpl implements Entity {
 	protected int tickspeed = 40; // number of ticks to get before update
 	protected int ticks = 0;
 
-	public int health;
+	public int health = 20;
 	
 	public abstract void update();
 	protected abstract Hitbox makeHitbox();

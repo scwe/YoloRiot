@@ -44,7 +44,7 @@ public class ItemPanel extends JPanel implements MouseListener {
 	public static final int BUTTON3Y = 417;
 	public static final int BUTTON4X = 115;
 	public static final int BUTTON4Y = 420;
-	
+	//don't do this.
 	public static final int BUTTONWIDTH = 64;
 	public static final int BUTTONHEIGHT = 64;
 

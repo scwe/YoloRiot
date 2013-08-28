@@ -40,7 +40,12 @@ public class Model {
 	private static final int CANNON_TRI_COST = 500;
 	private static final int WALL_COST = 100;
 	private static final int WALL_SPIKE_COST = 200;
+	private int creepSpeed = 10;
+	private int creepHealth = 10;
 	
+	private int waveCount = 0;
+	
+	private int yoloCount = 0;
 	private int dropcount = 0;
 	private int nextDrop;
 	public static int powerupcount = 0;
@@ -111,18 +116,20 @@ public class Model {
 		}
 		
 		
-		if (yolostone.health == 0 || player.health == 0) {
+		if (yolostone.health == 0 || player.health <= 0) {
 			riot.lost = true;
 		}
 		
-		if (yoloWaveLeft <= 0 && creeps.size() == 0) {
-			riot.won = true;
+		if (yolomode && yoloWaveLeft <= 0 && creeps.size() == 0) {
+			//riot.won = true;
+			YOLOOFF();
 		}
 		
 		if (tick > waveTick){
 			if (yolomode) yoloCreeps (); 
 			else makeCreeps ();
 			tick = 0;
+			waveCount++;
 		}
 		
 		tick++;
@@ -135,7 +142,7 @@ public class Model {
 		if (yolomode && Math.random() >= 0.1) {
 			int laneLoc = (int)((Math.random())*10);
 			Location l = new Location (0, laneLoc * Tile.TILE_HEIGHT);
-			Location l2 = new Location (10, laneLoc * Tile.TILE_HEIGHT);
+			Location l2 = new Location (10, laneLoc+1 * Tile.TILE_HEIGHT);
 			projectiles.add(new YoloBolt(l, l2));
 			
 			laneLoc = (int)((Math.random())*10);
@@ -145,6 +152,11 @@ public class Model {
 		}
 		
 		player.update();
+		if (waveCount == 2){
+			creepHealth += 10;
+			creepSpeed++;
+			waveCount= 0;
+		}
 	}
 	
 	public void draw (Graphics g) {
@@ -172,17 +184,19 @@ public class Model {
 	
 	private void makeCreeps () {
 		double creepNo = Math.abs(Math.sin(tick)*20);
-		
+		tick++;
+		if (tick > 180) tick =0;
 		int end = Map.MAP_WIDTH * Tile.TILE_WIDTH;
 		int laneHeight = Tile.TILE_HEIGHT;
 		homingTick++;
 		for (int i = 0 ; i < creepNo; i++){
 			int laneLoc = (int)((Math.random())*10);
-			creeps.add(new SimpleCreep (new Location(end, laneLoc * laneHeight)));
+			creeps.add(new SimpleCreep (new Location(end-10, laneLoc * laneHeight),creepHealth,creepSpeed));
 			laneLoc = (int)((Math.random())*10);
-			laneLoc = (int)((Math.random())*10);
+			creeps.add(new RandomCreep (new Location(end-10, laneLoc * laneHeight), 8,creepHealth,creepSpeed));
 			if(homingTick > 1){
-				creeps.add(new HomingCreep (new Location(end, laneLoc * laneHeight)));
+				laneLoc = (int)((Math.random())*10);
+				creeps.add(new HomingCreep (new Location(end-10, laneLoc+1 * laneHeight),creepHealth,creepSpeed));
 				homingTick = 0;
 			}
 		}
@@ -195,12 +209,12 @@ public class Model {
 		homingTick++;
 		for (int i = 0 ; i < YOLO_TICKWAVE_SIZE; i++){
 			int laneLoc = (int)((Math.random())*10);
-			creeps.add(new SimpleCreep (new Location(end, laneLoc * laneHeight)));
+			creeps.add(new SimpleCreep (new Location(end, laneLoc * laneHeight),10,10));
 			laneLoc = (int)((Math.random())*10);
-			creeps.add(new RandomCreep (new Location(end, laneLoc+1 * laneHeight), 8));
+			creeps.add(new RandomCreep (new Location(end, laneLoc * laneHeight), 8,10,10));
 			if(homingTick > 1){
 				laneLoc = (int)((Math.random())*10);
-				creeps.add(new HomingCreep (new Location(end, laneLoc * laneHeight)));
+				creeps.add(new HomingCreep (new Location(end, laneLoc * laneHeight),10,10));
 				homingTick = 0;
 			}
 		}
@@ -309,6 +323,9 @@ public class Model {
 		} else if (e instanceof Projectile) {
 			projectiles.remove(e);
 		}
+		else if (e instanceof Player){
+			FULLYOL0();
+		}
 	}	
 	
 	public void addStructure (Location l, int buttonnum) {
@@ -344,5 +361,13 @@ public class Model {
 		yolospeed = 0.5;
 		player.speed *= 2;
 		waveTick = 50;
+		yoloCount++;
+	}
+	public void YOLOOFF() {
+		yolomode  = false;
+		yolospeed = 0.5;
+		player.speed = 8;
+		waveTick = 200-(25*yoloCount);
+		structures.clear();
 	}
 }

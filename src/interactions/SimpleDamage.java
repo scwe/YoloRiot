@@ -11,6 +11,6 @@ public class SimpleDamage extends Interaction {
 
 	@Override
 	public void apply(Entity e) {
-		e.reduceHealth (10);		
+		e.reduceHealth (5);		
 	}
 }
